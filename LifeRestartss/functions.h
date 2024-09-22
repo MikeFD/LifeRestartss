@@ -1,38 +1,39 @@
+
 #include<iostream>
 #include<string>
 #include<vector>
 #include<map>
 using namespace std;
 
-//---------------------------Êý¾ÝÉè¼Æ------------------------------
+//---------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½------------------------------
 
 /*
-    ±íÊ¾½×¶Î£º²»Í¬½×¶Î»á´¥·¢²»Í¬µÄÊÂ¼þ  µ÷ÓÃ²»Í¬ÊÂ¼þµÄÊ÷ ÈôÊÇËÀÍö»òÕßÓÀÉúÔòµ÷ÓÃ½áÊøº¯Êý
-    0±íÊ¾Ó×¶ùÊ±ÆÚ 1±íÊ¾´óÑ§Ê±ÆÚ
-    2±íÊ¾ÑÐ¾¿ÉúÊ±ÆÚ 3±íÊ¾¹¤×÷Ê±ÆÚ
-    4±íÊ¾ÎÞÒµÊ±ÆÚ 5±íÊ¾ÏÌÓãÆÚ
-    6±íÊ¾´´ÒµÆÚ 7±íÊ¾ÍËÐÝÆÚ
-    8±íÊ¾ËÀÍö 9±íÊ¾ÓÀÉú
+    ï¿½ï¿½Ê¾ï¿½×¶Î£ï¿½ï¿½ï¿½Í¬ï¿½×¶Î»á´¥ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Â¼ï¿½  ï¿½ï¿½ï¿½Ã²ï¿½Í¬ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    0ï¿½ï¿½Ê¾ï¿½×¶ï¿½Ê±ï¿½ï¿½ 1ï¿½ï¿½Ê¾ï¿½ï¿½Ñ§Ê±ï¿½ï¿½
+    2ï¿½ï¿½Ê¾ï¿½Ð¾ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ 3ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    4ï¿½ï¿½Ê¾ï¿½ï¿½ÒµÊ±ï¿½ï¿½ 5ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    6ï¿½ï¿½Ê¾ï¿½ï¿½Òµï¿½ï¿½ 7ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    8ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ 9ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 */
 int flag;
 
 
 /*
-    Íæ¼ÒÉèÖÃ
-    ÄêÁä¡¢ÖÇÉÌ¡¢ÇéÉÌ¡¢±à³ÌÄÜÁ¦¡¢½¡¿µ
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ä¡¢ï¿½ï¿½ï¿½Ì¡ï¿½ï¿½ï¿½ï¿½Ì¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 typedef struct
 {
-    int Age;//ÄêÁä
-    int IQ;//ÖÇÉÌ
-    int EQ;//ÇéÉÌ
-    int ProgramingSkill;//±à³ÌÄÜÁ¦
-    int Health;//½¡¿µ
+    int Age;//ï¿½ï¿½ï¿½ï¿½
+    int IQ;//ï¿½ï¿½ï¿½ï¿½
+    int EQ;//ï¿½ï¿½ï¿½ï¿½
+    int ProgramingSkill;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    int Health;//ï¿½ï¿½ï¿½ï¿½
 }person;
 
 
 /*
-    ÊôÐÔÊÜÓ°Ïì ¼Ó/¼õ
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ ï¿½ï¿½/ï¿½ï¿½
 */
 typedef struct
 {
@@ -44,7 +45,7 @@ typedef struct
 
 
 /*
-    ´¥·¢ÊÂ¼þµÄÊôÐÔÏÞÖÆ  Èç{"IQ": 100, "CodingLevel": 80}
+    ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½{"IQ": 100, "CodingLevel": 80}
 */
 typedef struct
 {
@@ -56,31 +57,31 @@ typedef struct
 
 
 /*
-    Ìì¸³ÉèÖÃ
+    ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½
 */
 typedef struct {
-    int talentID; //Ìì¸³¿¨ID
-    string description; //Ìì¸³ÃèÊö
-    Bonus talentBonus; //Ìì¸³¶ÔÊôÐÔµÄÓ°Ïì
+    int talentID; //ï¿½ì¸³ï¿½ï¿½ID
+    string description; //ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½
+    Bonus talentBonus; //ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½Ó°ï¿½ï¿½
 }talent;
 
 
 /*
-    ÊÂ¼þÀàµÄ¸¸Àà   ÓÃÊ÷À´½øÐÐ±íÊ¾ ¸ù½Úµã±íÊ¾µ±Ç°ÊÂ¼þ  ×Ó½Úµã±íÊ¾ÏÂÒ»¸ö·¢ÉúÊÂ¼þµÄÑ¡Ôñ
-            ÈôÃ»ÓÐ×Ó½ÚµãÔò½øÈëÏÂÒ»¸ö½×¶Î
-            ÈôÖ»ÓÐÒ»¸ö×Ó½ÚµãÔòÖ±½Ó·ÃÎÊ¸Ã×Ó½Úµã
-            ÈôÓÐ¶à¸ö×Ó½Úµã×÷ÎªÑ¡ÔñÐÔÊÂ¼þ¹©Íæ¼ÒÑ¡Ôñ Ñ¡ÔñºóÔÙ·ÃÎÊ¸Ã½Úµã
-            ÌØÊâÇé¿ö£ºÈôÊôÐÔÏÞÖÆlimit ÏÞÖÆÁËÊÂ¼þ·¢Éú ÄÇÃ´½Úµã±£³Ö²»±ä ÊÂ¼þ·¢Õ¹Í£ÖÍ ÀýÈç£ºÄêÁä²»µ½25Ëê²»»á´¥·¢´ó³§²ÃÔ±µÄÊÂ¼þ
-    ³ÉÔ±±äÁ¿£ºÊÂ¼þÃèÊö description   ÊôÐÔÏÞÖÆ limit£¨ÏÞÖÆÊÂ¼þ·¢ÉúµÄ×îµÍÊôÐÔÒªÇó)
-    ÊÂ¼þµÄ×Ó½Úµã children ±íÊ¾
+    ï¿½Â¼ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ê¾ ï¿½ï¿½ï¿½Úµï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½Â¼ï¿½  ï¿½Ó½Úµï¿½ï¿½Ê¾ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+            ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½×¶ï¿½
+            ï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½Ê¸ï¿½ï¿½Ó½Úµï¿½
+            ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ÎªÑ¡ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ Ñ¡ï¿½ï¿½ï¿½ï¿½Ù·ï¿½ï¿½Ê¸Ã½Úµï¿½
+            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½limit ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã´ï¿½Úµã±£ï¿½Ö²ï¿½ï¿½ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½Õ¹Í£ï¿½ï¿½ ï¿½ï¿½ï¿½ç£ºï¿½ï¿½ï¿½ä²»ï¿½ï¿½25ï¿½ê²»ï¿½á´¥ï¿½ï¿½ï¿½ó³§²ï¿½Ô±ï¿½ï¿½ï¿½Â¼ï¿½
+    ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ description   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ limitï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½)
+    ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½ children ï¿½ï¿½Ê¾
 */
 class mainEvent
 {
 public:
-    string description;           // ÊÂ¼þÃèÊö
-    vector<mainEvent*> children;  // ×ÓÊÂ¼þ½Úµã
-    Bonus eventBonus; //±íÊ¾¸ÃÊÂ¼þ¶ÔÍæ¼ÒÊôÐÔµÄÓ°Ïì
-    int triggerAge;  //Èç¹ûÊÇ¹Ì¶¨ÊÂ¼þÔòÉèÖÃÎª¶ÔÓ¦µÄÄêÁä£¬½»»¥ÊÂ¼þÔòÉèÖÃÎª-1
+    string description;           // ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    vector<mainEvent*> children;  // ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Úµï¿½
+    Bonus eventBonus; //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½Ó°ï¿½ï¿½
+    int triggerAge;  //ï¿½ï¿½ï¿½ï¿½Ç¹Ì¶ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª-1
 
     virtual ~mainEvent() {};
 };
@@ -101,195 +102,195 @@ public:
 };
 
 
-//±íÊ¾´óÑ§½×¶ÎÊÂ¼þ ¼Ì³Ð
+//ï¿½ï¿½Ê¾ï¿½ï¿½Ñ§ï¿½×¶ï¿½ï¿½Â¼ï¿½ ï¿½Ì³ï¿½
 class UniversityEvent :public mainEvent {};
 
-//±íÊ¾ÑÐ¾¿Éú½×¶ÎÊÂ¼þ ¼Ì³Ð
+//ï¿½ï¿½Ê¾ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½Â¼ï¿½ ï¿½Ì³ï¿½
 class postgraduateEvent :public mainEvent {};
 
 
-//±íÊ¾¹¤×÷½×¶ÎÊÂ¼þ
+//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½Â¼ï¿½
 class jobEvent :public mainEvent {};
 
 
-//±íÊ¾´´Òµ½×¶ÎÊÂ¼þ
+//ï¿½ï¿½Ê¾ï¿½ï¿½Òµï¿½×¶ï¿½ï¿½Â¼ï¿½
 class EnterpriseEvent :public mainEvent {};
 
 
-//±íÊ¾Ê§°Ü½×¶ÎÊÂ¼þ
+//ï¿½ï¿½Ê¾Ê§ï¿½Ü½×¶ï¿½ï¿½Â¼ï¿½
 class defeatEvent : public mainEvent {};
 
 
-//±íÊ¾ÍËÐÝ½×¶ÎÊÂ¼þ
+//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ý½×¶ï¿½ï¿½Â¼ï¿½
 class retireEvent : public mainEvent {};
 
 
 /*
-    ±íÊ¾Ëæ»úÊÂ¼þ
-    ³ÉÔ±±äÁ¿£ºÊÂ¼þµÄ±íÊ¾ ÊÂ¼þµÄÐ§¹û ·¢ÉúµÄ¸ÅÂÊµÈ
+    ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+    ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ä±ï¿½Ê¾ ï¿½Â¼ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Êµï¿½
 */
 
 struct rndEvent
 {
-    string description;  // ÊÂ¼þÃèÊö£¬ÀýÈç¡°Í»È»µÃ°©Ö¢¡±¡¢¡°½»Í¨ÊÂ¹Ê¡±
-    Bonus effect;  // ÊÂ¼þÐ§¹û£¬ÀýÈç¼õÉÙ½¡¿µÖµ¡¢¼õÉÙÊÙÃüµÈ
-    float probability;   // ÊÂ¼þ·¢ÉúµÄ¸ÅÂÊ£¬0µ½1Ö®¼ä
-    //------------------------ÄÚÖÃº¯Êý-------------------------------
+    string description;  // ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°Í»È»ï¿½Ã°ï¿½Ö¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Â¹Ê¡ï¿½
+    Bonus effect;  // ï¿½Â¼ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    float probability;   // ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ê£ï¿½0ï¿½ï¿½1Ö®ï¿½ï¿½
+    //------------------------ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½-------------------------------
 };
 
 /*
-    ±íÊ¾Ëæ»úÊÂ¼þµÄ¼¯ºÏ
+    ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 */
 vector<rndEvent> rndEvents;
 
 
 /*
-    ±íÊ¾ÒÑ¾­·¢ÉúÊÂ¼þµÄ¼¯ºÏ Ã¿´Î³õÊ¼»¯Ê±ºò±éÀúÕ¹ÏÖµ½ÏûÏ¢½çÃæÉÏ
+    ï¿½ï¿½Ê¾ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ Ã¿ï¿½Î³ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½Öµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 vector<string> happenEvent;
 
 
 /*
-  ½á¾ÖÏà¹ØÉèÖÃ
+  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 
-// ÃèÊö½á¾Ö
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 typedef struct
 {
-    string description; // ½á¾ÖµÄÏêÏ¸ÃèÊö
-    int score; // ½á¾ÖÆÀ·Ö£¬A¡¢B¡¢CµÈ
-    bool isHidden; // ÊÇ·ñÎªÒþ²Ø½á¾Ö ¿ÉÒÔÉè¼ÆÒ»Ð©²Êµ°Ö®ÀàµÄ±ÈÈçÈç¹ûÊÇÒþ²Ø½á¾ÖÕ¹ÏÖµÄÒ³Ãæ²»Í¬
+    string description; // ï¿½ï¿½Öµï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½
+    int score; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½Aï¿½ï¿½Bï¿½ï¿½Cï¿½ï¿½
+    bool isHidden; // ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Ø½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½Êµï¿½Ö®ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½Õ¹ï¿½Öµï¿½Ò³ï¿½æ²»Í¬
 } Ending;
 
-// ½á¾Ö´¥·¢Ìõ¼þ£¬¿ÉÒÔ¸ù¾ÝÊôÐÔ»òÊÂ¼þÀ´Éè¶¨
+// ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½è¶¨
 typedef struct
 {
-    limit endlimit;//½á¾ÖÊôÐÔÌõ¼þ
-    vector<mainEvent> preevent;//±íÊ¾´¥·¢½á¾ÖµÄËùÐèÒª·¢ÉúµÄÇ°ÖÃÊÂ¼þ
+    limit endlimit;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    vector<mainEvent> preevent;//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Â¼ï¿½
 } EndingCondition;
 
-// ½á¾ÖÅÐ¶ÏÓë´¥·¢
+// ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ë´¥ï¿½ï¿½
 typedef struct
 {
-    Ending ending; // ¾ßÌåµÄ½á¾ÖÃèÊö
-    EndingCondition condition; // ´¥·¢¸Ã½á¾ÖµÄÌõ¼þ
+    Ending ending; // ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    EndingCondition condition; // ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½
 } EndingEvent;
 
-//---------------------------Êý¾ÝÉè¼Æ------------------------------
+//---------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½------------------------------
 
 
 
 //---------------------------service-------------------------------
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ³õÊ¼»¯Ëæ»úÊÂ¼þ±í
-        ³õÊ¼»¯ÓÎÏ·Êý¾Ý
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
+        ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void init();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        Ìì¸³¶ÔÊôÐÔµÄÓ°Ïì
-            ¸ù¾ÝÍæ¼ÒËùÑ¡ÔñµÄÌì¸³¿¨¶ÔÊôÐÔÖµ½øÐÐÐÞ¸Ä
-    ²ÎÊý£ºÍæ¼Ò¶ÔÏó£¬ÓÉtalentChooseViewº¯Êý´«ÈëµÄÌì¸³¿¨IDºÅÈÝÆ÷
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½Ó°ï¿½ï¿½
+            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½talentChooseViewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¸³ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void TalentBonus(person, vector<int>);
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ³õÊ¼»¯Ëæ»úÊÂ¼þ±í
-            ÍùrandomEventsÈÝÆ÷ÖÐÌí¼ÓÊÂ¼þ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
+            ï¿½ï¿½randomEventsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void initRandomEvents();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ¹¹½¨ÊÂ¼þÊ÷
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£º·µ»ØÈËÉúÆðµãÊÂ¼þ
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 
 */
 mainEvent* buildEventTree();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÊÂ¼þÑ­»·º¯Êý
-            °´¹Ì¶¨ÊÂ¼þ>½»»¥ÊÂ¼þ>Ëæ»úÊÂ¼þµÄË³Ðò£¬È·±£Ã¿ÄêÖ»´¥·¢Ò»¸öÊÂ¼þ
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½Â¼ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½Â¼ï¿½>ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½>ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ë³ï¿½ï¿½È·ï¿½ï¿½Ã¿ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Â¼ï¿½
                 while(age<100){
-                    ¼ì²éÊÇ·ñÓÐ¹Ì¶¨ÊÂ¼þ
+                    ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¹Ì¶ï¿½ï¿½Â¼ï¿½
 
-                    Ã»ÓÐ£¬Ôò¼ì²é½»»¥ÊÂ¼þ
+                    Ã»ï¿½Ð£ï¿½ï¿½ï¿½ï¿½é½»ï¿½ï¿½ï¿½Â¼ï¿½
 
-                    Ã»ÓÐ¹Ì¶¨ÊÂ¼þ¡¢½»»¥ÊÂ¼þ£¬Ôò¼ì²éËæ»úÊÂ¼þ
+                    Ã»ï¿½Ð¹Ì¶ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 
 
-                    ÊÂ¼þ·¢ÉúºóÍæ¼ÒÄêÁäÔö¼Ó
+                    ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-                    ¼ì²éÍæ¼ÒµÄ½¡¿µÖµ£¬´ïµ½ËÀÍöÌõ¼þÊ±Ìø³öÑ­»·
+                    ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
                 }
-            ÓÎÏ·½áÊøendView()
-    ²ÎÊý£ºÍæ¼Ò¶ÔÏóplayer£¬µ±Ç°ÊÂ¼þ½ÚµãcurrentEvent
-    ·µ»ØÖµ£ºvoid
+            ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½endView()
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½playerï¿½ï¿½ï¿½ï¿½Ç°ï¿½Â¼ï¿½ï¿½Úµï¿½currentEvent
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void gameLoop(person, mainEvent*);
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        Ëæ»úÊýÉú³ÉÆ÷£¬ÔÚcheckRandomEvents()º¯ÊýÖÐ±»µ÷ÓÃ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºÉú³ÉµÄËæ»úÊý
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½checkRandomEvents()ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 */
 float generateRandom();
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ¸ù¾ÝgenerateRandom()º¯ÊýÉú³ÉµÄËæ»úÊý£¬¼ì²éÊÇ·ñ´¥·¢Ëæ»úÊÂ¼þ
-    ²ÎÊý£ºÍæ¼Ò¶ÔÏó
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½generateRandom()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ´¥·ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void checkRandomEvents(person);
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ´¦Àí½»»¥ÊÂ¼þ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void handleInteractiveEvent();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ¸ù¾ÝÊÂ¼þÓ°ÏìÐÞ¸ÄÍæ¼ÒÊôÐÔÖµ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Ó°ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 
 */
 void EventBonus();
@@ -302,130 +303,130 @@ void EventBonus();
 //-----------------------------view--------------------------------
 
  /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ³õÊ¼»¯Ö÷²Ëµ¥½çÃæ
-            Õ¹Ê¾Ñ¡ÔñÑ¡Ïî£º
-                µÇÂ¼ÕË»§£º½øÈëµÇÂ¼½çÃæ
-                ×¢²áÕË»§£º½øÈë×¢²á½çÃæ
-                ÓÎÏ·ÉèÖÃ£º½øÈëÓÎÏ·ÉèÖÃ½çÃæ //À©Õ¹
-                ÍË³öÓÎÏ·£ºÍË³ö³ÌÐò
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½
+            Õ¹Ê¾Ñ¡ï¿½ï¿½Ñ¡ï¿½î£º
+                ï¿½ï¿½Â¼ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+                ×¢ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½
+                ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ //ï¿½ï¿½Õ¹
+                ï¿½Ë³ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void menuView();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£ºÌá¹©ÓÃ»§ÊäÈëÕË»§ºÍÃÜÂë
-        ÓÐÁ©¸ö°´Å¥
-        Ò»¸öÊÇµÇÂ¼°´Å¥  ½øÈëÓÎÏ·¿ªÊ¼½çÃæ
-        Ò»¸öÊÇÈ¡Ïû°´Å¥ ÓÃÓÚ·µ»ØÖ÷²Ëµ¥£¬½øÈëÖ÷²Ëµ¥Ò³Ãæ
-    ²ÎÊý void
-    ·µ»ØÖµ void
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½ï¿½á¹©ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
+        Ò»ï¿½ï¿½ï¿½Çµï¿½Â¼ï¿½ï¿½Å¥  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+        Ò»ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Å¥ ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½Ò³ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ void
+    ï¿½ï¿½ï¿½ï¿½Öµ void
 */
 void loginView();
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÓÃ»§×¢²áÕËºÅ
-        ÓÐÁ©¸ö°´Å¥Ò»¸öÊÇ×¢²á Ò»¸öÊÇ·µ»Ø ¶þÕß¾ù·µ»ØÖÁµÇÂ¼Ò³Ãæ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½ï¿½Ëºï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥Ò»ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ Ò»ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void registerView();
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÐÈý¸ö°´Å¥
-        Ò»¸öÊÇ¿ªÊ¼ÓÎÏ·µÄ°´Å¥½øÈë³é¿¨½çÃæ
-        Ò»¸öÊÇÈËÉúÂÄÀú°´Å¥½øÈëÉúÑÄ½çÃæ
-        Ò»¸öÊÇ³É¾Í°´Å¥½øÈë³É¾Í½çÃæ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
+        Ò»ï¿½ï¿½ï¿½Ç¿ï¿½Ê¼ï¿½ï¿½Ï·ï¿½Ä°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½é¿¨ï¿½ï¿½ï¿½ï¿½
+        Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½
+        Ò»ï¿½ï¿½ï¿½Ç³É¾Í°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½É¾Í½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void gameBeignView();
 
 
 /*
 
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-      Õ¹ÏÖÌì¸³Ñ¡Ïî
-            ÈÃÓÃ»§Ñ¡È¡Ìì¸³£¬ÈôÑ¡È¡µÄÌì¸³ÉÙÓÚ3¸öÔò¼ÌÐøÑ¡Ôñ
-            µ÷ÓÃTalentBonus()º¯Êý£¬¸ù¾ÝÌì¸³ÐÞ¸ÄÊôÐÔÖµ
-      ÓÐÒ»¸öÑ¡Ôñ°´Å¥ Ñ¡ÔñÖ®ºóÔò½øÈëÓÎÏ·½çÃæ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+      Õ¹ï¿½ï¿½ï¿½ì¸³Ñ¡ï¿½ï¿½
+            ï¿½ï¿½ï¿½Ã»ï¿½Ñ¡È¡ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½Ñ¡È¡ï¿½ï¿½ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+            ï¿½ï¿½ï¿½ï¿½TalentBonus()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¸³ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+      ï¿½ï¿½Ò»ï¿½ï¿½Ñ¡ï¿½ï¿½Å¥ Ñ¡ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void talentChooseView();
 
 
 /*
-     ¸ºÔðÈË£º
-     ¹¦ÄÜ£º
-        µ÷ÓÃinit()³õÊ¼»¯ÓÎÏ·Êý¾Ý
-        ÓÃÓÚÏÔÊ¾½ÇÉ«ÊôÐÔ ºÍÒ»Ð©»ù±¾ÐÅÏ¢
-        ÏÔÊ¾Ò»¸öÎÄ±¾¿òÓÃÓÚÕ¹Ê¾ÒÑ¾­·¢ÉúµÄÊÂ¼þ ºÍÒ»Ð©±ØÈ»ÊÂ¼þ
-        »¹ÓÐÒ»¸ö°´Å¥¹©ÓÃ»§µã»÷ÏÂÒ»Äê
-     ²ÎÊý£ºvoid
-     ·µ»ØÖµ£º void
+     ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+     ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½init()ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò»Ð©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+        ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ ï¿½ï¿½Ò»Ð©ï¿½ï¿½È»ï¿½Â¼ï¿½
+        ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+     ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+     ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ void
 */
 void gameView();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÔÚgameViewµÄ»ù´¡ÉÏÕ¹ÏÖÒ»¸öÐ¡µÄ½çÃæ ÓÃÓÚÕ¹Ê¾
-        1.Ëæ»úÊÂ¼þµÄÊÂ¼þ·¢ÉúÃèÊö
-        2.Ñ¡ÔñÊÂ¼þµÄÊÂ¼þÃèÊö ¼ÓÉÏÑ¡ÔñÑ¡Ïî
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gameViewï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½Ò»ï¿½ï¿½Ð¡ï¿½Ä½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾
+        1.ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        2.Ñ¡ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ñ¡ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void popView();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÕ¹ÏÖÉèÖÃ½çÃæ  ¾´ÇëÆÚ´ý¡­¡­
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void settingView();
 
 
 /*
-      ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÕ¹ÏÖÍæ¼ÒÔÚÓÎÏ·ÖÐÖØ¿ªµÄ´ÎÊý ÒÔ¼°»ñµÃµÄ×î¸ß·ÖÊý
-        ÀïÃæÓÐÒ»¸ö°´Å¥ÓÃÓÚ·µ»ØÓÎÏ·¿ªÊ¼½çÃæ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+      ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void careerView();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÕ¹ÏÖÍæ¼ÒËù»ñµÃ³É¾Í
-        ÀïÃæÓÐÒ»¸ö·µ»Ø°´Å¥ÓÃÓÚ·µ»ØÓÎÏ·¿ªÊ¼½çÃæ
-    ²ÎÊý£ºvoid
-    ·µ»ØÖµ£ºvoid
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¾ï¿½
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½Å¥ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½void
+    ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½void
 */
 void achievementView();
 
 
 /*
-    ¸ºÔðÈË£º
-    ¹¦ÄÜ£º
-        ÓÃÓÚÕ¹Ê¾Íæ¼ÒÓÎÏ·½áÊøºó²úÉúµÄ½á¾Ö
-        ¿ÉÒÔ·µ»ØÖ÷²Ëµ¥ ¿ÉÒÔÖØÐÂ¿ªÊ¼ÓÎÏ·£¨½øÈëGameView£©
+    ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+    ï¿½ï¿½ï¿½Ü£ï¿½
+        ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½
+        ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GameViewï¿½ï¿½
 */
 void endView();
 
@@ -437,7 +438,7 @@ void endView();
 int main()
 {
     person player;
-    mainEvent* eventTree = buildEventTree(); //³õÊ¼»¯ÊÂ¼þÊ÷
-    gameLoop(player, eventTree); //½øÈëÓÎÏ·Ö÷Ñ­»·
+    mainEvent* eventTree = buildEventTree(); //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
+    gameLoop(player, eventTree); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ñ­ï¿½ï¿½
     return 0;
 }
