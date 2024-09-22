@@ -104,43 +104,35 @@ public:
 //表示大学阶段事件 继承
 class UniversityEvent :public mainEvent {};
 
-//表示研究生阶段事件 继承
+/*
+    读研线
+*/
 class postgraduateEvent :public mainEvent {};
 
 
-//表示工作阶段事件
+/*
+    工作线
+*/
 class jobEvent :public mainEvent {};
 
 
-//表示创业阶段事件
+/*
+    创业线
+*/
 class EnterpriseEvent :public mainEvent {};
 
 
-//表示失败阶段事件
+/*
+    失败线
+*/
 class defeatEvent : public mainEvent {};
 
 
-//表示退休阶段事件
+
+/*
+    退休线
+*/
 class retireEvent : public mainEvent {};
-
-
-/*
-    表示随机事件
-    成员变量：事件的表示 事件的效果 发生的概率等
-*/
-
-struct rndEvent
-{
-    string description;  // 事件描述，例如“突然得癌症”、“交通事故”
-    Bonus effect;  // 事件效果，例如减少健康值、减少寿命等
-    float probability;   // 事件发生的概率，0到1之间
-    //------------------------内置函数-------------------------------
-};
-
-/*
-    表示随机事件的集合
-*/
-vector<rndEvent> rndEvents;
 
 
 /*
@@ -220,8 +212,9 @@ void initRandomEvents();
     负责人：
     功能：
         构建事件树
+            由关键时间节点事件组成
     参数：void
-    返回值：返回人生起点事件
+    返回值：返回事件树
 
 */
 mainEvent* buildEventTree();
@@ -261,6 +254,7 @@ void gameLoop(person, mainEvent*);
 
 */
 float generateRandom();
+
 
 /*
     负责人：
