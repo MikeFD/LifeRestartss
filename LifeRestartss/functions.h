@@ -14,7 +14,7 @@ using namespace std;
     6表示创业期 7表示退休期
     8表示死亡 9表示永生
 */
-int flag;
+extern int flag;
 
 
 
@@ -97,7 +97,7 @@ struct YoungAgeChoices
 };
 
 /*高考选择*/
-bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
+extern bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
 
 
 
@@ -108,7 +108,7 @@ struct examSocre//表示高考分数范围
     int max_score;//表示最高所能考取的分数
 };
 
-int score;//表示当前的最终分数
+extern int score;//表示当前的最终分数
 
 
 
@@ -222,7 +222,7 @@ struct randEvent
 /*
     表示随机事件的集合
 */
-vector<randEvent> ranEvents;
+extern vector<randEvent> ranEvents;
 
 
 //表示大学阶段事件 继承
@@ -261,7 +261,7 @@ class retireEvent : public mainEvent {};
 /*
     表示已经发生事件的集合 每次初始化时候遍历展现到消息界面上
 */
-vector<string> happenEvent;
+extern vector<string> happenEvent;
 
 
 /*
@@ -545,13 +545,3 @@ void endView();
 
 
 //-----------------------------view--------------------------------
-
-
-
-int main()
-{
-    person player;
-    mainEvent* eventTree = buildEventTree(); //初始化事件树
-    gameLoop(player, eventTree); //进入游戏主循环
-    return 0;
-}
