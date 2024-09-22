@@ -17,6 +17,7 @@ using namespace std;
 int flag;
 
 
+
 /*
     玩家设置
     年龄、智商、情商、编程能力、健康
@@ -91,6 +92,8 @@ struct YoungAgeChoices
         返回值：void
     */
     void showYoungAgeChoices();
+
+
 };
 
 /*高考选择*/
@@ -106,6 +109,8 @@ struct examSocre//表示高考分数范围
 };
 
 int score;//表示当前的最终分数
+
+
 
 
 /*
@@ -179,7 +184,8 @@ struct randEvent
 {
     string description;  // 事件描述，例如“突然得癌症”、“交通事故”
     EffectBonus effect;  // 事件效果，例如减少健康值、减少寿命等
-    float possibility;   // 事件发生的概率，0到1之间
+    float possibility;   // 事件发生的概率，0到1之间    
+    bool ishappend;//表示该事件是否以及发生
     //------------------------内置函数-------------------------------
     /*
         负责人：
@@ -379,18 +385,15 @@ int getScore（int iq）;
 
 
 
-
-
-
 /*
     负责人：
     功能：
-        处理交互事件
-    参数：玩家对象
-    返回值：void
-
+        玩家通过鼠标点击的方式来处理鼠标消息进行选择然后根据选择
+        来推导剧情的走向 包括选择事件的点击 和 下一年 以及登录 游戏中各个按钮的点击事件是否成功的函数
+    参数：int 表示用户鼠标点击时候的坐标
+    返回值：bool
 */
-void handleInteractiveEvent(person);
+bool mouseClick(int x,int y);
 
 
 /*
@@ -402,6 +405,7 @@ void handleInteractiveEvent(person);
 
 */
 void EventBonus();
+
 
 
 //---------------------------service-------------------------------
