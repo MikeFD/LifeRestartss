@@ -70,8 +70,9 @@ typedef struct {
 //人生选择 18岁之前的一些选择以及选择带来的一些影响
 typedef struct youngChoiceEffects
 {
-    string description;
+    string description;//事件描述
     Bonus improve;
+    string outcome;//表示事件发生在界面上所返回的一些句子
 };//代表18岁之前的选择以及影响
 
 // 定义18岁之前的选择数据
@@ -83,6 +84,13 @@ struct YoungAgeChoices
 {
     int age; // 年龄阶段，例如：12表示12岁，15表示15岁
     vector<youngChoiceEffects> choices; // 选择列表
+
+    /*
+        负责人：
+        功能：展示事件描述以及选择供玩家选择
+        返回值：void
+    */
+    void showYoungAgeChoices();
 };
 
 /*高考选择*/
@@ -117,7 +125,35 @@ public:
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
 
-    mainEvent() {};
+  /*
+Event的构造函数 
+    负责人：
+    功能：用于初始化事件类内的属性
+    参数：string limit分别表示事件描述 和 事件的属性限制
+    返回值： 无返回值
+
+*/
+mainEvent(string description,limit event) {};
+
+/*
+ 负责人：
+判断事件是否发生函数：
+    功能：传入人物当前属性值 判断是否可以发生该事件
+    参数：person
+    返回值：bool
+*/
+bool isTrigger(person p) {};
+
+
+/*
+    负责人：
+    功能：
+        展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
+        并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
+    参数：void
+    返回值: void
+*/
+void showAndChooseEvent() {};
 };
 
 
@@ -135,12 +171,51 @@ public:
 //     }
 // };
 
-class rndEvent :public mainEvent {
-public:
-    bool shouldTrigger() {
+/*
+    表示随机事件  其中包含事件的表示 事件的效果 以及发生的概率等
+*/
 
-    }
+struct randEvent
+{
+    string description;  // 事件描述，例如“突然得癌症”、“交通事故”
+    EffectBonus effect;  // 事件效果，例如减少健康值、减少寿命等
+    float possibility;   // 事件发生的概率，0到1之间
+    //------------------------内置函数-------------------------------
+    /*
+        负责人：
+        功能：传入人物属性 判断该事件是否会发生 若跟人物属性无关联则直接 生成一个随机数与possibility进行比较 若大于则可以发生 若小于则不能发生
+        参数：person
+        返回值： bool
+        
+    */
+    bool triggerEvent(person p);
+
+
+    /*
+        负责人：
+        功能：
+            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况 
+        参数：玩家对象
+        返回值：void
+    
+    */
+    void checkRandEvents(person);
+
+
+    /*
+        负责人：
+        功能：
+            展现随机事件发生的结果描述随机事件等
+        参数：void
+        返回值：void
+    */
+    void showRandEvent();
 };
+
+/*
+    表示随机事件的集合
+*/
+vector<randEvent> ranEvents;
 
 
 //表示大学阶段事件 继承
@@ -304,15 +379,7 @@ int getScore（int iq）;
 
 
 
-/*
-    负责人：
-    功能：
-        处理随机事件
-    参数：玩家对象
-    返回值：void
 
-*/
-void checkRandomEvents(person);
 
 
 /*
