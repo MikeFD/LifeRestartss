@@ -183,7 +183,7 @@ void showAndChooseEvent() {};
 struct randEvent
 {
     string description;  // 事件描述，例如“突然得癌症”、“交通事故”
-    EffectBonus effect;  // 事件效果，例如减少健康值、减少寿命等
+    Bonus effect;  // 事件效果，例如减少健康值、减少寿命等
     float possibility;   // 事件发生的概率，0到1之间    
     bool ishappend;//表示该事件是否以及发生
     //------------------------内置函数-------------------------------
@@ -374,7 +374,7 @@ void gameLoop(person, mainEvent*);
     参数：int
     返回值：void
 */
-int getScore（int iq）;
+int getScore(int iq);
 
 
 
