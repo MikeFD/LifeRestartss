@@ -77,16 +77,23 @@ typedef struct {
 class mainEvent
 {
 public:
+    int EventID;                  //事件ID号
     string description;           // 事件描述
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
-    int triggerAge;  //如果是固定事件则设置为对应的年龄，交互事件则设置为-1
 
     virtual ~mainEvent() {};
 };
 
 
 class interactiveEvent : public mainEvent {
+private:
+    /*
+        交互事件触发年龄：
+        如果是固定的交互事件就会设置年龄，
+        非固定的交互事件默认是-1
+    */
+    int triggerAge=-1; 
 public:
     void chooseEvent(person& person) {
 
@@ -126,7 +133,6 @@ class EnterpriseEvent :public mainEvent {};
     失败线
 */
 class defeatEvent : public mainEvent {};
-
 
 
 /*
@@ -176,7 +182,6 @@ typedef struct
 /*
     负责人：
     功能：
-        初始化随机事件表
         初始化游戏数据
     参数：void
     返回值：void
@@ -219,18 +224,22 @@ void initRandomEvents();
 */
 mainEvent* buildEventTree();
 
-
+//写一条主线，记录固定交互事件的时间点？
 /*
     负责人：
     功能：
         事件循环函数
             按固定事件>交互事件>随机事件的顺序，确保每年只触发一个事件
                 while(age<100){
-                    检查是否有固定事件
+                    根据年龄，检查是否有固定交互事件
 
-                    没有，则检查交互事件
-
-                    没有固定事件、交互事件，则检查随机事件
+                    根据当前基类指针可以动态转换过来的指针类型判断属于哪条故事线，
+                    或者用flag记录阶段、前面那些类主要用作存储对应故事线下的事件
+                    随机生成数，决定是触发非固定的交互事件还是触发随机事件
+                    {
+                        随机生成数——事件ID号，得分类因为数量不一定一样多
+                        决定触发哪件非固定的交互事件/随机事件
+                    }
 
 
                     事件发生后玩家年龄增加
@@ -248,18 +257,7 @@ void gameLoop(person, mainEvent*);
 /*
     负责人：
     功能：
-        随机数生成器，在checkRandomEvents()函数中被调用
-    参数：void
-    返回值：生成的随机数
-
-*/
-float generateRandom();
-
-
-/*
-    负责人：
-    功能：
-        根据generateRandom()函数生成的随机数，检查是否触发随机事件
+        处理随机事件
     参数：玩家对象
     返回值：void
 
@@ -271,11 +269,11 @@ void checkRandomEvents(person);
     负责人：
     功能：
         处理交互事件
-    参数：void
+    参数：玩家对象
     返回值：void
 
 */
-void handleInteractiveEvent();
+void handleInteractiveEvent(person);
 
 
 /*
