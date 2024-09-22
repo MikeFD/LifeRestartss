@@ -64,6 +64,41 @@ typedef struct {
     Bonus talentBonus; //天赋对属性的影响
 }talent;
 
+/*
+    表示18岁之前的选择性事件
+*/
+//人生选择 18岁之前的一些选择以及选择带来的一些影响
+typedef struct youngChoiceEffects
+{
+    string description;
+    Bonus improve;
+};//代表18岁之前的选择以及影响
+
+// 定义18岁之前的选择数据
+
+/*
+    表示18岁之前的选择性事件集合
+*/
+struct YoungAgeChoices
+{
+    int age; // 年龄阶段，例如：12表示12岁，15表示15岁
+    vector<youngChoiceEffects> choices; // 选择列表
+};
+
+/*高考选择*/
+bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
+
+
+
+struct examSocre//表示高考分数范围
+{
+    int IQ; // 智力影响系数
+    int min_score;//表示最低所能考取的分数
+    int max_score;//表示最高所能考取的分数
+};
+
+int score;//表示当前的最终分数
+
 
 /*
     事件类的父类   用树来进行表示 根节点表示当前事件  子节点表示下一个发生事件的选择
@@ -82,23 +117,23 @@ public:
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
 
-    virtual ~mainEvent() {};
+    mainEvent() {};
 };
 
 
-class interactiveEvent : public mainEvent {
-private:
-    /*
-        交互事件触发年龄：
-        如果是固定的交互事件就会设置年龄，
-        非固定的交互事件默认是-1
-    */
-    int triggerAge=-1; 
-public:
-    void chooseEvent(person& person) {
+// class interactiveEvent : public mainEvent {
+// private:
+//     /*
+//         交互事件触发年龄：
+//         如果是固定的交互事件就会设置年龄，
+//         非固定的交互事件默认是-1
+//     */
+//     int triggerAge=-1; 
+// public:
+//     void chooseEvent(person& person) {
 
-    }
-};
+//     }
+// };
 
 class rndEvent :public mainEvent {
 public:
@@ -182,7 +217,8 @@ typedef struct
 /*
     负责人：
     功能：
-        初始化游戏数据
+        初始化界面，根据已经发生的事件在消息框进行一个展示
+        以及初始化角色的初始属性
     参数：void
     返回值：void
 
@@ -219,39 +255,53 @@ void initRandomEvents();
         构建事件树
             由关键时间节点事件组成
     参数：void
-    返回值：返回事件树
-
-*/
-mainEvent* buildEventTree();
-
-//写一条主线，记录固定交互事件的时间点？
-/*
-    负责人：
-    功能：
-        事件循环函数
-            按固定事件>交互事件>随机事件的顺序，确保每年只触发一个事件
-                while(age<100){
-                    根据年龄，检查是否有固定交互事件
-
-                    根据当前基类指针可以动态转换过来的指针类型判断属于哪条故事线，
-                    或者用flag记录阶段、前面那些类主要用作存储对应故事线下的事件
-                    随机生成数，决定是触发非固定的交互事件还是触发随机事件
-                    {
-                        随机生成数——事件ID号，得分类因为数量不一定一样多
-                        决定触发哪件非固定的交互事件/随机事件
-                    }
-
-
-                    事件发生后玩家年龄增加
-
-                    检查玩家的健康值，达到死亡条件时跳出循环
-                }
-            游戏结束endView()
-    参数：玩家对象player，当前事件节点currentEvent
     返回值：void
 
 */
-void gameLoop(person, mainEvent*);
+void buildEventTree();
+
+
+// //写一条主线，记录固定交互事件的时间点？
+// /*
+//     负责人：
+//     功能：
+//         事件循环函数
+//             按固定事件>交互事件>随机事件的顺序，确保每年只触发一个事件
+//                 while(age<100){
+//                     根据年龄，检查是否有固定交互事件
+
+//                     根据当前基类指针可以动态转换过来的指针类型判断属于哪条故事线，
+//                     或者用flag记录阶段、前面那些类主要用作存储对应故事线下的事件
+//                     随机生成数，决定是触发非固定的交互事件还是触发随机事件
+//                     {
+//                         随机生成数——事件ID号，得分类因为数量不一定一样多
+//                         决定触发哪件非固定的交互事件/随机事件
+//                     }
+
+
+//                     事件发生后玩家年龄增加
+
+//                     检查玩家的健康值，达到死亡条件时跳出循环
+//                 }
+//             游戏结束endView()
+//     参数：玩家对象player，当前事件节点currentEvent
+//     返回值：void
+
+// */
+// void gameLoop(person, mainEvent*);
+
+
+
+/*
+    负责人：
+    功能：
+        根据智力值影响因素
+        以及随机数获取的分数来决定高考分数
+    参数：int
+    返回值：void
+*/
+int getScore（int iq）;
+
 
 
 /*
