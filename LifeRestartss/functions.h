@@ -87,7 +87,7 @@ struct YoungAgeChoices
     vector<youngChoiceEffects> choices; // 选择列表
 
     /*
-        负责人：
+        负责人：崇
         功能：展示事件描述以及选择供玩家选择
         返回值：void
     */
@@ -138,7 +138,7 @@ Event的构造函数
     返回值： 无返回值
 
 */
-mainEvent(string description,limit event) {};
+mainEvent(string description,limit event);
 
 /*
  负责人：
@@ -147,7 +147,7 @@ mainEvent(string description,limit event) {};
     参数：person
     返回值：bool
 */
-bool isTrigger(person p) {};
+bool isTrigger(person p);
 
 
 /*
@@ -158,7 +158,7 @@ bool isTrigger(person p) {};
     参数：void
     返回值: void
 */
-void showAndChooseEvent() {};
+void showAndChooseEvent();
 };
 
 
@@ -408,7 +408,7 @@ void EventBonus();
 //-----------------------------view--------------------------------
 
  /*
-    负责人：
+    负责人：崇
     功能：
         初始化主菜单界面
             展示选择选项：
@@ -423,7 +423,7 @@ void menuView();
 
 
 /*
-    负责人：
+    负责人：崇
     功能：提供用户输入账户和密码
         有俩个按钮
         一个是登录按钮  进入游戏开始界面
@@ -434,7 +434,7 @@ void menuView();
 void loginView();
 
 /*
-    负责人：
+    负责人：崇
     功能：
         用于用户注册账号
         有俩个按钮一个是注册 一个是返回 二者均返回至登录页面
@@ -444,7 +444,7 @@ void loginView();
 void registerView();
 
 /*
-    负责人：
+    负责人：崇
     功能：
         有三个按钮
         一个是开始游戏的按钮进入抽卡界面
@@ -458,7 +458,7 @@ void gameBeignView();
 
 /*
 
-    负责人：
+    负责人：崇
     功能：
       展现天赋选项
             让用户选取天赋，若选取的天赋少于3个则继续选择
@@ -471,7 +471,7 @@ void talentChooseView();
 
 
 /*
-     负责人：
+     负责人：崇
      功能：
         调用init()初始化游戏数据
         用于显示角色属性 和一些基本信息
@@ -484,7 +484,7 @@ void gameView();
 
 
 /*
-    负责人：
+    负责人：崇
     功能：
         用于在gameView的基础上展现一个小的界面 用于展示
         1.随机事件的事件发生描述
@@ -496,7 +496,7 @@ void popView();
 
 
 /*
-    负责人：
+    负责人：崇
     功能：
         用于展现设置界面  敬请期待……
     参数：void
@@ -506,7 +506,7 @@ void settingView();
 
 
 /*
-      负责人：
+      负责人：崇
     功能：
         用于展现玩家在游戏中重开的次数 以及获得的最高分数
         里面有一个按钮用于返回游戏开始界面
@@ -517,7 +517,7 @@ void careerView();
 
 
 /*
-    负责人：
+    负责人：崇
     功能：
         用于展现玩家所获得成就
         里面有一个返回按钮用于返回游戏开始界面
@@ -528,7 +528,7 @@ void achievementView();
 
 
 /*
-    负责人：
+    负责人：崇
     功能：
         用于展示玩家游戏结束后产生的结局
         可以返回主菜单 可以重新开始游戏（进入GameView）
