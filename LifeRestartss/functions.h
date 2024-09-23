@@ -130,35 +130,35 @@ public:
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
 
-  /*
-Event的构造函数 
-    负责人：
-    功能：用于初始化事件类内的属性
-    参数：string limit分别表示事件描述 和 事件的属性限制
-    返回值： 无返回值
+    /*
+  Event的构造函数
+      负责人：灰机
+      功能：用于初始化事件类内的属性
+      参数：string limit分别表示事件描述 和 事件的属性限制
+      返回值： 无返回值
 
-*/
-mainEvent(string description,limit event);
+  */
+    mainEvent(string description, limit event);
 
-/*
- 负责人：
-判断事件是否发生函数：
-    功能：传入人物当前属性值 判断是否可以发生该事件
-    参数：person
-    返回值：bool
-*/
-bool isTrigger(person p);
+    /*
+     负责人：灵泽
+    判断事件是否发生函数：
+        功能：传入人物当前属性值 判断是否可以发生该事件
+        参数：person
+        返回值：bool
+    */
+    bool isTrigger(person p);
 
 
-/*
-    负责人：
-    功能：
-        展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
-        并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
-    参数：void
-    返回值: void
-*/
-void showAndChooseEvent();
+    /*
+        负责人：liz
+        功能：
+            展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
+            并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
+        参数：void
+        返回值: void
+    */
+    void showAndChooseEvent();
 };
 
 
@@ -188,28 +188,28 @@ struct randEvent
     bool ishappend;//表示该事件是否以及发生
     //------------------------内置函数-------------------------------
     /*
-        负责人：
+        负责人：fan
         功能：传入人物属性 判断该事件是否会发生 若跟人物属性无关联则直接 生成一个随机数与possibility进行比较 若大于则可以发生 若小于则不能发生
         参数：person
         返回值： bool
-        
+
     */
     bool triggerEvent(person p);
 
 
     /*
-        负责人：
+        负责人：fan
         功能：
-            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况 
+            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况
         参数：玩家对象
         返回值：void
-    
+
     */
     void checkRandEvents(person);
 
 
     /*
-        负责人：
+        负责人：灵泽
         功能：
             展现随机事件发生的结果描述随机事件等
         参数：void
@@ -296,19 +296,18 @@ typedef struct
 //---------------------------service-------------------------------
 
 /*
-    负责人：
+    负责人：faivm
     功能：
         初始化界面，根据已经发生的事件在消息框进行一个展示
         以及初始化角色的初始属性
     参数：void
     返回值：void
-
 */
 void init();
 
 
 /*
-    负责人：
+    负责人：小逸
     功能：
         天赋对属性的影响
             根据玩家所选择的天赋卡对属性值进行修改
@@ -316,10 +315,10 @@ void init();
     返回值：void
 
 */
-void TalentBonus(person, vector<int>);
+void TalentBonus(person& p, vector<int>& talentId);
 
 /*
-    负责人：
+    负责人：飞
     功能：
         初始化随机事件表
             往randomEvents容器中添加事件
@@ -331,7 +330,7 @@ void initRandomEvents();
 
 
 /*
-    负责人：
+    负责人：liz
     功能：
         构建事件树
             由关键时间节点事件组成
@@ -344,7 +343,7 @@ void buildEventTree();
 
 //写一条主线，记录固定交互事件的时间点？
 /*
-    负责人：
+    负责人：GT
     功能：
         事件循环函数
             按18岁之前的事件>故事线上的事件>随机事件的顺序进行判断 每年最多同时发生俩件事
@@ -367,7 +366,7 @@ void gameLoop(person, mainEvent*);
 
 
 /*
-    负责人：
+    负责人：飞
     功能：
         根据智力值影响因素
         以及随机数获取的分数来决定高考分数
@@ -379,18 +378,18 @@ int getScore(int iq);
 
 
 /*
-    负责人：
+    负责人：小逸
     功能：
         玩家通过鼠标点击的方式来处理鼠标消息进行选择然后根据选择
         来推导剧情的走向 包括选择事件的点击 和 下一年 以及登录 游戏中各个按钮的点击事件是否成功的函数
     参数：int 表示用户鼠标点击时候的坐标
     返回值：bool
 */
-bool mouseClick(int x,int y);
+bool mouseClick(int x, int y);
 
 
 /*
-    负责人：
+    负责人：faivm
     功能：
         根据事件影响修改玩家属性值
     参数：void
@@ -458,7 +457,7 @@ void gameBeignView();
 
 /*
 
-    负责人：崇
+    负责人：小逸
     功能：
       展现天赋选项
             让用户选取天赋，若选取的天赋少于3个则继续选择
@@ -506,7 +505,7 @@ void settingView();
 
 
 /*
-      负责人：崇
+      负责人：GT
     功能：
         用于展现玩家在游戏中重开的次数 以及获得的最高分数
         里面有一个按钮用于返回游戏开始界面
@@ -528,7 +527,7 @@ void achievementView();
 
 
 /*
-    负责人：崇
+    负责人：灵泽
     功能：
         用于展示玩家游戏结束后产生的结局
         可以返回主菜单 可以重新开始游戏（进入GameView）
