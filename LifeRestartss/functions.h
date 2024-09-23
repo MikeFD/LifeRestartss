@@ -14,7 +14,8 @@ using namespace std;
     6表示创业期 7表示退休期
     8表示死亡 9表示永生
 */
-int flag;
+extern int flag;
+
 
 
 /*
@@ -64,6 +65,53 @@ typedef struct {
     Bonus talentBonus; //天赋对属性的影响
 }talent;
 
+/*
+    表示18岁之前的选择性事件
+*/
+//人生选择 18岁之前的一些选择以及选择带来的一些影响
+typedef struct youngChoiceEffects
+{
+    string description;//事件描述
+    Bonus improve;
+    string outcome;//表示事件发生在界面上所返回的一些句子
+};//代表18岁之前的选择以及影响
+
+// 定义18岁之前的选择数据
+
+/*
+    表示18岁之前的选择性事件集合
+*/
+struct YoungAgeChoices
+{
+    int age; // 年龄阶段，例如：12表示12岁，15表示15岁
+    vector<youngChoiceEffects> choices; // 选择列表
+
+    /*
+        负责人：
+        功能：展示事件描述以及选择供玩家选择
+        返回值：void
+    */
+    void showYoungAgeChoices();
+
+
+};
+
+/*高考选择*/
+extern bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
+
+
+
+struct examSocre//表示高考分数范围
+{
+    int IQ; // 智力影响系数
+    int min_score;//表示最低所能考取的分数
+    int max_score;//表示最高所能考取的分数
+};
+
+extern int score;//表示当前的最终分数
+
+
+
 
 /*
     事件类的父类   用树来进行表示 根节点表示当前事件  子节点表示下一个发生事件的选择
@@ -77,76 +125,142 @@ typedef struct {
 class mainEvent
 {
 public:
+    limit eventlimit;//表示发生该事情的属性限制
     string description;           // 事件描述
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
-    int triggerAge;  //如果是固定事件则设置为对应的年龄，交互事件则设置为-1
 
-    virtual ~mainEvent() {};
-};
+  /*
+Event的构造函数 
+    负责人：
+    功能：用于初始化事件类内的属性
+    参数：string limit分别表示事件描述 和 事件的属性限制
+    返回值： 无返回值
 
+*/
+mainEvent(string description,limit event) {};
 
-class interactiveEvent : public mainEvent {
-public:
-    void chooseEvent(person& person) {
-
-    }
-};
-
-class rndEvent :public mainEvent {
-public:
-    bool shouldTrigger() {
-
-    }
-};
-
-
-//表示大学阶段事件 继承
-class UniversityEvent :public mainEvent {};
-
-//表示研究生阶段事件 继承
-class postgraduateEvent :public mainEvent {};
-
-
-//表示工作阶段事件
-class jobEvent :public mainEvent {};
-
-
-//表示创业阶段事件
-class EnterpriseEvent :public mainEvent {};
-
-
-//表示失败阶段事件
-class defeatEvent : public mainEvent {};
-
-
-//表示退休阶段事件
-class retireEvent : public mainEvent {};
+/*
+ 负责人：
+判断事件是否发生函数：
+    功能：传入人物当前属性值 判断是否可以发生该事件
+    参数：person
+    返回值：bool
+*/
+bool isTrigger(person p) {};
 
 
 /*
-    表示随机事件
-    成员变量：事件的表示 事件的效果 发生的概率等
+    负责人：
+    功能：
+        展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
+        并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
+    参数：void
+    返回值: void
+*/
+void showAndChooseEvent() {};
+};
+
+
+// class interactiveEvent : public mainEvent {
+// private:
+//     /*
+//         交互事件触发年龄：
+//         如果是固定的交互事件就会设置年龄，
+//         非固定的交互事件默认是-1
+//     */
+//     int triggerAge=-1; 
+// public:
+//     void chooseEvent(person& person) {
+
+//     }
+// };
+
+/*
+    表示随机事件  其中包含事件的表示 事件的效果 以及发生的概率等
 */
 
-struct rndEvent
+struct randEvent
 {
     string description;  // 事件描述，例如“突然得癌症”、“交通事故”
     Bonus effect;  // 事件效果，例如减少健康值、减少寿命等
-    float probability;   // 事件发生的概率，0到1之间
+    float possibility;   // 事件发生的概率，0到1之间    
+    bool ishappend;//表示该事件是否以及发生
     //------------------------内置函数-------------------------------
+    /*
+        负责人：
+        功能：传入人物属性 判断该事件是否会发生 若跟人物属性无关联则直接 生成一个随机数与possibility进行比较 若大于则可以发生 若小于则不能发生
+        参数：person
+        返回值： bool
+        
+    */
+    bool triggerEvent(person p);
+
+
+    /*
+        负责人：
+        功能：
+            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况 
+        参数：玩家对象
+        返回值：void
+    
+    */
+    void checkRandEvents(person);
+
+
+    /*
+        负责人：
+        功能：
+            展现随机事件发生的结果描述随机事件等
+        参数：void
+        返回值：void
+    */
+    void showRandEvent();
 };
 
 /*
     表示随机事件的集合
 */
-vector<rndEvent> rndEvents;
+extern vector<randEvent> ranEvents;
+
+
+//表示大学阶段事件 继承
+class UniversityEvent :public mainEvent {};
+
+/*
+    读研线
+*/
+class postgraduateEvent :public mainEvent {};
+
+
+/*
+    工作线
+*/
+class jobEvent :public mainEvent {};
+
+
+/*
+    创业线
+*/
+class EnterpriseEvent :public mainEvent {};
+
+
+/*
+    失败线
+*/
+class defeatEvent : public mainEvent {};
+
+
+/*
+    退休线
+*/
+class retireEvent : public mainEvent {};
 
 
 /*
     表示已经发生事件的集合 每次初始化时候遍历展现到消息界面上
 */
-vector<string> happenEvent;
+extern vector<string> happenEvent;
 
 
 /*
@@ -184,8 +298,8 @@ typedef struct
 /*
     负责人：
     功能：
-        初始化随机事件表
-        初始化游戏数据
+        初始化界面，根据已经发生的事件在消息框进行一个展示
+        以及初始化角色的初始属性
     参数：void
     返回值：void
 
@@ -220,28 +334,27 @@ void initRandomEvents();
     负责人：
     功能：
         构建事件树
+            由关键时间节点事件组成
     参数：void
-    返回值：返回人生起点事件
+    返回值：void
 
 */
-mainEvent* buildEventTree();
+void buildEventTree();
 
 
+//写一条主线，记录固定交互事件的时间点？
 /*
     负责人：
     功能：
         事件循环函数
-            按固定事件>交互事件>随机事件的顺序，确保每年只触发一个事件
+            按18岁之前的事件>故事线上的事件>随机事件的顺序进行判断 每年最多同时发生俩件事
                 while(age<100){
-                    检查是否有固定事件
+                    根据年龄，检查是否有固定交互事件
 
-                    没有，则检查交互事件
-
-                    没有固定事件、交互事件，则检查随机事件
-
-
+                    根据当前flag判断哪个处于哪个阶段进行故事线的推进 同时推进完故事线时也会判断随机事件是否发生
+                    除了18岁之前 随机事件不会发生等
+                    或者用flag记录阶段、前面那些类主要用作存储对应故事线下的事件
                     事件发生后玩家年龄增加
-
                     检查玩家的健康值，达到死亡条件时跳出循环
                 }
             游戏结束endView()
@@ -252,36 +365,28 @@ mainEvent* buildEventTree();
 void gameLoop(person, mainEvent*);
 
 
-/*
-    负责人：
-    功能：
-        随机数生成器，在checkRandomEvents()函数中被调用
-    参数：void
-    返回值：生成的随机数
-
-*/
-float generateRandom();
 
 /*
     负责人：
     功能：
-        根据generateRandom()函数生成的随机数，检查是否触发随机事件
-    参数：玩家对象
+        根据智力值影响因素
+        以及随机数获取的分数来决定高考分数
+    参数：int
     返回值：void
-
 */
-void checkRandomEvents(person);
+int getScore(int iq);
+
 
 
 /*
     负责人：
     功能：
-        处理交互事件
-    参数：void
-    返回值：void
-
+        玩家通过鼠标点击的方式来处理鼠标消息进行选择然后根据选择
+        来推导剧情的走向 包括选择事件的点击 和 下一年 以及登录 游戏中各个按钮的点击事件是否成功的函数
+    参数：int 表示用户鼠标点击时候的坐标
+    返回值：bool
 */
-void handleInteractiveEvent();
+bool mouseClick(int x,int y);
 
 
 /*
@@ -293,6 +398,7 @@ void handleInteractiveEvent();
 
 */
 void EventBonus();
+
 
 
 //---------------------------service-------------------------------
@@ -431,13 +537,3 @@ void endView();
 
 
 //-----------------------------view--------------------------------
-
-
-
-int main()
-{
-    person player;
-    mainEvent* eventTree = buildEventTree(); //初始化事件树
-    gameLoop(player, eventTree); //进入游戏主循环
-    return 0;
-}
