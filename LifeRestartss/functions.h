@@ -120,7 +120,7 @@ struct examSocre//表示高考分数范围
 表示高考分数的三个范围100~300 300~500 500~700
 
 */
-vector<examSocre> examScores
+vector<examSocre> examScores;
 
 extern int score;//表示当前的最终分数
 
