@@ -7,6 +7,11 @@
 #include<conio.h>
 using namespace std;
 
+const int HighAttribute = ;
+const int MidAttribute = ;
+const int LowAttribute = ;
+
+
 //---------------------------数据设计------------------------------
 
 /*
