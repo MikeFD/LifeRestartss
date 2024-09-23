@@ -18,6 +18,9 @@ using namespace std;
     8表示死亡 9表示永生
 */
 extern int flag;
+
+extern vector<YoungAgeChoices> YoungEvents;
+
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
 extern ExMessage msg;
@@ -467,6 +470,7 @@ void loginView();
 */
 void registerView();
 
+
 /*
     负责人：崇
     功能：
@@ -477,7 +481,7 @@ void registerView();
     参数：void
     返回值：void
 */
-void gameBeignView();
+void gameBeginView();
 
 
 /*
