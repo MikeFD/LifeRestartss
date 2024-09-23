@@ -1,7 +1,10 @@
+#pragma once
 #include<iostream>
 #include<string>
 #include<vector>
 #include<map>
+#include<graphics.h>
+#include<conio.h>
 using namespace std;
 
 //---------------------------数据设计------------------------------
@@ -17,7 +20,7 @@ using namespace std;
 extern int flag;
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
-ExMessage msg = { 0 };
+extern ExMessage msg;
 
 
 /*
@@ -355,7 +358,6 @@ void buildEventTree();
                     根据当前flag判断哪个处于哪个阶段进行故事线的推进 同时推进完故事线时也会判断随机事件是否发生
                     除了18岁之前 随机事件不会发生等
                     或者用flag记录阶段、前面那些类主要用作存储对应故事线下的事件
-                    事件发生后玩家年龄增加
                     检查玩家的健康值，达到死亡条件时跳出循环
                 }
             游戏结束endView()
@@ -415,33 +417,33 @@ void EventBonus();
     参数：void
     返回值：void
 */
-void ThingView();
- /*
-    负责人：崇
-    功能：
-        初始化主菜单界面
-            展示选择选项：
-                开始游戏：进入游戏界面
-                游戏说明 ：说明游戏玩法
-                退出游戏：退出程序
-    参数：void
-    返回值：void
+void thingView();
+/*
+   负责人：崇
+   功能：
+       初始化主菜单界面
+           展示选择选项：
+               开始游戏：进入游戏界面
+               游戏说明 ：说明游戏玩法
+               退出游戏：退出程序
+   参数：void
+   返回值：void
 */
 
 void menuView();
- /*
-    负责人：崇
-    功能：
-        初始化主菜单界面
-            展示选择选项：
-                登录账户：进入登录界面
-                注册账户：进入注册界面
-                游戏设置：进入游戏设置界面 //扩展
-                退出游戏：退出程序
-    参数：void
-    返回值：void
+/*
+   负责人：崇
+   功能：
+       初始化主菜单界面
+           展示选择选项：
+               登录账户：进入登录界面
+               注册账户：进入注册界面
+               游戏设置：进入游戏设置界面 //扩展
+               退出游戏：退出程序
+   参数：void
+   返回值：void
 */
-void BeginView();
+void beginView();
 
 
 /*
@@ -509,7 +511,7 @@ void gameView();
     负责人：崇
     功能：
         用于在gameView的基础上展现一个小的界面 用于展示
-        
+
         1.选择事件的事件描述 加上选择选项
     参数：void
     返回值：void
