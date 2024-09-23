@@ -16,7 +16,7 @@ using namespace std;
 */
 extern int flag;
 
-
+extern vector<YoungAgeChoices> YoungEvents;
 
 /*
     玩家设置
@@ -442,6 +442,7 @@ void loginView();
 */
 void registerView();
 
+
 /*
     负责人：崇
     功能：
@@ -452,7 +453,7 @@ void registerView();
     参数：void
     返回值：void
 */
-void gameBeignView();
+void gameBeginView();
 
 
 /*
