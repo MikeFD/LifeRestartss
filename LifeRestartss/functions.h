@@ -130,35 +130,35 @@ public:
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
 
-  /*
-Event的构造函数 
-    负责人：灰机 
-    功能：用于初始化事件类内的属性
-    参数：string limit分别表示事件描述 和 事件的属性限制
-    返回值： 无返回值
+    /*
+  Event的构造函数
+      负责人：灰机
+      功能：用于初始化事件类内的属性
+      参数：string limit分别表示事件描述 和 事件的属性限制
+      返回值： 无返回值
 
-*/
-mainEvent(string description,limit event);
+  */
+    mainEvent(string description, limit event);
 
-/*
- 负责人：灵泽
-判断事件是否发生函数：
-    功能：传入人物当前属性值 判断是否可以发生该事件
-    参数：person
-    返回值：bool
-*/
-bool isTrigger(person p);
+    /*
+     负责人：灵泽
+    判断事件是否发生函数：
+        功能：传入人物当前属性值 判断是否可以发生该事件
+        参数：person
+        返回值：bool
+    */
+    bool isTrigger(person p);
 
 
-/*
-    负责人：liz
-    功能：
-        展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
-        并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
-    参数：void
-    返回值: void
-*/
-void showAndChooseEvent();
+    /*
+        负责人：liz
+        功能：
+            展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
+            并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
+        参数：void
+        返回值: void
+    */
+    void showAndChooseEvent();
 };
 
 
@@ -192,7 +192,7 @@ struct randEvent
         功能：传入人物属性 判断该事件是否会发生 若跟人物属性无关联则直接 生成一个随机数与possibility进行比较 若大于则可以发生 若小于则不能发生
         参数：person
         返回值： bool
-        
+
     */
     bool triggerEvent(person p);
 
@@ -200,10 +200,10 @@ struct randEvent
     /*
         负责人：fan
         功能：
-            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况 
+            处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况
         参数：玩家对象
         返回值：void
-    
+
     */
     void checkRandEvents(person);
 
@@ -302,7 +302,6 @@ typedef struct
         以及初始化角色的初始属性
     参数：void
     返回值：void
-
 */
 void init();
 
@@ -316,7 +315,7 @@ void init();
     返回值：void
 
 */
-void TalentBonus(person, vector<int>);
+void TalentBonus(person& p, vector<int>& talentId);
 
 /*
     负责人：飞
@@ -386,7 +385,7 @@ int getScore(int iq);
     参数：int 表示用户鼠标点击时候的坐标
     返回值：bool
 */
-bool mouseClick(int x,int y);
+bool mouseClick(int x, int y);
 
 
 /*
