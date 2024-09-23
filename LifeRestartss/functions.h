@@ -141,7 +141,7 @@ Event的构造函数
 mainEvent(string description,limit event);
 
 /*
- 负责人：liz
+ 负责人：灵泽
 判断事件是否发生函数：
     功能：传入人物当前属性值 判断是否可以发生该事件
     参数：person
@@ -151,7 +151,7 @@ bool isTrigger(person p);
 
 
 /*
-    负责人：灵泽
+    负责人：liz
     功能：
         展示事件的内容并且 如果是节点只有一个则是只展示事件 如果节点有多个则是选择事件
         并且调用mouseClick函数用于接受用户输入根据输入进入下一节点
