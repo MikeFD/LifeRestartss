@@ -65,20 +65,20 @@ void menuView()
 			//			//	cout << "点击鼠标右键4" << endl;
 			//			//}
 			//
-			//			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 480 && msg.y <= 520)
-			//			{
+						if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 480 && msg.y <= 520)
+						{
+			
+			
+							//explainView();//游戏说明
+							cout << "点击鼠标右键5" << endl;
+						}
 			//
-			//
-			//				//explainView();//游戏说明
-			//				cout << "点击鼠标右键5" << endl;
-			//			}
-			//
-			//			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 550 && msg.y <= 590)
-			//			{
-			//
-			//				exit(0);// 退出游戏
-			//				cout << "点击鼠标右键6" << endl;
-			//			}
+						if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 550 && msg.y <= 590)
+						{
+			
+							exit(0);// 退出游戏
+							cout << "点击鼠标右键6" << endl;
+						}
 		}
 	}
 }
