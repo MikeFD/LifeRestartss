@@ -15,7 +15,9 @@ using namespace std;
     8表示死亡 9表示永生
 */
 extern int flag;
-
+#define WINDOW_HEIGHT 768// 窗口高度
+#define WINDOW_WIDTH 1024//窗口宽度
+ExMessage msg = { 0 };
 
 
 /*
@@ -405,7 +407,28 @@ void EventBonus();
 
 
 //-----------------------------view--------------------------------
+/*
+    负责人：崇
+    功能：
+        用于在gameView的基础上展现一个小的界面 用于展示
+    随机事件的事件发生描述
+    参数：void
+    返回值：void
+*/
+void ThingView();
+ /*
+    负责人：崇
+    功能：
+        初始化主菜单界面
+            展示选择选项：
+                开始游戏：进入游戏界面
+                游戏说明 ：说明游戏玩法
+                退出游戏：退出程序
+    参数：void
+    返回值：void
+*/
 
+void menuView();
  /*
     负责人：崇
     功能：
@@ -418,7 +441,7 @@ void EventBonus();
     参数：void
     返回值：void
 */
-void menuView();
+void BeginView();
 
 
 /*
@@ -486,8 +509,8 @@ void gameView();
     负责人：崇
     功能：
         用于在gameView的基础上展现一个小的界面 用于展示
-        1.随机事件的事件发生描述
-        2.选择事件的事件描述 加上选择选项
+        
+        1.选择事件的事件描述 加上选择选项
     参数：void
     返回值：void
 */
