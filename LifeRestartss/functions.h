@@ -14,6 +14,8 @@ const int MidAttribute ;
 const int LowAttribute ;
 
 
+
+
 //---------------------------数据设计------------------------------
 
 /*
@@ -218,7 +220,7 @@ struct randEvent
         返回值： bool
 
     */
-    bool triggerEvent(person p,randEvent event);
+    bool triggerEvent(person &p,randEvent &event);
 
 
     /*
@@ -229,7 +231,7 @@ struct randEvent
         返回值：void
 
     */
-    void checkRandEvents(person &p);
+    void checkRandEvents(person &p, randEvent& event);
 
 
     /*

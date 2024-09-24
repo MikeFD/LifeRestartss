@@ -4,6 +4,7 @@
 int flag;
 int score;
 
+
 vector<randEvent> ranEvents;
 vector<string> happenEvent;
 
@@ -55,6 +56,7 @@ void gameLoop(person& p, mainEvent& event) {
 	}	
 }
 
+
 float randEvent::adjustPossibility(person& p, randEvent event)
 {
 	if (!event.isafectPossibility) return event.possibility;
@@ -67,21 +69,25 @@ float randEvent::adjustPossibility(person& p, randEvent event)
 	{
 		adjustposibility = p.Age * 0.25;
 	}
-	return min(100, adjustposibility);
+	return min(100.0f, adjustposibility);
 
 	
 }
 
-bool randEvent::triggerEvent(person p,randEvent &event)
+bool randEvent::triggerEvent(person &p,randEvent &event)
 {
+	// 在主程序或初始化函数中调用一次
+	//srand(static_cast<unsigned>(time(NULL)));
 	float randnum;
 	event.possibility = adjustPossibility(p, event);
 	if (event.ishappend)
 	{
+
+		
 		if (p.Age >= randlimit.Age && p.Health >= randlimit.Health && p.EQ >= randlimit.EQ && p.IQ >= randlimit.IQ && p.ProgramingSkill >= randlimit.ProgramingSkill)
 		{
-			srand(time(NULL));
-			randnum = float(rand() % 100);
+			
+			randnum = static_cast<float>(rand() % 100);
 			return randnum < event.possibility;
 		}
 	}
@@ -90,7 +96,7 @@ bool randEvent::triggerEvent(person p,randEvent &event)
 
 void  randEvent::checkRandEvents(person &p,randEvent &event)
 {
-	if (triggerEvent)
+	if (triggerEvent(p,event))
 	{
 		p.Health = event.effect.HealthBonus;
 		p.EQ = event.effect.EQBonus;
