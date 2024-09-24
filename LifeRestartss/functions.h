@@ -5,13 +5,18 @@
 #include<map>
 #include<graphics.h>
 #include<conio.h>
+#include<stdlib.h>
+#include<time.h>
 #include <utility>
 #include <stack>
+
 using namespace std;
 
-const int HighAttribute = ;
-const int MidAttribute = ;
-const int LowAttribute = ;
+const int HighAttribute ;
+const int MidAttribute ;
+const int LowAttribute ;
+
+
 
 
 //---------------------------数据设计------------------------------
@@ -28,6 +33,7 @@ extern int flag;
 
 extern vector<YoungAgeChoices> YoungEvents;
 
+#define MINHEALTH 50//
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
 extern ExMessage msg;
@@ -67,6 +73,7 @@ Bonus b;//实例化Bonus结构体
 */
 typedef struct
 {
+    int Age;
     int IQ;
     int EQ;
     int ProgramingSkill;
@@ -196,9 +203,22 @@ struct randEvent
 {
     string description;  // 事件描述，例如“突然得癌症”、“交通事故”
     Bonus effect;  // 事件效果，例如减少健康值、减少寿命等
-    float possibility;   // 事件发生的概率，0到1之间    
+    limit randlimit;//随机事件发生的 属性限制
+    float possibility;   // 事件发生的概率，0到1之间  
+    bool isafectPossibility;//人物属性是否影响事件发生的概率
     bool ishappend;//表示该事件是否以及发生
     //------------------------内置函数-------------------------------
+    /*
+        负责人：fan
+        功能：
+            根据角色属性的下降 来给对应事件一个增加一个概率
+        参数： randevent 和 person
+        返回值： float
+    */
+    float adjustPossibility(person& p, randEvent event);
+
+
+
     /*
         负责人：fan
         功能：传入人物属性 判断该事件是否会发生 若跟人物属性无关联则直接 生成一个随机数与possibility进行比较 若大于则可以发生 若小于则不能发生
@@ -206,18 +226,18 @@ struct randEvent
         返回值： bool
 
     */
-    bool triggerEvent(person p);
+    bool triggerEvent(person &p,randEvent &event);
 
 
     /*
         负责人：fan
         功能：
             处理随机事件 对应给人物增加的属性 或 导致人物出先某些状况
-        参数：玩家对象
+        参数：玩家对象 和 randEvent
         返回值：void
 
     */
-    void checkRandEvents(person);
+    void checkRandEvents(person &p, randEvent& event);
 
 
     /*
