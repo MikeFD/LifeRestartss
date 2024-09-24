@@ -7,6 +7,11 @@
 #include<conio.h>
 using namespace std;
 
+const int HighAttribute = ;
+const int MidAttribute = ;
+const int LowAttribute = ;
+
+
 //---------------------------数据设计------------------------------
 
 /*
@@ -18,6 +23,9 @@ using namespace std;
     8表示死亡 9表示永生
 */
 extern int flag;
+
+extern vector<YoungAgeChoices> YoungEvents;
+
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
 extern ExMessage msg;
@@ -111,10 +119,16 @@ extern bool isExam;//表示是否参加高考 若参加根据当前的属性来�
 
 struct examSocre//表示高考分数范围
 {
-    int IQ; // 智力影响系数
+    int IQ; // 达到该范围的最小IQ值
     int min_score;//表示最低所能考取的分数
     int max_score;//表示最高所能考取的分数
 };
+
+/*
+表示高考分数的三个范围100~300 300~500 500~700
+
+*/
+vector<examSocre> examScores;
 
 extern int score;//表示当前的最终分数
 
@@ -170,19 +184,7 @@ public:
 };
 
 
-// class interactiveEvent : public mainEvent {
-// private:
-//     /*
-//         交互事件触发年龄：
-//         如果是固定的交互事件就会设置年龄，
-//         非固定的交互事件默认是-1
-//     */
-//     int triggerAge=-1; 
-// public:
-//     void chooseEvent(person& person) {
 
-//     }
-// };
 
 /*
     表示随机事件  其中包含事件的表示 事件的效果 以及发生的概率等
@@ -371,12 +373,20 @@ void buildEventTree();
 void gameLoop(person, mainEvent*);
 
 
+/*
+    负责人：飞
+    功能：
+        根据传入的智力获取一个高考所能获得的分数范围
+    参数：int
+    返回值：pair<int,int>
+*/
+pair<int,int> getScoreRange(int iq);
+
 
 /*
     负责人：飞
     功能：
-        根据智力值影响因素
-        以及随机数获取的分数来决定高考分数
+        调用getScoreRange函数来获取一个分数范围再 从返回的分数范围内利用随机数返回最后的实际的高考分数
     参数：int
     返回值：void
 */
@@ -470,6 +480,7 @@ void loginView();
 */
 void registerView();
 
+
 /*
     负责人：崇
     功能：
@@ -480,7 +491,7 @@ void registerView();
     参数：void
     返回值：void
 */
-void gameBeignView();
+void gameBeginView();
 
 
 /*
