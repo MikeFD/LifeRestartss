@@ -404,3 +404,7 @@ void beginView()
 		}
 	}
 }
+
+void careerView() {
+
+}
