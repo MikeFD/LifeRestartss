@@ -6,10 +6,7 @@
 #include<graphics.h>
 #include<conio.h>
 #include <utility>
-<<<<<<< HEAD
-=======
 #include <stack>
->>>>>>> dd
 using namespace std;
 
 const int HighAttribute = ;
