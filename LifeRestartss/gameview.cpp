@@ -22,14 +22,14 @@ void menuView()
 		settextcolor(BLACK);
 		fillrectangle(340, 200, 700, 240);
 		outtextxy(470, 205, "开始游戏");
-		//fillrectangle(340, 270, 700, 310);
-		//outtextxy(470, 275, "结算界面");
+		fillrectangle(340, 270, 700, 310);
+		outtextxy(470, 275, "结算界面");
 		//fillrectangle(340, 340, 700, 380);
 		//outtextxy(470, 345, " 排行榜 ");
 		//fillrectangle(340, 410, 700, 450);
 		//outtextxy(470, 415, "更换皮肤");
 		fillrectangle(340, 480, 700, 520);
-		outtextxy(470, 485, "游戏说明");
+		outtextxy(470, 485, "展示设置");
 		fillrectangle(340, 550, 700, 590);
 		outtextxy(470, 555, "退出游戏");
 		EndBatchDraw();
@@ -41,13 +41,13 @@ void menuView()
 				gameBeignView();//开始游戏
 				cout << "点击鼠标右键1" << endl;
 			}
-			//
-			//			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 270 && msg.y <= 310)
-			//			{
-			//
-			//				//Endthingview();//游戏设置界面
-			//				//cout << "点击鼠标右键2" << endl;
-			//			}
+
+			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 270 && msg.y <= 310)
+			{
+
+				endView();//游戏设置界面
+				cout << "点击鼠标右键2" << endl;
+			}
 			//
 			//			//if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 340 && msg.y <= 380)
 			//			//{
@@ -65,29 +65,28 @@ void menuView()
 			//			//	cout << "点击鼠标右键4" << endl;
 			//			//}
 			//
-			//			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 480 && msg.y <= 520)
-			//			{
+			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 480 && msg.y <= 520)
+			{
+
+
+				settingView();//游戏说明
+				//cout << "点击鼠标右键5" << endl;
+			}
 			//
-			//
-			//				//explainView();//游戏说明
-			//				cout << "点击鼠标右键5" << endl;
-			//			}
-			//
-			//			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 550 && msg.y <= 590)
-			//			{
-			//
-			//				exit(0);// 退出游戏
-			//				cout << "点击鼠标右键6" << endl;
-			//			}
+			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 550 && msg.y <= 590)
+			{
+
+				exit(0);// 退出游戏
+				//				cout << "点击鼠标右键6" << endl;
+			}
 		}
 	}
 }
-void popView()
+void achievementView()
 {
 	EasyButton 	btnthing;
-	EasyButton btntext;
+	EasyButton btnnext;
 	EasyButton btnreturn;
-	cout << 3 << endl;
 	while (1)
 	{
 		BeginBatchDraw();
@@ -96,9 +95,75 @@ void popView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btntext.Create(400, 220, 560, 280, "选择事件", NULL);
+		btnthing.Create(220, 130, 760, 570, "", NULL);
+		btnreturn.Create(420, 130, 540, 180, "成就", NULL);
+		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeignView);
+		EndBatchDraw();
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+				if (btnreturn.Check(msg.x, msg.y)) {
+
+					btnreturn.OnMessage();
+				}
+				if (btnnext.Check(msg.x, msg.y)) {
+
+					btnnext.OnMessage();
+				}
+			}
+		}
+	}
+}
+void endView()
+{
+	EasyButton 	btnthing;
+	EasyButton btntext;
+	EasyButton btnreturn;
+	while (1)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
 		btnthing.Create(220, 300, 760, 570, "", NULL);
-		btnreturn.Create(180, 650, 800, 690, "结束此阶段", thingView);
+		btnreturn.Create(180, 650, 320, 690, "返回菜单", menuView);
+		btntext.Create(660, 650, 800, 690, "再来一局", gameBeignView);
+		EndBatchDraw();
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+				if (btnreturn.Check(msg.x, msg.y)) {
+
+					btnreturn.OnMessage();
+				}
+				if (btntext.Check(msg.x, msg.y)) {
+
+					btntext.OnMessage();
+				}
+			}
+		}
+	}
+}
+void settingView()
+{
+	EasyButton btntext;
+	EasyButton btnreturn;
+	while (1)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+		btnreturn.Create(400, 590, 560, 650, "返回菜单", menuView);
+		btntext.Create(400, 220, 560, 280, "敬请期待", NULL);
 		EndBatchDraw();
 		while (true)
 		{
@@ -111,6 +176,134 @@ void popView()
 				}
 			}
 		}
+	}
+}
+void popView()
+{
+	EasyButton 	btnthing;
+	EasyButton btntext;
+	EasyButton btnreturn;
+	EasyButton btnreturn1;
+	cout << 3 << endl;
+	while (1)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+		btntext.Create(400, 220, 560, 280, "选择事件", NULL);
+		btnthing.Create(220, 300, 760, 570, "", NULL);
+		btnreturn.Create(260, 570, 380, 610, "A", thingView);
+		btnreturn1.Create(580, 570, 720, 610, "B", thingView);
+		EndBatchDraw();
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+				if (btnreturn.Check(msg.x, msg.y)) {
+
+					btnreturn.OnMessage();
+				}
+				if (btnreturn1.Check(msg.x, msg.y)) {
+
+					btnreturn1.OnMessage();
+				}
+			}
+		}
+	}
+}
+void talentChooseView()
+{
+	EasyButton 	btnthing;
+	EasyButton btntext;
+	EasyButton btnreturn;
+	EasyButton btnreturn1;
+	cout << 3 << endl;
+	while (1)
+	{
+		char str[20] = "大小多少年龄";
+		char ans[20];
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+
+		btnthing.Create(220, 50, 760, 700, "", NULL);
+		btntext.Create(400, 50, 560, 90, "选择天赋", NULL);
+		btnreturn.Create(260, 700, 380, 740, "取消", NULL);
+		btnreturn1.Create(580, 700, 720, 740, "确让", gameView);
+		settextcolor(RGB(239, 218, 187));
+		settextstyle(25, 0, "字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
+
+		for (int i = 1; i <= 10; i++)
+		{
+			sprintf_s(ans, "%d  %s", i, str);
+			cout << ans;
+			outtextxy(300, 100 + i * 20, ans); // 标题文本?
+		}
+
+		EndBatchDraw();
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+				if (btnreturn.Check(msg.x, msg.y)) {
+
+					btnreturn.OnMessage();
+				}
+				if (btnreturn1.Check(msg.x, msg.y)) {
+
+					btnreturn1.OnMessage();
+				}
+			}
+		}
+	}
+}
+void career()
+{
+	EasyButton 	btnthing;
+	EasyButton btnnext;
+	EasyButton btnreturn;
+	cout << 4;
+
+	while (1)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+
+		btnthing.Create(220, 130, 760, 570, "", NULL);
+		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeignView);
+
+
+
+		EndBatchDraw();
+
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+
+				if (btnnext.Check(msg.x, msg.y)) {
+
+					btnnext.OnMessage();
+				}
+			}
+
+
+		}
+
+
 	}
 }
 void thingView()
@@ -128,10 +321,10 @@ void thingView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		//btn.Create(400,220,560,280,"选择事件",NULL);
+
 		btnthing.Create(220, 130, 760, 570, "", NULL);
 		btnreturn.Create(180, 650, 800, 690, "结束此阶段", gameView);
-		btnnext.Create(420, 590, 540, 630, "开始事件", popView);
+		btnnext.Create(420, 590, 540, 630, "下一年", popView);
 
 
 
@@ -176,9 +369,7 @@ void gameView()
 		btnnext.Create(420, 590, 540, 630, "开始事件", thingView);
 		btnnature.Create(180, 650, 800, 690, "属性 : 智商:    情商： 编程能力： 体质：  ", NULL);
 		settextcolor(BLACK);
-		setbkmode(TRANSPARENT);//文本填充色：透明
-		//字体大小&类型字魂无外润黑体(商用需授权)
-		//outtextxy(WINDOW_WIDTH / 2 - textwidth("人生重开模拟器---我要做程序员") / 2, 200 - textheight("人生重开模拟器---我要做程序员") / 2, "人生重开模拟器---我要做程序员");//标题文本
+		setbkmode(TRANSPARENT);
 		EndBatchDraw();
 		while (true)
 		{
@@ -206,9 +397,9 @@ void gameBeignView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btningame.Create(320, 200, 700, 240, "点击开始你的程序员的一生", gameView);
-		btnLife.Create(200, 500, 350, 540, "人生", NULL);
-		btnach.Create(650, 500, 780, 540, "成就", NULL);
+		btningame.Create(320, 200, 700, 240, "点击开始你的程序员的一生", talentChooseView);
+		btnLife.Create(200, 500, 350, 540, "人生", career);
+		btnach.Create(650, 500, 780, 540, "成就", achievementView);
 		EndBatchDraw();
 		while (true)
 		{
@@ -281,15 +472,15 @@ void loginView()
 			{
 				LoginView_txtUsername.OnMessage();
 			}
-			else if (LoginView_txtPassword.Check(msg.x, msg.y))
+			if (LoginView_txtPassword.Check(msg.x, msg.y))
 			{
 				LoginView_txtPassword.OnMessage();
 			}
-			else if (LoginView_btnConfirm.Check(msg.x, msg.y))
+			if (LoginView_btnConfirm.Check(msg.x, msg.y))
 			{
 				LoginView_btnConfirm.OnMessage();
 			}
-			else if (LoginView_btnBack.Check(msg.x, msg.y))
+			if (LoginView_btnBack.Check(msg.x, msg.y))
 			{
 				LoginView_btnBack.OnMessage();// 返回主界面
 			}
@@ -342,15 +533,15 @@ void registerView()
 			{
 				registerView_txtUsername.OnMessage();
 			}
-			else if (registerView_txtPassword.Check(msg.x, msg.y))
+			if (registerView_txtPassword.Check(msg.x, msg.y))
 			{
 				registerView_txtPassword.OnMessage();
 			}
-			else if (registerView_btnConfirm.Check(msg.x, msg.y))
+			if (registerView_btnConfirm.Check(msg.x, msg.y))
 			{
 				registerView_btnConfirm.OnMessage();
 			}
-			else if (registerView_btnBack.Check(msg.x, msg.y))
+			if (registerView_btnBack.Check(msg.x, msg.y))
 			{
 				registerView_btnBack.OnMessage();// 返回主界面
 			}
@@ -403,4 +594,8 @@ void beginView()
 			}
 		}
 	}
+}
+
+void careerView() {
+
 }
