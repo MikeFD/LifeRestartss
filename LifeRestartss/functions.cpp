@@ -228,3 +228,13 @@ void TalentBonus(person& p, vector<int>& talentId)
         
   
 }
+
+class Event {
+public:
+	string description;//事件描述
+	int eventLimit;//事件限制
+
+	Event::Event(const string& description, int eventLimit)
+		: description(description), eventLimit(eventLimit) {
+	}
+};
