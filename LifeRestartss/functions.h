@@ -5,6 +5,8 @@
 #include<map>
 #include<graphics.h>
 #include<conio.h>
+#include <utility>
+#include <stack>
 using namespace std;
 
 const int HighAttribute = ;
@@ -371,6 +373,7 @@ void buildEventTree();
 
 */
 void gameLoop(person, mainEvent*);
+void traverseTree(mainEvent* root, person p);
 
 
 /*

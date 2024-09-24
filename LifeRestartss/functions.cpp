@@ -90,7 +90,7 @@ void EventBonus()
     参数：person
     返回值：bool
 */
-bool isTrigger(person p)
+bool mainEvent::isTrigger(person p)
 {
     if (p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
     {
@@ -100,7 +100,7 @@ bool isTrigger(person p)
     struct YoungAgeChoices y;
     if (p.Age == y.age)
     {
-        return ture;
+        return true;
     }
 }
 
@@ -168,6 +168,28 @@ void endView();
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
+void traverseTree(mainEvent* root, person p) {
+	if (root == nullptr) {
+		return;
+	}
+	
+	stack<mainEvent*> eventStack;
+
+	eventStack.push(root);
+
+	while (!eventStack.empty()) {
+		mainEvent* current = eventStack.top();
+		eventStack.pop();
+
+		for (auto child : current->children) {
+			if (child->isTrigger(p) || current->children.size() == 1) {
+				eventStack.push(child);
+				break;
+			}
+		}
+	}
+}
+
 
 void gameLoop(person& p, mainEvent& event) {
 	for (p.Age = 0; p.Age <= 100; p.Age++) {
@@ -192,7 +214,7 @@ void gameLoop(person& p, mainEvent& event) {
 			}
 		}
 		else if (flag == 1) {
-
+			
 		}
 		else if (flag == 2) {
 
