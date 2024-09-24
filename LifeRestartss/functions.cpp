@@ -6,19 +6,18 @@ int score;
 vector<randEvent> ranEvents;
 vector<string> happenEvent;
 
-
 /*
- ¸ºÔğÈË£ºÁéÔó
-ÅĞ¶ÏÊÂ¼şÊÇ·ñ·¢Éúº¯Êı£º
-    ¹¦ÄÜ£º´«ÈëÈËÎïµ±Ç°ÊôĞÔÖµ ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ·¢Éú¸ÃÊÂ¼ş
-    ²ÎÊı£ºperson
-    ·µ»ØÖµ£ºbool
+ è´Ÿè´£äººï¼šçµæ³½
+åˆ¤æ–­äº‹ä»¶æ˜¯å¦å‘ç”Ÿå‡½æ•°ï¼š
+    åŠŸèƒ½ï¼šä¼ å…¥äººç‰©å½“å‰å±æ€§å€¼ åˆ¤æ–­æ˜¯å¦å¯ä»¥å‘ç”Ÿè¯¥äº‹ä»¶
+    å‚æ•°ï¼šperson
+    è¿”å›å€¼ï¼šbool
 */
 bool isTrigger(person p)
 {
     if (p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
     {
-        return false; // ÊôĞÔ²»Âú×ãÌõ¼ş
+        return false; // å±æ€§ä¸æ»¡è¶³æ¡ä»¶
     }
 
     struct YoungAgeChoices y;
@@ -30,61 +29,109 @@ bool isTrigger(person p)
 
 
 /*
-     ¸ºÔğÈË£ºÁéÔó
-     ¹¦ÄÜ£º
-         Õ¹ÏÖËæ»úÊÂ¼ş·¢ÉúµÄ½á¹ûÃèÊöËæ»úÊÂ¼şµÈ
-     ²ÎÊı£ºvoid
-     ·µ»ØÖµ£ºvoid
+     è´Ÿè´£äººï¼šçµæ³½
+     åŠŸèƒ½ï¼š
+         å±•ç°éšæœºäº‹ä»¶å‘ç”Ÿçš„ç»“æœæè¿°éšæœºäº‹ä»¶ç­‰
+     å‚æ•°ï¼švoid
+     è¿”å›å€¼ï¼švoid
  */
 void showRandEvent()
 {
-    initgraph(WINDOW_WIDTH, WINDOW_HEIGHT); // ³õÊ¼»¯Í¼ĞÎ´°¿Ú
+    initgraph(WINDOW_WIDTH, WINDOW_HEIGHT); // åˆå§‹åŒ–å›¾å½¢çª—å£
 
-    // ÉèÖÃÎÄ±¾ÑùÊ½
+    // è®¾ç½®æ–‡æœ¬æ ·å¼
     settextcolor(BLACK);
-    settextstyle(24, 0, _T("ËÎÌå"));
+    settextstyle(24, 0, _T("å®‹ä½“"));
 
-    // »æÖÆÊÂ¼şÃèÊö
+    // ç»˜åˆ¶äº‹ä»¶æè¿°
     outtextxy(50, 50, re.description);
     outtextxy(50, 70, re.effect);
 
 
 
-    // ¹Ø±ÕÍ¼ĞÎ´°¿Ú
+    // å…³é—­å›¾å½¢çª—å£
     closegraph();
 }
 
 
 void endView();
 {
-    initgraph(640, 480); // ´´½¨Ò»¸ö¿í640ÏñËØ£¬¸ß480ÏñËØµÄ´°¿Ú
-    setbkcolor(GREEN); // ÉèÖÃ±³¾°ÑÕÉ«
-    cleardevice(); // Çå¿ÕÆÁÄ»
-    settextstyle(24, 0, _T("Arial")); // ÉèÖÃÎÄ±¾×ÖÌåÎªArial£¬´óĞ¡Îª24
-    settextcolor(BLACK); // ÉèÖÃÎÄ±¾ÑÕÉ«ÎªºÚÉ«
+    initgraph(640, 480); // åˆ›å»ºä¸€ä¸ªå®½640åƒç´ ï¼Œé«˜480åƒç´ çš„çª—å£
+    setbkcolor(GREEN); // è®¾ç½®èƒŒæ™¯é¢œè‰²
+    cleardevice(); // æ¸…ç©ºå±å¹•
+    settextstyle(24, 0, _T("Arial")); // è®¾ç½®æ–‡æœ¬å­—ä½“ä¸ºArialï¼Œå¤§å°ä¸º24
+    settextcolor(BLACK); // è®¾ç½®æ–‡æœ¬é¢œè‰²ä¸ºé»‘è‰²
 
-    outtextxy(50, 50, _T("ÓÎÏ·½áÊø£¡")); // ÏÔÊ¾ÓÎÏ·½áÊø
+    outtextxy(50, 50, _T("æ¸¸æˆç»“æŸï¼")); // æ˜¾ç¤ºæ¸¸æˆç»“æŸ
 
-    outtextxy(50, 100, Ending); // ÏÔÊ¾½á¾ÖĞÅÏ¢
-    setfillcolor(BLUE); // ÉèÖÃÌî³äÑÕÉ«ÎªÀ¶É«
-    setlinecolor(BLUE); // ÉèÖÃ±ß¿òÑÕÉ«ÎªÀ¶É«
-    fillrectangle(220, 200, 420, 230); // »æÖÆ¾ØĞÎ°´Å¥
-    settextstyle(20, 0, _T("Arial")); // ÉèÖÃÎÄ±¾×ÖÌåºÍ´óĞ¡
-    settextcolor(WHITE); // ÉèÖÃÎÄ±¾ÑÕÉ«Îª°×É«
-    outtextxy(250, 210, _T("·µ»ØÖ÷²Ëµ¥")); // ÏÔÊ¾°´Å¥ÎÄ±¾
-    fillrectangle(220, 250, 420, 280); // »æÖÆ¾ØĞÎ°´Å¥
-    outtextxy(250, 260, _T("ÖØĞÂ¿ªÊ¼ÓÎÏ·")); // ÏÔÊ¾°´Å¥ÎÄ±¾
+    outtextxy(50, 100, Ending); // æ˜¾ç¤ºç»“å±€ä¿¡æ¯
+    setfillcolor(BLUE); // è®¾ç½®å¡«å……é¢œè‰²ä¸ºè“è‰²
+    setlinecolor(BLUE); // è®¾ç½®è¾¹æ¡†é¢œè‰²ä¸ºè“è‰²
+    fillrectangle(220, 200, 420, 230); // ç»˜åˆ¶çŸ©å½¢æŒ‰é’®
+    settextstyle(20, 0, _T("Arial")); // è®¾ç½®æ–‡æœ¬å­—ä½“å’Œå¤§å°
+    settextcolor(WHITE); // è®¾ç½®æ–‡æœ¬é¢œè‰²ä¸ºç™½è‰²
+    outtextxy(250, 210, _T("è¿”å›ä¸»èœå•")); // æ˜¾ç¤ºæŒ‰é’®æ–‡æœ¬
+    fillrectangle(220, 250, 420, 280); // ç»˜åˆ¶çŸ©å½¢æŒ‰é’®
+    outtextxy(250, 260, _T("é‡æ–°å¼€å§‹æ¸¸æˆ")); // æ˜¾ç¤ºæŒ‰é’®æ–‡æœ¬
     MOUSEMSG m;
     while (true) {
         m = GetMouseMsg();
-        if (m.uMsg == WM_LBUTTONDOWN) { // ¼ì²âÊó±ê×ó¼üµã»÷
-            if (m.x >= 220 && m.x <= 420 && m.y >= 200 && m.y <= 230) { // ·µ»ØÖ÷²Ëµ¥°´Å¥
-                return menuView(); // µ÷ÓÃ·µ»ØÖ÷²Ëµ¥µÄº¯Êı
+        if (m.uMsg == WM_LBUTTONDOWN) { // æ£€æµ‹é¼ æ ‡å·¦é”®ç‚¹å‡»
+            if (m.x >= 220 && m.x <= 420 && m.y >= 200 && m.y <= 230) { // è¿”å›ä¸»èœå•æŒ‰é’®
+                return menuView(); // è°ƒç”¨è¿”å›ä¸»èœå•çš„å‡½æ•°
             }
-            if (m.x >= 220 && m.x <= 420 && m.y >= 250 && m.y <= 280) { // ÖØĞÂ¿ªÊ¼ÓÎÏ·°´Å¥
-                return gameBeignView(); // µ÷ÓÃ¿ªÊ¼ÓÎÏ·µÄº¯Êı
+            if (m.x >= 220 && m.x <= 420 && m.y >= 250 && m.y <= 280) { // é‡æ–°å¼€å§‹æ¸¸æˆæŒ‰é’®
+                return gameBeignView(); // è°ƒç”¨å¼€å§‹æ¸¸æˆçš„å‡½æ•°
             }
         }
     }
-    closegraph(); // ¹Ø±ÕÍ¼ĞÎ´°¿Ú
+    closegraph(); // å…³é—­å›¾å½¢çª—å£
 }
+
+vector<YoungAgeChoices> YoungEvents;//å­˜å‚¨18å²ä»¥å‰çš„å¹´é¾„äº‹ä»¶
+vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
+
+
+void gameLoop(person& p, mainEvent& event) {
+	for (p.Age = 0; p.Age <= 100; p.Age++) {
+		if (flag == 0) {
+			if (p.Age == 17) {
+				score = getScore(p.IQ);
+			}
+			else {
+				if (YoungEvents[p.Age].choices.size() > 1) {
+					YoungEvents[p.Age].showYoungAgeChoices();
+					//æ˜¯ä¸æ˜¯è¿˜è¦åŠ ä¸€äº›æ•°å€¼ä¼ å…¥ä»€ä¹ˆ
+					Bonus delta = YoungEvents[p.Age].choices[0].improve;
+					p.IQ += delta.IQBonus;
+					p.EQ += delta.EQBonus;
+					p.ProgramingSkill += delta.ProgramingSkillBonus;
+					p.Health += delta.HealthBonus;
+				}
+				else if (YoungEvents[p.Age].choices.size() == 1) {
+					//ç›´æ¥æ˜¾ç¤ºäº‹ä»¶
+					YoungAgeChoices[p.Age].showYoungAgeChoices();
+				}
+			}
+		}
+		else if (flag == 1) {
+
+		}
+		else if (flag == 2) {
+
+		}
+		else if (flag == 3) {
+
+		}
+		else if (flag == 4) {
+
+		}
+		else if (flag == 5) {
+
+		}
+		else if (flag == 6)
+	}
+
+	
+}
+
