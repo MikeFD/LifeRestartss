@@ -11,6 +11,7 @@ vector<string> happenEvent;
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
+
 void init()
 {
 
@@ -268,10 +269,6 @@ void gameLoop(person& p, mainEvent& event) {
 		//退休期
 	}
 
-
-
-		}
-
 	else if (flag == 8) {
 		//死亡线
 	}
@@ -295,11 +292,9 @@ void TalentBonus(person& p, vector<int>& talentId)
         
   
 }
-Event::Event(const string& description, int eventLimit)
-      : description(description), eventLimit(eventLimit) {
-
-}
-
+mainEvent::mainEvent(string description, limit event) {
+	this->description = description;
+	this->eventlimit = event;
 }
 
 float randEvent::adjustPossibility(person& p, randEvent event)
@@ -339,7 +334,7 @@ bool randEvent::triggerEvent(person &p,randEvent &event)
 	return false;
 }
 
-void  randEvent::checkRandEvents(person &p,randEvent &event)
+void randEvent::checkRandEvents(person &p,randEvent &event)
 {
 	if (triggerEvent(p,event))
 	{
