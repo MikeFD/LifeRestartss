@@ -1,4 +1,4 @@
-#include "functions.h"
+ï»¿#include "functions.h"
 
 int flag;
 int score;
@@ -7,7 +7,7 @@ vector<randEvent> ranEvents;
 vector<string> happenEvent;
 void init()
 {
-	//³õÊ¼»¯ÊôĞÔ
+	//åˆå§‹åŒ–å±æ€§
 	p.Age = 0;
 	p.EQ = 0;
 	p.Health = 100;
@@ -17,47 +17,47 @@ void init()
 
 	//
 
-	//ÏûÏ¢¿òµÄ´óĞ¡
+	//æ¶ˆæ¯æ¡†çš„å¤§å°
 	const int BOX_WIDTH = 400;
 	const int BOX_HEIGHT = 300;
 
-	//ÏûÏ¢¿òµÄÎ»ÖÃ
+	//æ¶ˆæ¯æ¡†çš„ä½ç½®
 	const int BOX_X = 50;
 	const int BOX_Y = 50;
 
-	//Ã¿ĞĞ¸ß¶È
+	//æ¯è¡Œé«˜åº¦
 	const int LINE_HEIGHT = 20;
 
-	//×î´óĞĞÊı
+	//æœ€å¤§è¡Œæ•°
 	const int MAX_LINES = BOX_HEIGHT / LINE_HEIGHT;
 
-	//´¢´æÊÂ¼şµÄÈİÆ÷
+	//å‚¨å­˜äº‹ä»¶çš„å®¹å™¨
 	vector<string> messages;
 
 
-	// ¹ö¶¯Æ«ÒÆÁ¿£¬±íÊ¾µ±Ç°ÏÔÊ¾µÄÏûÏ¢µÄÆğÊ¼ĞĞ
+	// æ»šåŠ¨åç§»é‡ï¼Œè¡¨ç¤ºå½“å‰æ˜¾ç¤ºçš„æ¶ˆæ¯çš„èµ·å§‹è¡Œ
 	int scroll_offset = 0;
 
-	//»æÖÆÏûÏ¢¿ò
+	//ç»˜åˆ¶æ¶ˆæ¯æ¡†
 	setfillcolor(WHITE);
 	bar(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
 
-	// »æÖÆÏûÏ¢¿òµÄ±ß¿ò
+	// ç»˜åˆ¶æ¶ˆæ¯æ¡†çš„è¾¹æ¡†
 	setlinecolor(BLACK);
 	rectangle(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
 
-	// »æÖÆÏûÏ¢
-	int start_line = scroll_offset;//ÆğÊ¼ĞĞ
-	int end_line = start_line + MAX_LINES;//½áÊøĞĞ
+	// ç»˜åˆ¶æ¶ˆæ¯
+	int start_line = scroll_offset;//èµ·å§‹è¡Œ
+	int end_line = start_line + MAX_LINES;//ç»“æŸè¡Œ
 
 	for (int i = start_line; i < end_line && i < messages.size(); ++i) 
 	{
-		//»æÖÆÃ¿ĞĞÏûÏ¢
-		outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());//(i - start_line) * LINE_HEIGHTÃ¿ĞĞ¼ä¸ô,messages[i].c_str()×ª»»³ÉcÓïÑÔ·ç¸ñµÄ×Ö·û´®
+		//ç»˜åˆ¶æ¯è¡Œæ¶ˆæ¯
+		outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());//(i - start_line) * LINE_HEIGHTæ¯è¡Œé—´éš”,messages[i].c_str()è½¬æ¢æˆcè¯­è¨€é£æ ¼çš„å­—ç¬¦ä¸²
 	}
 	
-	//Í¨¹ı"w","s"¿ØÖÆÏûÏ¢¿òÒÆ¶¯
-	if (_kbhit()) //¼ì²âÊÇ·ñÓĞÊäÈë
+	//é€šè¿‡"w","s"æ§åˆ¶æ¶ˆæ¯æ¡†ç§»åŠ¨
+	if (_kbhit()) //æ£€æµ‹æ˜¯å¦æœ‰è¾“å…¥
 	{
 		char key = _getch();
 		if (key == 'w' && scroll_offset > 0) {
