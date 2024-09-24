@@ -9,8 +9,6 @@ vector<string> happenEvent;
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
-
-
 void init()
 {
 
@@ -243,33 +241,35 @@ void gameLoop(person& p, mainEvent& event) {
 		//无业期，用几个不同阶段的事件触发函数，看看会触发哪些东西
 		//先判断创业线，创业线的属性限制比较明显
 		//无业期的核心触发是选择，看你选择走哪一条线
-		mainEvent* a， b, c, d, e;//我需要各种root的定义
+		mainEvent* a, * b, * c, * d, * e;//我需要各种root的定义
 		//判断创业线
 		if (a->isTrigger(p)) {
 			flag = 6;
 		}
-		else if (b->isTrigger(p)) {
-
+		else if (b->isTrigger(p)) {//这个的前提是不被裁员cc
+			//判断工作线线
+			flag = 3;
 		}
-		else if ()
-
 	}
 	else if (flag == 5) {
 		//咸鱼时期，主打一个外卖小哥
 		//直接遍历树，判断子节点是否超过一个
 		//子节点超过一个就调用isTrigger();
+		traverseTree(root, p);
 	}
 	else if (flag == 6) {
-		//
+		//创业期,是的是的
 	}
 	else if (flag == 7) {
-
+		//退休期
 	}
 	else if (flag == 8) {
-
+		//死亡线
 	}
 	else if (flag == 9 {
-
+		//永胜线
+	}
+}
 
 void TalentBonus(person& p, vector<int>& talentId)
 {
@@ -289,4 +289,3 @@ void TalentBonus(person& p, vector<int>& talentId)
 Event::Event(const string& description, int eventLimit)
       : description(description), eventLimit(eventLimit) {
 }
-
