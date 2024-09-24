@@ -595,3 +595,7 @@ void beginView()
 		}
 	}
 }
+
+void careerView() {
+
+}
