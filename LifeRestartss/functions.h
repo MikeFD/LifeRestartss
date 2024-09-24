@@ -36,6 +36,8 @@ typedef struct
     int Health;//健康
 }person;
 
+person p;//实例化主角
+
 
 /*
     属性受影响 加/减
@@ -48,6 +50,7 @@ typedef struct
     int HealthBonus;
 }Bonus;
 
+Bonus b;//实例化Bonus结构体
 
 /*
     触发事件的属性限制  如{"IQ": 100, "CodingLevel": 80}
