@@ -1,4 +1,4 @@
-﻿#include "functions.h"
+#include "functions.h"
 
 int flag;
 int score;
@@ -270,6 +270,23 @@ void gameLoop(person& p, mainEvent& event) {
 	}
 	else if (flag == 9 {
 
-	}
-	
+
+void TalentBonus(person& p, vector<int>& talentId)
+{
+    for (vector<int>::iterator it1 = talentId.begin(); it1 != talentId.end(); it1++) {
+        for (vector<talent>::iterator it2 = talents.begin(); it2 != talents.end(); it2++) {
+            if (it2->talentID == *it1) {
+                p.IQ += it2->talentBonus.IQBonus;
+                p.EQ += it2->talentBonus.EQBonus;
+                p.ProgramingSkill += it2->talentBonus.ProgramingSkillBonus;
+                p.Health += it2->talentBonus.HealthBonus;
+            }
+        }
+    }
+        
+  
 }
+Event::Event(const string& description, int eventLimit)
+      : description(description), eventLimit(eventLimit) {
+}
+
