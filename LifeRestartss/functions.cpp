@@ -1,7 +1,9 @@
 #include "functions.h"
 
+
 int flag;
 int score;
+
 
 vector<randEvent> ranEvents;
 vector<string> happenEvent;
@@ -216,6 +218,7 @@ void gameLoop(person& p, mainEvent& event) {
 			else if (YoungEvents[p.Age].choices.size() == 1) {
 				//直接显示事件
 				YoungAgeChoices[p.Age].showYoungAgeChoices();
+
 			}
 		}
 	}
@@ -264,7 +267,8 @@ void gameLoop(person& p, mainEvent& event) {
 	}
 	else if (flag == 7) {
 
-	}
+
+		}
 	else if (flag == 8) {
 
 	}
@@ -290,3 +294,50 @@ Event::Event(const string& description, int eventLimit)
       : description(description), eventLimit(eventLimit) {
 }
 
+float randEvent::adjustPossibility(person& p, randEvent event)
+{
+	if (!event.isafectPossibility) return event.possibility;
+	float adjustposibility = event.possibility;
+	if (p.Health < 50)
+	{
+		adjustposibility += abs(p.Health - 50) * 0.5;
+	}
+	if (p.Age > 0)
+	{
+		adjustposibility = p.Age * 0.25;
+	}
+	return min(100.0f, adjustposibility);
+
+	
+}
+
+bool randEvent::triggerEvent(person &p,randEvent &event)
+{
+	// 在初始化的时候使用
+	//srand(static_cast<unsigned>(time(NULL)));
+	float randnum;
+	event.possibility = adjustPossibility(p, event);
+	if (event.ishappend)
+	{
+
+		
+		if (p.Age >= randlimit.Age && p.Health >= randlimit.Health && p.EQ >= randlimit.EQ && p.IQ >= randlimit.IQ && p.ProgramingSkill >= randlimit.ProgramingSkill)
+		{
+			
+			randnum = static_cast<float>(rand() % 100);
+			return randnum < event.possibility;
+		}
+	}
+	return false;
+}
+
+void  randEvent::checkRandEvents(person &p,randEvent &event)
+{
+	if (triggerEvent(p,event))
+	{
+		p.Health = event.effect.HealthBonus;
+		p.EQ = event.effect.EQBonus;
+		p.IQ = event.effect.IQBonus;
+		p.ProgramingSkill = event.effect.ProgramingSkillBonus;
+	}
+}
