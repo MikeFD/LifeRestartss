@@ -16,6 +16,15 @@ vector<int> talentChoices;//选择的3个天赋id
 person p;//实例化主角
 Bonus b;//实例化Bonus结构体
 
+void YoungAgeChoices::showYoungAgeChoices()
+{
+	char ans[100];
+	for (auto x : choices) {
+		sprintf_s(ans, "%s \n ", x.description.c_str());
+	}
+	printf("%s", ans);
+}
+
 void init()
 {
 
@@ -167,6 +176,7 @@ void traverseTree(mainEvent* root, person p) {
 }
 
 //GT写的
+
 //void gameLoop(person& p, mainEvent& event) {
 //	if (flag == 0) {
 //		if (p.Age == 17) {
@@ -252,6 +262,7 @@ void traverseTree(mainEvent* root, person p) {
 //	}
 //}
 
+
 void TalentBonus(person& p, vector<int>& talentId)
 {
     for (vector<int>::iterator it1 = talentId.begin(); it1 != talentId.end(); it1++) {
@@ -268,7 +279,9 @@ void TalentBonus(person& p, vector<int>& talentId)
   
 }
 
+
 mainEvent::mainEvent(string description, limit event):description(description), eventlimit(event) {}
+
 
 float randEvent::adjustPossibility(person& p, randEvent event)
 {
@@ -306,7 +319,7 @@ bool randEvent::triggerEvent(person &p,randEvent &event)
 	return false;
 }
 
-void  randEvent::checkRandEvents(person &p,randEvent &event)
+void randEvent::checkRandEvents(person &p,randEvent &event)
 {
 	if (triggerEvent(p,event))
 	{
@@ -315,5 +328,27 @@ void  randEvent::checkRandEvents(person &p,randEvent &event)
 		p.IQ = event.effect.IQBonus;
 		p.ProgramingSkill = event.effect.ProgramingSkillBonus;
 	}
+}
+/*
+	负责人：飞
+	功能：
+		根据传入的智力获取一个高考所能获得的分数范围
+*/
+pair<int, int> getScoreRange(int iq)
+{
+	for (int i = 0; i < examScores.size(); i++) {
+		const auto& score = examScores[i];
+		if (iq >= score.IQ)
+			return make_pair(min_score, max_score);
+	}
+	return make_pair(0, 0);
+}
+// 调用 getScoreRange 函数来获取一个分数范围再 从返回的分数范围内利用随机数返回最后的实际的高考分数
+int getScore(int iq) {
+	int score;
+	std::pair<int, int> scoreRange = getScoreRange(iq);
+	/*std::srand(std::time(0));*/
+	score = scoreRange.first + (std::rand() % (scoreRange.second - scoreRange.first + 1));
+	return score;
 }
 
