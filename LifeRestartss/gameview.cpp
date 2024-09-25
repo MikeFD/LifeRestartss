@@ -135,7 +135,7 @@ void endView()
 		EndBatchDraw();
 		while (true)
 		{
-			msg = getmessage(EX_MOUSE);
+			ExMessage msg = getmessage(EX_MOUSE);
 			if (msg.message == WM_LBUTTONDOWN)
 			{
 				if (btnreturn.Check(msg.x, msg.y)) {
@@ -215,56 +215,147 @@ void popView()
 		}
 	}
 }
+
+
+
+
+
+
 void talentChooseView()
 {
-	EasyButton 	btnthing;
+	// 测试案例
+	vector<talent> randtalents;
+	Bonus improve = { 10, 10, 10, 10 };
+	talent a = { 1, "一个很牛逼的天赋", improve };
+	for (int i = 0; i < 10; i++)
+	{
+		randtalents.push_back(a);
+	}
+
+	EasyButton btnthing;
 	EasyButton btntext;
 	EasyButton btnreturn;
 	EasyButton btnreturn1;
-	cout << 3 << endl;
+	EasyButton btnchoices[10];
+
+	int selectedCount = 0; // 选中的天赋数量
+	vector<bool> selected(randtalents.size(), false); // 用于跟踪每个天赋的选中状态
+
+	bool showDialog = false; // 控制弹窗显示
+	const char* dialogMessage = ""; // 弹窗消息内容
+
 	while (1)
 	{
-		char str[20] = "大小多少年龄";
-		char ans[20];
 		BeginBatchDraw();
 		setbkcolor(BLACK);
 		IMAGE game;
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-
+		settextstyle(25, 0, "字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
+		// 创建按钮
 		btnthing.Create(220, 50, 760, 700, "", NULL);
 		btntext.Create(400, 50, 560, 90, "选择天赋", NULL);
-		btnreturn.Create(260, 700, 380, 740, "取消", NULL);
-		btnreturn1.Create(580, 700, 720, 740, "确让", gameView);
+		btnreturn.Create(260, 700, 380, 740, "取消", gameBeginView);
+		btnreturn1.Create(580, 700, 720, 740, "确认", gameView);
+
 		settextcolor(RGB(239, 218, 187));
-		settextstyle(25, 0, "字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
+		settextstyle(25, 0, "字魂无外润黑体(商用需授权)");
 
-		for (int i = 1; i <= 10; i++)
+		// 绘制天赋选项
+		for (int i = 0; i < randtalents.size(); i++)
 		{
-			sprintf_s(ans, "%d  %s", i, str);
-			cout << ans;
-			outtextxy(300, 100 + i * 20, ans); // 标题文本?
+			// 绘制按钮的背景
+			btnchoices[i].Create(290, 80 + (i + 1) * 50, 690, 130 + (i + 1) * 50, "", NULL);
+
+			// 根据选中状态改变按钮的文字颜色
+			settextcolor(selected[i] ? RGB(255, 0, 0) : RGB(239, 218, 187)); // 选中/未选中颜色
+
+			// 绘制文本
+			outtextxy(300, 90 + (i + 1) * 50, randtalents[i].description.c_str());
 		}
+		FlushBatchDraw();
 
-		EndBatchDraw();
-		while (true)
+		// 弹窗逻辑
+		while (showDialog)
 		{
-			msg = getmessage(EX_MOUSE);
+			// 设置弹窗背景色
+			setfillcolor(RGB(173, 216, 230)); // 弹窗背景色
+			fillrectangle(280, 250, 700, 400); // 弹窗位置和大小
+
+			// 绘制弹窗边框
+			setlinecolor(RGB(0, 0, 139)); // 边框颜色
+			rectangle(280, 250, 700, 400);
+
+			// 绘制消息
+			settextcolor(RGB(50, 50, 50)); // 文字颜色
+			settextstyle(25, 0, "黑体");
+			outtextxy(300, 280, dialogMessage); // 绘制消息文本
+
+			// 创建确定按钮
+			EasyButton btnOk;
+			btnOk.Create(430, 375, 530 ,425 , "确定", NULL);
+
+			// 检查鼠标事件
+			msg = getmessage();
 			if (msg.message == WM_LBUTTONDOWN)
 			{
-				if (btnreturn.Check(msg.x, msg.y)) {
-
-					btnreturn.OnMessage();
+				if (btnOk.Check(msg.x, msg.y))
+				{
+					showDialog = false; // 关闭弹窗
+					break; // 退出弹窗循环，继续主循环
 				}
-				if (btnreturn1.Check(msg.x, msg.y)) {
+			}
+			FlushBatchDraw();
+		}
 
-					btnreturn1.OnMessage();
+		// 处理鼠标事件
+		msg = getmessage(EX_MOUSE);
+		if (msg.message == WM_LBUTTONDOWN)
+		{
+			if (btnreturn.Check(msg.x, msg.y)) {
+				btnreturn.OnMessage(); // 返回主界面
+			}
+
+			if (btnreturn1.Check(msg.x, msg.y)) {
+				if (selectedCount < 3)
+				{
+					dialogMessage = "请选择三个天赋"; // 设置弹窗消息
+					showDialog = true; // 显示弹窗
+				}
+				else
+				{
+					btnreturn1.OnMessage(); // 确认选择
+				}
+			}
+
+			// 遍历所有按钮，检查是否被点击
+			for (int i = 0; i < randtalents.size(); i++)
+			{
+				if (btnchoices[i].Check(msg.x, msg.y))
+				{
+					// 切换选中状态
+					if (!selected[i])
+					{
+						if (selectedCount < 3)
+						{
+							selected[i] = true; // 选中
+							selectedCount++;
+						}
+					}
+					else
+					{
+						selected[i] = false; // 取消选中
+						selectedCount--;
+					}
 				}
 			}
 		}
 	}
 }
+
+
+
 void career()
 {
 	EasyButton 	btnthing;

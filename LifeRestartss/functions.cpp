@@ -23,7 +23,7 @@ void init()
 
 	p.Age = 0;
 	p.EQ = 0;
-	p.Health = 100;
+	p.Health = 100; 
 	p.IQ = 0;
 	p.ProgramingSkill = 0;
 
