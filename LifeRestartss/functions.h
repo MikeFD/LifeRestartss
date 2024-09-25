@@ -124,7 +124,9 @@ typedef struct {
 }talent;
 
 extern vector<talent> talents;//存储可选天赋
+extern vector<talent> randtalents;//存储在天赋页面上展现的天赋
 extern vector<int> talentChoices;//选择的3个天赋id
+
 
 
 
@@ -437,6 +439,10 @@ int getScore(int iq);
     返回值：bool
 */
 bool mouseClick(int x, int y);
+
+
+
+
 
 
 /*
