@@ -79,7 +79,7 @@ void init()
 	}
 
 }
-void EventBonus()
+void EventBonus(person& p, Bonus b)
 {
 	p.EQ += b.EQBonus;
 	p.Health += b.HealthBonus;
@@ -173,35 +173,37 @@ void endView();
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
-void traverseTree(mainEvent* root, person p) {//对于遍历树来讲，我们还需要一个停止遍历的条件，我可以把这里边的循环处理掉
+bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合条件的
 	if (root == nullptr) {
-		return;
+		return true;
 	}
-	
-	stack<mainEvent*> eventStack;
-
-	eventStack.push(root);
-
-	while (!eventStack.empty()) {
-		mainEvent* current = eventStack.top();
-		eventStack.pop();
-
-		for (auto child : current->children) {
-			if (child->isTrigger(p) || current->children.size() == 1) {
-				eventStack.push(child);
-				break;
+	if (!root->is_choose) {
+		for (auto child : root->children) {
+			if (child->isTrigger(p)) {
+				root = child;
+				return true;
 			}
 		}
 	}
+	else {
+		//选择并返回事件id
+		root = root->children[0];
+		return true;
+	}
+	return false;
+	
 }
 
 //GT写的
-void gameLoop(person& p, mainEvent& event) {
-	if (flag == 0) {
+void gameLoop(person& p, mainEvent*& event) {
+	srand(static_cast<unsigned int>(time(nullptr)));
+	int randId = rand() % 20;
+	mainEvent* treeEvent = event;
+	if (p.Age < 18) {
 		if (p.Age == 17) {
 			score = getScore(p.IQ);
 
-			//有没有大学相关的判断功能，比如我去了哪个大学
+			//有没有大学相关的判断功能，比如我去了哪个大学,属性需要发生什么更改。
 			//University_lor();
 		}
 		else {
@@ -221,59 +223,24 @@ void gameLoop(person& p, mainEvent& event) {
 			}
 		}
 	}
-	else if (flag == 1) {
-		//是不是有个大学相关的事件树
-		//通过传入事件树，然后遍历，用if(isTrigger())来判断事件发生的走向
-		//走完本科线这里有个选择（选1或者选3，即工作线以及读研线。若失败，则进入4 无业时期）
-		traverseTree(root, p);//这里的root待定，一般来讲是名为University的根节点。
+	else if (is_mainEvent(event, p)) {
+		//这里是要判断主事件的发生情况，主事件的发生也包含了那些支线树。
+		string arr = event->description;//故事
+		p.IQ += event->eventBonus.IQBonus;
+		p.EQ += event->eventBonus.EQBonus;
+		p.Health += event->eventBonus.HealthBonus;
+		p.ProgramingSkill += event->eventBonus.ProgramingSkillBonus;
+		
 
 	}
-	else if (flag == 2) {
-		//研究生时期
-		traverseTree(root, p);
-		//事件遍历完后，遍历下一个状态。
-		//我觉得应该设定一个Bool 变量 isAlive;
-		flag = 4;//进入无业状态。
-
-	}
-	else if (flag == 3) {
-		//工作时期
-		//先判断工作时期找没找到工作，要是事件触发的是没找到，则根据属性做下一步工作
-		//用属性判断函数，判断创业线是否可能发生，有的话就选择，没有的话就直接进入失业线
-	}
-	else if (flag == 4) {
-		//无业期，用几个不同阶段的事件触发函数，看看会触发哪些东西
-		//先判断创业线，创业线的属性限制比较明显
-		//无业期的核心触发是选择，看你选择走哪一条线
-		mainEvent* a, * b, * c, * d, * e;//我需要各种root的定义
-		//判断创业线
-		if (a->isTrigger(p)) {
-			flag = 6;
-		}
-		else if (b->isTrigger(p)) {//这个的前提是不被裁员cc
-			//判断工作线线
-			flag = 3;
-		}
-	}
-	else if (flag == 5) {
-		//咸鱼时期，主打一个外卖小哥
-		//直接遍历树，判断子节点是否超过一个
-		//子节点超过一个就调用isTrigger();
-		traverseTree(root, p);
-	}
-	else if (flag == 6) {
-		//创业期,是的是的
-	}
-	else if (flag == 7) {
-
-		//退休期
-	}
-
-	else if (flag == 8) {
-		//死亡线
-	}
-	else if (flag == 9 {
-		//永胜线
+	else if (ranEvents[randId].triggerEvent(p, ranEvents[randId])) {
+		//这里判断随机事件的发生情况
+		randEvent cEvent = ranEvents[randId];
+		string arr = cEvent.description;
+		p.IQ += cEvent.effect.IQBonus;
+		p.EQ += cEvent.effect.EQBonus;
+		p.ProgramingSkill += cEvent.effect.ProgramingSkillBonus;
+		p.Health += cEvent.effect.HealthBonus;
 	}
 }
 
@@ -292,9 +259,11 @@ void TalentBonus(person& p, vector<int>& talentId)
         
   
 }
-mainEvent::mainEvent(string description, limit event) {
+mainEvent::mainEvent(string description, limit event, Bonus eventBonus, bool choose) {
 	this->description = description;
 	this->eventlimit = event;
+	this->eventBonus = eventBonus;
+	this->is_choose = choose;
 }
 
 float randEvent::adjustPossibility(person& p, randEvent event)

@@ -162,6 +162,7 @@ public:
     string description;           // 事件描述
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
+    bool is_choose;
 
     /*
   Event的构造函数
@@ -171,7 +172,7 @@ public:
       返回值： 无返回值
 
   */
-    mainEvent(string description, limit event);
+    mainEvent(string description, limit event, Bonus eventBonus, bool choose);
 
     /*
      负责人：灵泽
@@ -395,7 +396,7 @@ void buildEventTree();
 
 */
 void gameLoop(person, mainEvent*);
-void traverseTree(mainEvent&* root, person& p);
+void traverseTree(mainEvent*& root, person& p);
 
 
 /*
