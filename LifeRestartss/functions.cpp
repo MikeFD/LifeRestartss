@@ -339,7 +339,7 @@ pair<int, int> getScoreRange(int iq)
 	for (int i = 0; i < examScores.size(); i++) {
 		const auto& score = examScores[i];
 		if (iq >= score.IQ)
-			return make_pair(min_score, max_score);
+			return make_pair(examScores[i].min_score,examScores[i].max_score);
 	}
 	return make_pair(0, 0);
 }
