@@ -16,6 +16,14 @@ vector<int> talentChoices;//选择的3个天赋id
 person p;//实例化主角
 Bonus b;//实例化Bonus结构体
 
+void YoungAgeChoices::showYoungAgeChoices()
+{
+	char ans[100];
+	for (auto x : choices) {
+		sprintf_s(ans, "%s \n ", x.description.c_str());
+	}
+	printf("%s", ans);
+}
 
 void init()
 {
