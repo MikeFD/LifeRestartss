@@ -395,7 +395,7 @@ void buildEventTree();
 
 */
 void gameLoop(person, mainEvent*);
-void traverseTree(mainEvent* root, person p);
+void traverseTree(mainEvent&* root, person& p);
 
 
 /*
