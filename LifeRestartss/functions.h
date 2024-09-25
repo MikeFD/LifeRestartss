@@ -9,6 +9,8 @@
 #include<time.h>
 #include <utility>
 #include <stack>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 

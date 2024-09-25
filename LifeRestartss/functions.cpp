@@ -173,7 +173,7 @@ void endView();
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
-void traverseTree(mainEvent* root, person p) {
+void traverseTree(mainEvent* root, person p) {//对于遍历树来讲，我们还需要一个停止遍历的条件，我可以把这里边的循环处理掉
 	if (root == nullptr) {
 		return;
 	}
@@ -202,7 +202,7 @@ void gameLoop(person& p, mainEvent& event) {
 			score = getScore(p.IQ);
 
 			//有没有大学相关的判断功能，比如我去了哪个大学
-
+			//University_lor();
 		}
 		else {
 			if (YoungEvents[p.Age].choices.size() > 1) {
