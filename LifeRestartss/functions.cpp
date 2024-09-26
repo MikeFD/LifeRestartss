@@ -55,7 +55,7 @@ void init()
 	const int MAX_LINES = BOX_HEIGHT / LINE_HEIGHT;
 
 	//储存事件的容器
-	vector<string> messages;
+	vector<wstring> messages;
 
 
 	// 滚动偏移量，表示当前显示的消息的起始行
@@ -110,16 +110,12 @@ void EventBonus()
 */
 bool mainEvent::isTrigger(person p)
 {
-    if (p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
+    if (p.Age<eventlimit.Age||p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
     {
         return false; // 属性不满足条件
     }
 
-    struct YoungAgeChoices y;
-    if (p.Age == y.age)
-    {
-        return true;
-    }
+	return true;
 }
 
 

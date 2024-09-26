@@ -1,21 +1,21 @@
 #pragma once
-#pragma once
 #include <graphics.h>
+#include <wchar.h>  // 支持宽字符处理
 
 // 实现文本框控件
 class EasyTextBox
 {
 private:
     int left = 0, top = 0, right = 0, bottom = 0;    // 控件坐标
-    char* text = NULL;                            // 控件内容
-    size_t maxlen = 0;                                    // 文本框最大内容长度
+    wchar_t* text = NULL;                            // 控件内容
+    size_t maxlen = 0;                               // 文本框最大内容长度
 
 public:
     void Create(int x1, int y1, int x2, int y2, int max)
     {
         maxlen = max;
-        text = new char[maxlen];
-        text[0] = 0;
+        text = new wchar_t[maxlen];  // 分配宽字符内存
+        text[0] = 0;  // 初始化为空字符串
         left = x1, top = y1, right = x2, bottom = y2;
 
         // 绘制用户界面
@@ -28,7 +28,7 @@ public:
             delete[] text;
     }
 
-    char* Text()
+    wchar_t* Text()
     {
         return text;
     }
@@ -47,13 +47,15 @@ public:
         int oldfillcolor = getfillcolor();
 
         setlinecolor(LIGHTGRAY);        // 设置画线颜色
-        setbkcolor(RGB(248, 193, 90));            // 设置背景颜色
-        setfillcolor(RGB(248, 193, 90));            // 设置填充颜色
+        setbkcolor(RGB(248, 193, 90));  // 设置背景颜色
+        setfillcolor(RGB(248, 193, 90)); // 设置填充颜色
         fillrectangle(left, top, right, bottom);
-        outtextxy(left + 10, top + 5, text);
+        outtextxy(left + 10, top + 5, text);  // 使用宽字符输出
 
         // 恢复环境值
-
+        setlinecolor(oldlinecolor);
+        setbkcolor(oldbkcolor);
+        setfillcolor(oldfillcolor);
     }
 
     void OnMessage()
@@ -64,14 +66,14 @@ public:
         int oldfillcolor = getfillcolor();
 
         setlinecolor(BLACK);            // 设置画线颜色
-        setbkcolor(RGB(239, 218, 187));                // 设置背景颜色
-        setfillcolor(RGB(239, 218, 187));            // 设置填充颜色
+        setbkcolor(RGB(239, 218, 187));  // 设置背景颜色
+        setfillcolor(RGB(239, 218, 187)); // 设置填充颜色
         fillrectangle(left, top, right, bottom);
         outtextxy(left + 10, top + 5, text);
 
-        int width = textwidth(text);    // 字符串总宽度
-        int counter = 0;                // 光标闪烁计数器
-        bool binput = true;                // 是否输入中
+        int width = textwidth(text);  // 宽字符版本的 textwidth
+        int counter = 0;  // 光标闪烁计数器
+        bool binput = true;  // 是否输入中
 
         ExMessage msg;
         while (binput)
@@ -89,10 +91,10 @@ public:
                 }
                 else if (msg.message == WM_CHAR)
                 {
-                    size_t len = strlen(text);
+                    size_t len = wcslen(text);  // 使用宽字符长度
                     switch (msg.ch)
                     {
-                    case '\b':                // 用户按退格键，删掉一个字符
+                    case '\b':  // 用户按退格键，删掉一个字符
                         if (len > 0)
                         {
                             text[len - 1] = 0;
@@ -101,38 +103,38 @@ public:
                             clearrectangle(left + 10 + width, top + 1, right - 1, bottom - 1);
                         }
                         break;
-                    case '\r':                // 用户按回车键，结束文本输入
+                    case '\r':  // 用户按回车键，结束文本输入
                     case '\n':
                         binput = false;
                         break;
-                    default:                // 用户按其它键，接受文本输入
+                    default:  // 用户按其它键，接受文本输入
                         if (len < maxlen - 1)
                         {
                             text[len++] = msg.ch;
                             text[len] = 0;
 
-                            clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);    // 清除画的光标
-                            width = textwidth(text);                // 重新计算文本框宽度
+                            clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);  // 清除画的光标
+                            width = textwidth(text);  // 重新计算宽字符文本框宽度
                             counter = 0;
-                            outtextxy(left + 10, top + 5, text);        // 输出新的字符串
+                            outtextxy(left + 10, top + 5, text);  // 输出新的宽字符字符串
                         }
                     }
                 }
-                peekmessage(NULL, EX_MOUSE | EX_CHAR);                // 从消息队列抛弃刚刚处理过的一个消息
+                peekmessage(NULL, EX_MOUSE | EX_CHAR);  // 从消息队列抛弃刚刚处理过的一个消息
             }
 
             // 绘制光标（光标闪烁周期为 20ms * 32）
             counter = (counter + 1) % 32;
             if (counter < 16)
-                line(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);                // 画光标
+                line(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);  // 画光标
             else
-                clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);        // 擦光标
+                clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);  // 擦光标
 
             // 延时 20ms
             Sleep(20);
         }
 
-        clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);    // 擦光标
+        clearrectangle(left + 10 + width + 1, top + 3, left + 10 + width + 1, bottom - 3);  // 擦光标
 
         // 恢复环境值
         setlinecolor(oldlinecolor);
@@ -142,19 +144,20 @@ public:
         Show();
     }
 };
+
 // 实现按钮控件
 class EasyButton
 {
 private:
     int left = 0, top = 0, right = 0, bottom = 0;    // 控件坐标
-    char* text = NULL;                            // 控件内容
-    void (*userfunc)() = NULL;                        // 控件消息
+    wchar_t* text = NULL;                            // 控件内容
+    void (*userfunc)() = NULL;                       // 控件消息
 
 public:
-    void Create(int x1, int y1, int x2, int y2, const char* title, void (*func)())
+    void Create(int x1, int y1, int x2, int y2, const wchar_t* title, void (*func)())
     {
-        text = new char[strlen(title) + 1];
-        strcpy_s(text, strlen(title) + 1, title);
+        text = new wchar_t[wcslen(title) + 1];  // 分配宽字符内存
+        wcscpy_s(text, wcslen(title) + 1, title);  // 复制宽字符内容
         left = x1, top = y1, right = x2, bottom = y2;
         userfunc = func;
 
@@ -172,6 +175,7 @@ public:
     {
         return (left <= x && x <= right && top <= y && y <= bottom);
     }
+
     // 绘制界面
     void Show()
     {
@@ -180,10 +184,10 @@ public:
         int oldfillcolor = getfillcolor();
 
         setlinecolor(BLACK);            // 设置画线颜色
-        setbkcolor(WHITE);                // 设置背景颜色
-        setfillcolor(RGB(248, 193, 90));            // 设置填充颜色
+        setbkcolor(WHITE);              // 设置背景颜色
+        setfillcolor(RGB(248, 193, 90)); // 设置填充颜色
         fillrectangle(left, top, right, bottom);
-        outtextxy(left + (right - left - textwidth(text) + 1) / 2, top + (bottom - top - textheight(text) + 1) / 2, text);
+        outtextxy(left + (right - left - textwidth(text) + 1) / 2, top + (bottom - top - textheight(text) + 1) / 2, text);  // 使用宽字符文本
 
         setlinecolor(oldlinecolor);
         setbkcolor(oldbkcolor);
@@ -196,4 +200,3 @@ public:
             userfunc();
     }
 };
-

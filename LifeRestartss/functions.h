@@ -119,7 +119,7 @@ typedef struct
 */
 typedef struct {
     int talentID; //天赋卡ID
-    string description; //天赋描述
+    wstring description; //天赋描述
     Bonus talentBonus; //天赋对属性的影响
 }talent;
 
