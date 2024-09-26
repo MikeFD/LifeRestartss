@@ -395,6 +395,7 @@ void deleteEventTree(mainEvent* event);
     返回值：void
 
 */
+bool is_mainEvent(mainEvent*& root, person p);
 void gameLoop(person, mainEvent*);
 void traverseTree(mainEvent*& root, person& p);
 
