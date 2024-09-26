@@ -51,7 +51,7 @@ void init(person& p)
 	const int MAX_LINES = BOX_HEIGHT / LINE_HEIGHT;
 
 	//储存事件的容器
-	vector<string> messages;
+	vector<wstring> messages;
 
 
 	// 滚动偏移量，表示当前显示的消息的起始行
@@ -321,12 +321,12 @@ void EventBonus(person& p, Bonus b)
 */
 bool mainEvent::isTrigger(person p, mainEvent* event)
 {
-    if (p.IQ < event->eventlimit.IQ || p.EQ < event->eventlimit.EQ || p.ProgramingSkill < event->eventlimit.ProgramingSkill || p.Health < event->eventlimit.Health || p.Age < event->eventlimit.Age)
+    if (p.Age<eventlimit.Age||p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
     {
         return false; // 属性不满足条件
     }
 
-    return true;
+	return true;
 }
 
 
@@ -805,9 +805,6 @@ void deleteEventTree(mainEvent* event) {
     // 删除当前事件
     delete event;
 }
-
-vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
-
 bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合条件的
     if (root == nullptr) {
         return true;
@@ -820,11 +817,11 @@ bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合�
 			}
 		}
 	}
-	else {
-		//选择并返回事件id
-		root = root->children[0];
-		return true;
-	}
+    else {
+        //选择并返回事件id
+        root = root->children[0];
+        return true;
+    }
 	return false;
 	
 }
