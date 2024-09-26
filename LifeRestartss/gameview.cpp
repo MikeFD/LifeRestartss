@@ -1,8 +1,21 @@
 //图形化区
 #include "functions.h"
 #include "Easytext.h"
-ExMessage msg = { 0 };
+EasyTextBox LoginView_txtUsername;
 
+EasyTextBox LoginView_txtPassword;
+
+EasyButton LoginView_btnConfirm;
+EasyButton LoginView_btnBack;
+
+EasyTextBox registerView_txtUsername;
+
+EasyTextBox registerView_txtPassword;
+
+EasyButton registerView_btnConfirm;
+EasyButton registerView_btnBack;
+
+ExMessage msg = { 0 };
 
 void menuView()
 {
@@ -54,7 +67,7 @@ void menuView()
 			//			//if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 340 && msg.y <= 380)
 			//			//{
 			//			//	
-			//			//	mciSendString("setaudio musicMenu volume to 0", NULL, 0, NULL);
+			//			//	mciSendwstring("setaudio musicMenu volume to 0", NULL, 0, NULL);
 			//			//	rankView();//排行榜界面
 			//			//	cout << "点击鼠标右键3" << endl;
 			//			//}
@@ -62,7 +75,7 @@ void menuView()
 			//			//if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 410 && msg.y <= 450)
 			//			//{
 			//			//
-			//			//	mciSendString("setaudio musicMenu volume to 0", NULL, 0, NULL);
+			//			//	mciSendwstring("setaudio musicMenu volume to 0", NULL, 0, NULL);
 			//			//	skinView();//更换皮肤
 			//			//	cout << "点击鼠标右键4" << endl;
 			//			//}
@@ -183,12 +196,25 @@ void settingView()
 		}
 	}
 }
-void popView()
+int popView()
 {
+	int result;
 	EasyButton 	btnthing;
 	EasyButton btntext;
 	EasyButton btnreturn;
 	EasyButton btnreturn1;
+
+	cout << 3 << endl;
+
+	IMAGE game;
+	loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+	bool exitLoop = false;
+	while (!exitLoop)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		putimage(0, 0, &game);
+
 	while (1)
 	{
 		BeginBatchDraw();
@@ -199,6 +225,7 @@ void popView()
 		btnreturn.Create(260, 570, 380, 610, L"A", gameView);
 		btnreturn1.Create(580, 570, 720, 610, L"B", gameView);
 		EndBatchDraw();
+		bool innerExit = false;
 		while (true)
 		{
 			msg = getmessage(EX_MOUSE);
@@ -207,17 +234,95 @@ void popView()
 				if (btnreturn.Check(msg.x, msg.y)) {
 
 					btnreturn.OnMessage();
+					innerExit = true;
+					result = 0;
 				}
 				if (btnreturn1.Check(msg.x, msg.y)) {
 
 					btnreturn1.OnMessage();
+					innerExit = true;
+					result = 1;
 				}
 			}
+			else if (msg.message == WM_KEYDOWN && msg.vkcode == VK_ESCAPE)
+			{
+				exitLoop = true; // 按下 ESC 键退出外层循环
+				innerExit = true; // 退出内部循环
+			}
 		}
+		// 清除按钮内存
+		btntext.Clear();
+		btnthing.Clear();
+		btnreturn.Clear();
+		btnreturn1.Clear();
 	}
+	return result;
 }
 
+int popView3()
+{
+	int result;
+	EasyButton 	btnthing;
+	EasyButton btntext;
+	EasyButton btnreturn;
+	EasyButton btnreturn1;
+	EasyButton btnreturn2;
+	cout << 3 << endl;
 
+	IMAGE game;
+	loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+	bool exitLoop = false;
+	while (!exitLoop)
+	{
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+		btntext.Create(400, 220, 560, 280, L"选择事件", NULL);
+		btnthing.Create(220, 300, 760, 570, L"", NULL);
+		btnreturn.Create(260, 570, 380, 610, L"A", gameView);
+		btnreturn1.Create(580, 570, 720, 610, L"B", gameView);
+		btnreturn2.Create(600, 570, 720, 610, L"C", gameView);//这个地方的坐标需要修改一下
+		EndBatchDraw();
+		bool innerExit = false;
+		while (true)
+		{
+			msg = getmessage(EX_MOUSE);
+			if (msg.message == WM_LBUTTONDOWN)
+			{
+				if (btnreturn.Check(msg.x, msg.y)) {
+
+					btnreturn.OnMessage();
+					innerExit = true;
+					result = 0;
+				}
+				if (btnreturn1.Check(msg.x, msg.y)) {
+
+					btnreturn1.OnMessage();
+					innerExit = true;
+					result = 1;
+				}
+				if (btnreturn2.Check(msg.x, msg.y)) {
+
+					btnreturn2.OnMessage();
+					innerExit = true;
+					result = 1;
+				}
+			}
+			else if (msg.message == WM_KEYDOWN && msg.vkcode == VK_ESCAPE)
+			{
+				exitLoop = true; // 按下 ESC 键退出外层循环
+				innerExit = true; // 退出内部循环
+			}
+		}
+		// 清除按钮内存
+		btntext.Clear();
+		btnthing.Clear();
+		btnreturn.Clear();
+		btnreturn1.Clear();
+	}
+	return result;
+}
 
 
 
@@ -242,110 +347,138 @@ void talentChooseView()
 	EasyButton btnchoices[10];
 
 	int selectedCount = 0; // 选中的天赋数量
-  vector<bool> selected(randtalents.size(), false); // 用于跟踪每个天赋的选中状态
+	vector<bool> selected(randtalents.size(), false); // 用于跟踪每个天赋的选中状态
 
-  bool showDialog = false; // 控制弹窗显示
-  const wchar_t* dialogMessage = L"这是一个弹窗消息内容"; // 使用宽字符字符串
-  
-  
-  IMAGE game;
-  loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
-  putimage(0, 0, &game);
-  BeginBatchDraw();
+	bool showDialog = false; // 控制弹窗显示
+	const wchar_t* dialogMessage = L"这是一个弹窗消息内容"; // 使用宽字符字符串
+
 	while (1)
 	{
 
-	
-	setbkcolor(BLACK);
-	
-	settextcolor(BLACK);
-	settextstyle(25, 0, L"字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
-	// 创建按钮
-	btnthing.Create(220, 50, 760, 700, L"", NULL);
-	btntext.Create(400, 50, 560, 90, L"选择天赋", NULL);
-	btnreturn.Create(260, 700, 380, 740, L"取消", gameBeginView);
-	btnreturn1.Create(580, 700, 720, 740, L"确认", gameView);
+		BeginBatchDraw();
+		setbkcolor(BLACK);
+		IMAGE game;
+		loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+		putimage(0, 0, &game);
+		settextcolor(BLACK);
+		settextstyle(25, 0, L"字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
+		// 创建按钮
+		btnthing.Create(220, 50, 760, 700, L"", NULL);
+		btntext.Create(400, 50, 560, 90, L"选择天赋", NULL);
+		btnreturn.Create(260, 700, 380, 740, L"取消", gameBeginView);
+		btnreturn1.Create(580, 700, 720, 740, L"确认", gameView);
+    bool showDialog = false; // 控制弹窗显示
+    const wchar_t* dialogMessage = L"这是一个弹窗消息内容"; // 使用宽字符字符串
+  
+  
+    IMAGE game;
+    loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+    putimage(0, 0, &game);
+    BeginBatchDraw();
+    while (1)
+    {
 
-	settextcolor(RGB(239, 218, 187));
-	settextstyle(25, 0, L"字魂无外润黑体(商用需授权)");
 
-	// 绘制天赋选项
-	for (int i = 0; i < randtalents.size(); i++)
-	{
-		// 绘制按钮的背景
-		btnchoices[i].Create(290, 80 + (i + 1) * 50, 690, 130 + (i + 1) * 50, L"", NULL);
+    setbkcolor(BLACK);
 
-		// 根据选中状态改变按钮的文字颜色
-		settextcolor(selected[i] ? RGB(255, 0, 0) : RGB(239, 218, 187)); // 选中/未选中颜色
+    settextcolor(BLACK);
+    settextstyle(25, 0, L"字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
+    // 创建按钮
+    btnthing.Create(220, 50, 760, 700, L"", NULL);
+    btntext.Create(400, 50, 560, 90, L"选择天赋", NULL);
+    btnreturn.Create(260, 700, 380, 740, L"取消", gameBeginView);
+    btnreturn1.Create(580, 700, 720, 740, L"确认", gameView);
 
-		// 绘制文本
-		outtextxy(300, 90 + (i + 1) * 50, randtalents[i].description.c_str());
-	}
-	FlushBatchDraw();
 
-	// 弹窗逻辑
-	while (showDialog)
-	{
-		// 设置弹窗背景色
-		setfillcolor(RGB(173, 216, 230)); // 弹窗背景色
-		fillrectangle(280, 250, 700, 400); // 弹窗位置和大小
+		settextcolor(RGB(239, 218, 187));
+		settextstyle(25, 0, L"字魂无外润黑体(商用需授权)");
 
-		// 绘制弹窗边框
-		setlinecolor(RGB(0, 0, 139)); // 边框颜色
-		rectangle(280, 250, 700, 400);
-
-		// 绘制消息
-		settextcolor(RGB(50, 50, 50)); // 文字颜色
-		settextstyle(25, 0, L"黑体");
-		outtextxy(300, 280, dialogMessage); // 绘制消息文本
-
-		// 创建确定按钮
-		EasyButton btnOk;
-		btnOk.Create(430, 375, 530 ,425 , L"确定", NULL);
-
-		// 检查鼠标事件
-		msg = getmessage();
-		if (msg.message == WM_LBUTTONDOWN)
-		{
-			if (btnOk.Check(msg.x, msg.y))
-			{
-				showDialog = false; // 关闭弹窗
-				break; // 退出弹窗循环，继续主循环
-			}
-		}
-		FlushBatchDraw();
-	}
-
-	// 处理鼠标事件
-	msg = getmessage(EX_MOUSE);
-	if (msg.message == WM_LBUTTONDOWN)
-	{
-		if (btnreturn.Check(msg.x, msg.y)) {
-			btnreturn.OnMessage(); // 返回主界面
-		}
-
-		if (btnreturn1.Check(msg.x, msg.y)) {
-			if (selectedCount < 3)
-			{
-				dialogMessage = L"请选择三个天赋"; // 设置弹窗消息
-				showDialog = true; // 显示弹窗
-			}
-			else
-			{
-				btnreturn1.OnMessage(); // 确认选择
-			}
-		}
-
-		// 遍历所有按钮，检查是否被点击
+		// 绘制天赋选项
 		for (int i = 0; i < randtalents.size(); i++)
 		{
-			if (btnchoices[i].Check(msg.x, msg.y))
+			// 绘制按钮的背景
+			btnchoices[i].Create(290, 80 + (i + 1) * 50, 690, 130 + (i + 1) * 50, L"", NULL);
+
+			// 根据选中状态改变按钮的文字颜色
+			settextcolor(selected[i] ? RGB(255, 0, 0) : RGB(239, 218, 187)); // 选中/未选中颜色
+
+			// 绘制文本
+			outtextxy(300, 90 + (i + 1) * 50, randtalents[i].description.c_str());
+		}
+		FlushBatchDraw();
+
+		// 弹窗逻辑
+		while (showDialog)
+		{
+			// 设置弹窗背景色
+			setfillcolor(RGB(173, 216, 230)); // 弹窗背景色
+			fillrectangle(280, 250, 700, 400); // 弹窗位置和大小
+
+			// 绘制弹窗边框
+			setlinecolor(RGB(0, 0, 139)); // 边框颜色
+			rectangle(280, 250, 700, 400);
+
+			// 绘制消息
+			settextcolor(RGB(50, 50, 50)); // 文字颜色
+			settextstyle(25, 0, L"黑体");
+			outtextxy(300, 280, dialogMessage); // 绘制消息文本
+
+			// 创建确定按钮
+			EasyButton btnOk;
+			btnOk.Create(430, 375, 530, 425, L"确定", NULL);
+
+			// 检查鼠标事件
+			msg = getmessage();
+			if (msg.message == WM_LBUTTONDOWN)
 			{
-				// 切换选中状态
-				if (!selected[i])
+				if (btnOk.Check(msg.x, msg.y))
 				{
-					if (selectedCount < 3)
+					showDialog = false; // 关闭弹窗
+					break; // 退出弹窗循环，继续主循环
+				}
+			}
+			FlushBatchDraw();
+		}
+
+		// 处理鼠标事件
+		msg = getmessage(EX_MOUSE);
+		if (msg.message == WM_LBUTTONDOWN)
+		{
+			if (btnreturn.Check(msg.x, msg.y)) {
+				btnreturn.OnMessage(); // 返回主界面
+			}
+
+			if (btnreturn1.Check(msg.x, msg.y)) {
+				if (selectedCount < 3)
+				{
+					dialogMessage = L"请选择三个天赋"; // 设置弹窗消息
+					showDialog = true; // 显示弹窗
+				}
+				else
+				{
+					btnreturn1.OnMessage(); // 确认选择
+				}
+			}
+
+			// 遍历所有按钮，检查是否被点击
+			for (int i = 0; i < randtalents.size(); i++)
+			{
+				if (btnchoices[i].Check(msg.x, msg.y))
+				{
+					// 切换选中状态
+					if (!selected[i])
 					{
+						if (selectedCount < 3)
+						{
+							selected[i] = true; // 选中
+							selectedCount++;
+						}
+					}
+					else
+					{
+						selected[i] = false; // 取消选中
+						selectedCount--;
+					}
 						selected[i] = true; // 选中
 						selectedCount++;
 						talentChoices.push_back(randtalents[i].talentID);
@@ -359,8 +492,7 @@ void talentChooseView()
 				}
 			}
 		}
-	}
-	
+
 	}
 }
 
@@ -453,6 +585,7 @@ void gameView()
 	messages.push_back(L"Message 11");
 	messages.push_back(L"Message 12");
 
+	messages.push_back(key_text);
 
 	while (true)
 	{
@@ -466,36 +599,38 @@ void gameView()
 
 		// 绘制消息框的边框
 		setlinecolor(BLACK);
+		setlinestyle(PS_SOLID, 2); // 设置线条宽度
 		rectangle(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
 
 		// 绘制消息
 		int start_line = scroll_offset;
 		int end_line = start_line + MAX_LINES;
 
-		
-
-		for (int i = start_line; i < end_line && i < messages.size(); ++i) {
-			outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());//messages[i].c_str()转换成c语言风格的字符串
-		}
-		EasyButton btnnext;
 		settextcolor(BLACK);
+		for (int i = start_line; i < end_line && i < messages.size(); ++i) {
+			outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());
+		}
+
+		EasyButton btnnext;
 		btnreturn.Create(200, 660, 360, 710, L"上一年(请按w)", NULL);
 		btnnext.Create(600, 660, 760, 710, L"下一年(请按s)", NULL);
-		if (_kbhit()) //检测是否有输入
+		if (_kbhit()) // 检测是否有输入
 		{
-			char key = _getch();//获取按键
+			char key = _getch(); // 获取按键
 			if (key == 'w' && scroll_offset > 0) {
 				scroll_offset--;
 			}
 			else if (key == 's' && scroll_offset < messages.size() - MAX_LINES) {
 				scroll_offset++;
+				gameLoop(Person, eventTree);
+				messages.push_back(key_text);//更新事件文本
 			}
 		}
+
 		Sleep(10);
 		FlushBatchDraw();
 	}
 	EndBatchDraw();
-
 }
 
 
@@ -509,7 +644,7 @@ void gameBeginView()
 	while (true)
 	{
 		BeginBatchDraw();
-		setbkcolor(BLACK); 
+		setbkcolor(BLACK);
 		IMAGE game;
 		loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
@@ -545,14 +680,28 @@ void gameBeginView()
 		}
 	}
 }
+bool login_btn() {
+	wstring username = LoginView_txtUsername.Text();
+	wstring password = LoginView_txtPassword.Text();//导入你输入的账户和密码
+
+	wstring username1, password1;
+
+	wifstream file1("user.txt", ios::in);
+
+	wstring line;
+	while (getline(file1, line)) {//循环匹配账户密码
+		wistringstream iss(line);
+		iss >> username1 >> password1;
+
+		if (username1 == username && password1 == password) {
+			return true;
+		}
+	}
+	return false;
+}
 void loginView()
 {
-	EasyTextBox LoginView_txtUsername;
 
-	EasyTextBox LoginView_txtPassword;
-
-	EasyButton LoginView_btnConfirm;
-	EasyButton LoginView_btnBack;
 	BeginBatchDraw();
 	cleardevice();
 	//设置窗口颜色
@@ -595,7 +744,14 @@ void loginView()
 			}
 			if (LoginView_btnConfirm.Check(msg.x, msg.y))
 			{
-				LoginView_btnConfirm.OnMessage();
+				if (login_btn()) {
+					MessageBox(GetHWnd(), L"登录成功！", L"登录结果", MB_OK | MB_ICONINFORMATION);//弹窗提示
+					LoginView_btnConfirm.OnMessage();
+				}
+				else {
+					MessageBox(GetHWnd(), L"用户名或密码错误！", L"登录结果", MB_OK | MB_ICONERROR);
+					beginView();
+				}
 			}
 			if (LoginView_btnBack.Check(msg.x, msg.y))
 			{
@@ -606,14 +762,39 @@ void loginView()
 	}
 	closegraph();
 }
+
+void register_btn() {
+	wstring username = registerView_txtUsername.Text();
+	wstring password = registerView_txtPassword.Text();
+
+	wofstream file1("user.txt", ios::app);
+
+	file1 << username << ' ' << password << endl;
+}
+
+bool is_repeat() {
+	wstring username = registerView_txtUsername.Text();
+	wstring password = registerView_txtPassword.Text();
+
+	wstring username1, password1;
+
+	wifstream file1("user.txt", ios::in);
+
+	wstring line;
+	while (getline(file1, line)) {
+		wistringstream iss(line);
+		iss >> username1 >> password1;
+
+		if (username1 == username) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void registerView()
 {
-	EasyTextBox registerView_txtUsername;
-
-	EasyTextBox registerView_txtPassword;
-
-	EasyButton registerView_btnConfirm;
-	EasyButton registerView_btnBack;
+	
 	BeginBatchDraw();
 	cleardevice();
 	//设置窗口颜色
@@ -656,7 +837,15 @@ void registerView()
 			}
 			if (registerView_btnConfirm.Check(msg.x, msg.y))
 			{
+				register_btn();
+				if (!is_repeat()) {
+					MessageBox(GetHWnd(), L"恭喜你，注册成功，请前往登录界面！", L"注册结果", MB_OK | MB_ICONINFORMATION);
+				}
+				else {
+					MessageBox(GetHWnd(), L"账号已存在！", L"注册结果", MB_OK | MB_ICONERROR);
+				}
 				registerView_btnConfirm.OnMessage();
+				
 			}
 			if (registerView_btnBack.Check(msg.x, msg.y))
 			{
@@ -667,6 +856,8 @@ void registerView()
 	}
 	closegraph();
 }
+
+
 void beginView()
 {
 	EasyButton btnLogIn;
@@ -675,7 +866,7 @@ void beginView()
 	cleardevice();
 	BeginBatchDraw();
 	IMAGE login;
-	loadimage(&login,L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+	loadimage(&login, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 	putimage(0, 0, &login);
 	settextcolor(RGB(239, 218, 187));
 	setbkmode(TRANSPARENT);//文本填充色：透明
@@ -712,4 +903,3 @@ void beginView()
 		}
 	}
 }
-

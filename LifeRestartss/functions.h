@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-#include<string>
+#include <string>
 #include<vector>
 #include<map>
 #include<graphics.h>
@@ -9,17 +9,21 @@
 #include<time.h>
 #include <utility>
 #include <stack>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <sstream>
+#include <Windows.h>
 #include<set>
 #define maxtalentSize  20
 
-
 using namespace std;
 
-const int HighAttribute=100 ;
-const int MidAttribute=50 ;
-const int LowAttribute=0 ;
+const int HighAttribute = 130;
+const int MidAttribute = 110;
+const int LowAttribute = 90;
 
-
+extern wstring key_text;
 
 
 //---------------------------数据设计------------------------------
@@ -33,8 +37,6 @@ const int LowAttribute=0 ;
     8表示死亡 9表示永生
 */
 extern int flag;
-
-
 /*
     属性受影响 加/减
 */
@@ -52,9 +54,9 @@ typedef struct
 //人生选择 18岁之前的一些选择以及选择带来的一些影响
 struct youngChoiceEffects
 {
-    string description;//事件描述
+    wstring description;//事件描述
     Bonus improvebonus;
-    string outcome;//表示事件发生在界面上所返回的一些句子
+    wstring outcome;//表示事件发生在界面上所返回的一些句子
 };//代表18岁之前的选择以及影响
 
 
@@ -73,7 +75,7 @@ struct YoungAgeChoices
     */
     void showYoungAgeChoices();
 
-
+    YoungAgeChoices(int age);
 };
 
 extern vector<YoungAgeChoices> YoungEvents;
@@ -97,12 +99,6 @@ typedef struct
     int Health;//健康
 }person;
 
-extern person p;//实例化主角
-
-
-
-
-extern Bonus b;//实例化Bonus结构体
 
 /*
     触发事件的属性限制  如{"IQ": 100, "CodingLevel": 80}
@@ -134,8 +130,7 @@ extern vector<int> talentChoices;//选择的3个天赋id
 
 
 // 定义18岁之前的选择数据
-
-
+extern vector<YoungAgeChoices> YoungEvents;
 
 /*高考选择*/
 extern bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
@@ -157,6 +152,7 @@ extern vector<examSocre> examScores;
 
 extern int score;//表示当前的最终分数
 
+extern person Person;
 
 
 
@@ -173,19 +169,20 @@ class mainEvent
 {
 public:
     limit eventlimit;//表示发生该事情的属性限制
-    string description;           // 事件描述
+    wstring description;           // 事件描述
     vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
+    bool is_choose;
 
     /*
   Event的构造函数
       负责人：灰机
       功能：用于初始化事件类内的属性
-      参数：string limit分别表示事件描述 和 事件的属性限制
+      参数：wstring limit分别表示事件描述 和 事件的属性限制
       返回值： 无返回值
 
   */
-    mainEvent(string description, limit event);
+    mainEvent(wstring description, limit event, Bonus eventBonus, bool choose);
 
     /*
      负责人：灵泽
@@ -194,7 +191,7 @@ public:
         参数：person
         返回值：bool
     */
-    bool isTrigger(person p);
+    bool isTrigger(person p, mainEvent* event);
 
 
     /*
@@ -208,8 +205,9 @@ public:
     void showAndChooseEvent();
 };
 
+extern mainEvent* eventTree;
 
-
+extern mainEvent* defeat;
 
 /*
     表示随机事件  其中包含事件的表示 事件的效果 以及发生的概率等
@@ -217,7 +215,7 @@ public:
 
 struct randEvent
 {
-    string description;  // 事件描述，例如“突然得癌症”、“交通事故”
+    wstring description;  // 事件描述，例如“突然得癌症”、“交通事故”
     Bonus effect;  // 事件效果，例如减少健康值、减少寿命等
     limit randlimit;//随机事件发生的 属性限制
     float possibility;   // 事件发生的概率，0到1之间  
@@ -242,7 +240,7 @@ struct randEvent
         返回值： bool
 
     */
-    bool triggerEvent(person &p,randEvent &event);
+    bool triggerEvent(person& p, randEvent& event);
 
 
     /*
@@ -253,7 +251,7 @@ struct randEvent
         返回值：void
 
     */
-    void checkRandEvents(person &p, randEvent& event);
+    void checkRandEvents(person& p, randEvent& event);
 
 
     /*
@@ -308,7 +306,7 @@ class retireEvent : public mainEvent {};
 /*
     表示已经发生事件的集合 每次初始化时候遍历展现到消息界面上
 */
-extern vector<string> happenEvent;
+extern vector<wstring> happenEvent;
 
 
 /*
@@ -318,7 +316,7 @@ extern vector<string> happenEvent;
 // 描述结局
 typedef struct
 {
-    string description; // 结局的详细描述
+    wstring description; // 结局的详细描述
     int score; // 结局评分，A、B、C等
     bool isHidden; // 是否为隐藏结局 可以设计一些彩蛋之类的比如如果是隐藏结局展现的页面不同
 } Ending;
@@ -351,7 +349,7 @@ typedef struct
     参数：void
     返回值：void
 */
-void init();
+void init(person& p);
 
 
 
@@ -391,7 +389,8 @@ void initRandomEvents();
     返回值：void
 
 */
-void buildEventTree();
+mainEvent* buildEventTree();
+void deleteEventTree(mainEvent* event);
 
 
 //写一条主线，记录固定交互事件的时间点？
@@ -413,15 +412,21 @@ void buildEventTree();
     返回值：void
 
 */
-void gameLoop(person, mainEvent*);
-void traverseTree(mainEvent* root, person p);
+void youngEvent();
+void University_lor(person& p);
+void handleYoungAgeChoices(person& p, int age);
+void handleMainEvent(person& p, mainEvent*& event);
+void handleRandomEvent(person& p);
+bool is_mainEvent(mainEvent*& root, person p);
+void gameLoop(person& p, mainEvent*& event);
+
 
 
 /*
     负责人：飞
     功能：
         根据传入的智力获取一个高考所能获得的分数范围
-    参数：int
+    //参数：int
     返回值：pair<int,int>
 */
 pair<int,int> getScoreRange(int iq);
@@ -461,7 +466,7 @@ bool mouseClick(int x, int y);
     返回值：void
 
 */
-void EventBonus();
+void EventBonus(person& p, Bonus b);
 
 
 
@@ -578,7 +583,8 @@ void gameView();
     参数：void
     返回值：void
 */
-void popView();
+int popView();
+int popView3();
 
 
 /*
@@ -623,3 +629,5 @@ void endView();
 
 
 //-----------------------------view--------------------------------
+
+bool login_btn();
