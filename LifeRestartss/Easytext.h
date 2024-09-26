@@ -25,8 +25,13 @@ public:
 
     ~EasyTextBox()
     {
-        if (text != NULL)
+        Clear();
+    }
+
+    void Clear() {
+        if (text != NULL) {
             delete[] text;
+        }
     }
 
     wchar_t* Text()
@@ -168,8 +173,14 @@ public:
 
     ~EasyButton()
     {
-        if (text != NULL)
+        Clear();
+    }
+
+    void Clear() {
+        if (text != NULL) {
             delete[] text;
+        }
+        userfunc = NULL;
     }
 
     bool Check(int x, int y)
