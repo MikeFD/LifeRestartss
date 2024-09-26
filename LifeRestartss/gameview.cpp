@@ -38,7 +38,7 @@ void menuView()
 		{
 			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 200 && msg.y <= 240)
 			{
-				gameBeignView();//开始游戏
+				gameBeginView();//开始游戏
 				cout << "点击鼠标右键1" << endl;
 			}
 
@@ -97,7 +97,7 @@ void achievementView()
 		settextcolor(BLACK);
 		btnthing.Create(220, 130, 760, 570, "", NULL);
 		btnreturn.Create(420, 130, 540, 180, "成就", NULL);
-		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeignView);
+		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeginView);
 		EndBatchDraw();
 		while (true)
 		{
@@ -131,7 +131,7 @@ void endView()
 		settextcolor(BLACK);
 		btnthing.Create(220, 300, 760, 570, "", NULL);
 		btnreturn.Create(180, 650, 320, 690, "返回菜单", menuView);
-		btntext.Create(660, 650, 800, 690, "再来一局", gameBeignView);
+		btntext.Create(660, 650, 800, 690, "再来一局", gameBeginView);
 		EndBatchDraw();
 		while (true)
 		{
@@ -374,7 +374,7 @@ void careerView()
 		settextcolor(BLACK);
 
 		btnthing.Create(220, 130, 760, 570, "", NULL);
-		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeignView);
+		btnnext.Create(420, 590, 540, 630, "返回游戏", gameBeginView);
 
 
 
@@ -489,7 +489,7 @@ void gameView()
 	EndBatchDraw();
 
 }
-void gameBeignView()
+void gameBeginView()
 {
 	EasyButton 	btningame;
 	EasyButton btnLife;

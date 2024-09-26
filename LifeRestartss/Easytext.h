@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 #include <graphics.h>
 
 // 实现文本框控件

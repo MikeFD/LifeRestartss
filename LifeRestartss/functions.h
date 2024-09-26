@@ -127,7 +127,6 @@ extern vector<int> talentChoices;//选择的3个天赋id
 
 
 // 定义18岁之前的选择数据
-};
 extern vector<YoungAgeChoices> YoungEvents;
 
 /*高考选择*/
@@ -345,7 +344,7 @@ typedef struct
     参数：void
     返回值：void
 */
-void init();
+void init(person& p);
 
 
 /*
@@ -404,8 +403,7 @@ void deleteEventTree(mainEvent* event);
 
 */
 bool is_mainEvent(mainEvent*& root, person p);
-void gameLoop(person, mainEvent*);
-void traverseTree(mainEvent*& root, person& p);
+void gameLoop(person& p, mainEvent*& event);
 
 
 /*
@@ -452,7 +450,7 @@ bool mouseClick(int x, int y);
     返回值：void
 
 */
-void EventBonus();
+void EventBonus(person& p, Bonus b);
 
 
 

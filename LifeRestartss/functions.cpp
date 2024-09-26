@@ -8,7 +8,6 @@ int score;
 vector<randEvent> ranEvents;
 vector<string> happenEvent;
 
-vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 vector<talent> talents;//存储可选天赋
 vector<int> talentChoices;//选择的3个天赋id
@@ -22,7 +21,7 @@ void YoungAgeChoices::showYoungAgeChoices()
 	printf("%s", ans);
 }
 
-void init()
+void init(person& p)
 {
 
 	//初始化属性
@@ -89,6 +88,221 @@ void init()
 	}
 
 }
+
+void initRandomEvents() /*初始化随机事件表*/
+{
+    ranEvents.clear(); /*清空容器*/
+
+    // 添加随机事件及其效果
+    ranEvents.emplace_back(randEvent{
+        "正当你心情有点儿小郁闷时，突然一道彩虹挂在天边，宛如画中仙境，心情瞬间晴朗起来！",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在公园溜达一圈，长椅上躺着一张钞票，你感觉真是天上掉馅饼",
+        Bonus{0, 0, 0, 0}, // 无属性影响
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.05f, // 5% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在咖啡馆喝咖啡时，与久别的挚友不期而遇，聊起当年趣事，犹在眼前",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你遇到一位迷路的外国友人，给他指路，他十分感谢，自己心里也满满的成就感。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.08f, // 8% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "街头转角，一只软萌的流浪猫蹭蹭你的腿，眼神里全是渴望，你因为爱心收留了它！",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.07f, // 7% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "超市大促销，你抢到心仪的打折商品，省下的银子可以再买包零食庆祝一番！",
+        Bonus{0, 0, 0, 0}, // 无属性影响
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.06f, // 6% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在广场上，看见一位街头艺人的精彩表演，你也跟着high了起来。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.09f, // 9% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "下班路上你抬头一看，发现晚霞满天，美得让人窒息，让奔波的灵魂得到了片刻安宁。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "小区门口新开的餐馆，你尝鲜之后发现竟是意外的美味，从此多了个心头好！",
+        Bonus{0, 0, 0, 0}, // 无属性影响
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.05f, // 5% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你和家人一起过节，餐桌上摆满了熟悉的食物，谈笑风生之间，那份亲情和归属感油然而生。",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在一堆堆书山中挖宝，终于找到那本期待已久的书，那种兴奋感简直爆棚！",
+        Bonus{5, 0, 0, 0}, // 增加5点智商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.08f, // 8% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在商场逛街时，背景音乐刚好是你的最爱，让你平淡的生活增添了几许浪漫气息，整个人都被治愈了。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.09f, // 9% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你过生日时意外地收到朋友邮寄的神秘礼物，那份惊喜和感动直接拉满！",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你清晨公园散步时，耳边响起鸟儿们的欢快歌声，感觉整个世界都在欢迎新的一天。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "帮助老爷爷老奶奶过马路，他们的笑容比太阳还要灿烂，感觉自己做了件很了不起的事情。",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.08f, // 8% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "在巷弄里，你与你的朋友把一面墙绘成了五彩斑斓的艺术品，你们十分开心。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.07f, // 7% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在散步时突然被一阵热烈的鼓掌吸引，你一看是有位街头表演者正在献艺，那股激情和活力感染了你。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.09f, // 9% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你扶老人安全过马路，他们的微笑是对善良行为最好的回报。",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.08f, // 8% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你购买的彩票竟然中奖了，虽然金额不大，但那份惊喜如同中了大奖一般。",
+        Bonus{0, 0, 0, 0}, // 无属性影响
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.05f, // 5% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在旅游途中，误打误撞进入一个风景如画的小镇，留下了一生中最美的回忆。",
+        Bonus{0, 10, 0, 0}, // 增加10点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.08f, // 8% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你学习烹饪，成功做出一道美味佳肴。",
+        Bonus{0, 5, 0, 0}, // 增加5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.07f, // 7% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你在美术馆偶遇一幅触动心灵的作品，那份艺术与情感的交汇让你感慨万千。",
+        Bonus{5, 5, 0, 0}, // 增加5点智商和5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.09f, // 9% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+
+    ranEvents.emplace_back(randEvent{
+        "你读到一篇励志文章，其中的观点和感悟如同及时雨般滋养了你干涸的心灵。",
+        Bonus{5, 5, 0, 0}, // 增加5点智商和5点情商
+        limit{0, 0, 0, 0, 0}, // 无属性限制
+        0.1f, // 10% 的概率
+        false, // 属性不影响概率
+        false // 事件未发生
+        });
+}
+
+
 void EventBonus(person& p, Bonus b)
 {
 	p.EQ += b.EQBonus;
@@ -140,10 +354,6 @@ void showRandEvent()
     // 关闭图形窗口
     closegraph();
 }
-
-
-
-
 
 mainEvent* buildEventTree() {
     /*
@@ -387,7 +597,7 @@ mainEvent* buildEventTree() {
 
     // 失败线：定义事件变量
     mainEvent* deliver = new mainEvent(
-        "成为一名外卖员，勉强维持生计。",
+        "成为一名外卖员，勉强维持生计",
         { 20, 80, 70, 50, 0 }, // 年龄大于20岁，智商小于80，情商小于70，编程能力小于50
         { -5, -5, -5, -10 }, // 智商-5，情商-5，编程能力-5，健康-10
         false // 不是选择事件
@@ -582,7 +792,6 @@ mainEvent* buildEventTree() {
     */
     return university;
 }
-
 void deleteEventTree(mainEvent* event) {
     if (event == nullptr) {
         return;
@@ -598,7 +807,6 @@ void deleteEventTree(mainEvent* event) {
 }
 
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
-vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
 bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合条件的
     if (root == nullptr) {
@@ -622,43 +830,47 @@ bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合�
 }
 
 //GT写的
-void gameLoop(person& p, mainEvent*& event) {
-	srand(static_cast<unsigned int>(time(nullptr)));
-	int randId = rand() % 20;
-	mainEvent* treeEvent = event;
-	if (p.Age < 18) {
-		if (p.Age == 17) {
-			score = getScore(p.IQ);
+// 
+// 
 
-			//有没有大学相关的判断功能，比如我去了哪个大学,属性需要发生什么更改。
-			//University_lor();
-		}
-		else {
-			if (YoungEvents[p.Age].choices.size() > 1) {
-				YoungEvents[p.Age].showYoungAgeChoices();
-				//是不是还要加一些数值传入什么
-				Bonus delta = YoungEvents[p.Age].choices[0].improvebonus;//这行代码的数值传入尚未解决。就那个0
-				p.IQ += delta.IQBonus;
-				p.EQ += delta.EQBonus;
-				p.ProgramingSkill += delta.ProgramingSkillBonus;
-				p.Health += delta.HealthBonus;
-			}
-			else if (YoungEvents[p.Age].choices.size() == 1) {
-				//直接显示事件
-				YoungAgeChoices[p.Age].showYoungAgeChoices();
-
-			}
-		}
-	}
-	else if (is_mainEvent(event, p)) {
-		//这里是要判断主事件的发生情况，主事件的发生也包含了那些支线树。
-		string arr = event->description;//故事
-		p.IQ += event->eventBonus.IQBonus;
-		p.EQ += event->eventBonus.EQBonus;
-		p.Health += event->eventBonus.HealthBonus;
-		p.ProgramingSkill += event->eventBonus.ProgramingSkillBonus;
-		
-
+//void gameLoop(person& p, mainEvent*& event) {
+//    srand(static_cast<unsigned int>(time(nullptr)));
+//    int randId = rand() % 20;
+//    initRandomEvents();
+//    if (p.Age < 18) {
+//        if (p.Age == 17) {
+//            score = getScore(p.IQ);
+//
+//            //有没有大学相关的判断功能，比如我去了哪个大学,属性需要发生什么更改。
+//            //University_lor();
+//        }
+//        else {
+//            if (YoungEvents[p.Age].choices.size() > 1) {
+//                //是不是还要加一些数值传入什么
+//                Bonus delta = YoungEvents[p.Age].choices[0].improvebonus;//这行代码的数值传入尚未解决。就那个0
+//                p.IQ += delta.IQBonus;
+//                p.EQ += delta.EQBonus;
+//                p.ProgramingSkill += delta.ProgramingSkillBonus;
+//                p.Health += delta.HealthBonus;
+//            }
+//            else if (YoungEvents[p.Age].choices.size() == 1) {
+//                //直接显示事件
+//                YoungEvents[p.Age].showYoungAgeChoices();
+//
+//
+//            }
+//        }
+//    }
+//    else if (is_mainEvent(event, p)) {
+//        //这里是要判断主事件的发生情况，主事件的发生也包含了那些支线树。
+//        string arr = event->description;//故事
+//        p.IQ += event->eventBonus.IQBonus;
+//        p.EQ += event->eventBonus.EQBonus;
+//        p.Health += event->eventBonus.HealthBonus;
+//        p.ProgramingSkill += event->eventBonus.ProgramingSkillBonus;
+//
+//    }
+//}
 
 void TalentBonus(person& p, vector<int>& talentId)
 {
@@ -677,8 +889,12 @@ void TalentBonus(person& p, vector<int>& talentId)
 }
 
 
-mainEvent::mainEvent(string description, limit event):description(description), eventlimit(event) {}
-
+mainEvent::mainEvent(string description, limit event, Bonus eventBonus, bool choose) {
+    this->description = description;
+    this->eventlimit = event;
+    this->eventBonus = eventBonus;
+    this->is_choose = choose;
+}
 
 float randEvent::adjustPossibility(person& p, randEvent event)
 {

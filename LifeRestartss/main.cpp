@@ -10,9 +10,6 @@ int main()
     RemoveFontResourceEx("font.ttf", FR_PRIVATE, NULL);
     system("pause");
 
-    person player;
-    mainEvent* eventTree = buildEventTree(); //初始化事件树
-    gameLoop(player, eventTree); //进入游戏主循环
-    deleteEventTree(eventTree);
+    
     return 0;
 }
