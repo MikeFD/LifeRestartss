@@ -3,11 +3,9 @@
 
 int flag;
 int score;
-
-
 vector<randEvent> ranEvents;
 vector<string> happenEvent;
-
+vector<talent> randtalents;
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 vector<talent> talents;//存储可选天赋
@@ -15,6 +13,8 @@ vector<int> talentChoices;//选择的3个天赋id
 
 person p;//实例化主角
 Bonus b;//实例化Bonus结构体
+
+
 
 void YoungAgeChoices::showYoungAgeChoices()
 {
@@ -35,6 +35,8 @@ void init()
 	p.Health = 100; 
 	p.IQ = 0;
 	p.ProgramingSkill = 0;
+
+	TalentBonus(p,talentChoices);
 
 
 	//消息框
@@ -58,40 +60,28 @@ void init()
 	vector<wstring> messages;
 
 
-	// 滚动偏移量，表示当前显示的消息的起始行
-	int scroll_offset = 0;
-
-	//绘制消息框
-	setfillcolor(WHITE);
-	bar(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
-
-	// 绘制消息框的边框
-	setlinecolor(BLACK);
-	rectangle(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
-
-	// 绘制消息
-	int start_line = scroll_offset;//起始行
-	int end_line = start_line + MAX_LINES;//结束行
-
-	for (int i = start_line; i < end_line && i < messages.size(); ++i) 
-	{
-		//绘制每行消息
-		outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());//(i - start_line) * LINE_HEIGHT每行间隔,messages[i].c_str()转换成c语言风格的字符串
-	}
-
-
-	if (_kbhit()) //检测是否有键盘输入
-	{
-		char key = _getch();
-		if (key == 'w' && scroll_offset > 0) {
-			scroll_offset--;
-		}
-		else if (key == 's' && scroll_offset < messages.size() - MAX_LINES) {
-			scroll_offset++;
-		}
-	}
-
+	
 }
+
+
+
+//void gettalents()
+//{
+//	set<int> selectedIndexes;  // 用于存储已选天赋的索引
+//	while (selectedIndexes.size() < 10)
+//	{
+//		int index = rand() % maxtalentSize;
+//		if (selectedIndexes.find(index) == selectedIndexes.end())
+//		{
+//			selectedIndexes.insert(index);  // 加入索引集，避免重复
+//			randtalents.push_back(talents[index]);
+//		}
+//	}
+//}
+
+
+
+
 void EventBonus()
 {
 	p.EQ += b.EQBonus;

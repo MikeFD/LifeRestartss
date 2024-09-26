@@ -9,6 +9,9 @@
 #include<time.h>
 #include <utility>
 #include <stack>
+#include<set>
+#define maxtalentSize  20
+
 
 using namespace std;
 
@@ -349,6 +352,11 @@ typedef struct
     返回值：void
 */
 void init();
+
+
+
+void gettalents();
+
 
 
 /*

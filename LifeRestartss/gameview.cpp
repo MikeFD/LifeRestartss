@@ -24,14 +24,14 @@ void menuView()
 		settextcolor(BLACK);
 		fillrectangle(340, 200, 700, 240);
 		outtextxy(470, 205, L"开始游戏");
-		fillrectangle(340, 270, 700, 310);
-		outtextxy(470, 275, L"结算界面");
+		//fillrectangle(340, 270, 700, 310);
+		//outtextxy(470, 275, L"结算界面");
 		//fillrectangle(340, 340, 700, 380);
 		//outtextxy(470, 345, " 排行榜 ");
 		//fillrectangle(340, 410, 700, 450);
 		//outtextxy(470, 415, "更换皮肤");
-		fillrectangle(340, 480, 700, 520);
-		outtextxy(470, 485, L"展示设置");
+		//fillrectangle(340, 480, 700, 520);
+		//outtextxy(470, 485, L"展示设置");
 		fillrectangle(340, 550, 700, 590);
 		outtextxy(470, 555, L"退出游戏");
 		EndBatchDraw();
@@ -84,6 +84,7 @@ void menuView()
 		}
 	}
 }
+
 void achievementView()
 {
 	EasyButton 	btnthing;
@@ -118,6 +119,8 @@ void achievementView()
 		}
 	}
 }
+
+
 void endView()
 {
 	EasyButton 	btnthing;
@@ -186,14 +189,10 @@ void popView()
 	EasyButton btntext;
 	EasyButton btnreturn;
 	EasyButton btnreturn1;
-	cout << 3 << endl;
 	while (1)
 	{
 		BeginBatchDraw();
 		setbkcolor(BLACK);
-		IMAGE game;
-		loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
-		putimage(0, 0, &game);
 		settextcolor(BLACK);
 		btntext.Create(400, 220, 560, 280, L"选择事件", NULL);
 		btnthing.Create(220, 300, 760, 570, L"", NULL);
@@ -225,8 +224,10 @@ void popView()
 
 void talentChooseView()
 {
+	//gettalents();
+
 	// 测试案例
-	vector<talent> randtalents;
+
 	Bonus improve = { 10, 10, 10, 10 };
 	talent a = { 1, L"一个很牛逼的天赋", improve };
 	for (int i = 0; i < 10; i++)
@@ -245,15 +246,18 @@ void talentChooseView()
 
   bool showDialog = false; // 控制弹窗显示
   const wchar_t* dialogMessage = L"这是一个弹窗消息内容"; // 使用宽字符字符串
-
+  
+  
+  IMAGE game;
+  loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+  putimage(0, 0, &game);
+  BeginBatchDraw();
 	while (1)
 	{
 
-		BeginBatchDraw();
+	
 	setbkcolor(BLACK);
-	IMAGE game;
-	loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
-	putimage(0, 0, &game);
+	
 	settextcolor(BLACK);
 	settextstyle(25, 0, L"字魂无外润黑体(商用需授权)"); // 字体大小&类型字魂无外润黑体(商用需授权)
 	// 创建按钮
@@ -344,12 +348,14 @@ void talentChooseView()
 					{
 						selected[i] = true; // 选中
 						selectedCount++;
+						talentChoices.push_back(randtalents[i].talentID);
 					}
 				}
 				else
 				{
 					selected[i] = false; // 取消选中
 					selectedCount--;
+					talentChoices.pop_back();
 				}
 			}
 		}
@@ -361,7 +367,7 @@ void talentChooseView()
 
 void careerView()
 {
-	EasyButton 	btnthing;
+	EasyButton btnthing;
 	EasyButton btnnext;
 	EasyButton btnreturn;
 	cout << 4;
@@ -403,7 +409,7 @@ void careerView()
 
 void gameView()
 {
-
+	init();
 	const int HighAttribute = 100;
 	const int MidAttribute = 50;
 	const int LowAttribute = 0;
@@ -425,6 +431,23 @@ void gameView()
 	messages.push_back(L"Message 6");
 	messages.push_back(L"Message 7");
 	messages.push_back(L"Message 8");
+	messages.push_back(L"Message 9");
+	messages.push_back(L"Message 10");
+	messages.push_back(L"Message 11");
+	messages.push_back(L"Message 12");
+	messages.push_back(L"Message 8");
+	messages.push_back(L"Message 9");
+	messages.push_back(L"Message 10");
+	messages.push_back(L"Message 11");
+	messages.push_back(L"Message 12"); 
+	messages.push_back(L"Message 9");
+	messages.push_back(L"Message 10");
+	messages.push_back(L"Message 11");
+	messages.push_back(L"Message 12"); 
+	messages.push_back(L"Message 9");
+	messages.push_back(L"Message 10");
+	messages.push_back(L"Message 11");
+	messages.push_back(L"Message 12"); 
 	messages.push_back(L"Message 9");
 	messages.push_back(L"Message 10");
 	messages.push_back(L"Message 11");
@@ -474,6 +497,10 @@ void gameView()
 	EndBatchDraw();
 
 }
+
+
+
+
 void gameBeginView()
 {
 	EasyButton 	btningame;
@@ -487,7 +514,7 @@ void gameBeginView()
 		loadimage(&game, L"./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btningame.Create(320, 200, 700, 240, L"点击开始你的程序员的一生", talentChooseView);
+		btningame.Create(310, 200, 730, 240, L"点击此处开始你的程序员的一生", talentChooseView);
 		btnLife.Create(200, 500, 350, 540, L"人生", careerView);
 		btnach.Create(650, 500, 780, 540, L"成就", achievementView);
 		EndBatchDraw();
@@ -653,7 +680,7 @@ void beginView()
 	settextcolor(RGB(239, 218, 187));
 	setbkmode(TRANSPARENT);//文本填充色：透明
 	settextstyle(50, 0, L"字魂无外润黑体(商用需授权)");//字体大小&类型字魂无外润黑体(商用需授权)
-	outtextxy(WINDOW_WIDTH / 2 - textwidth(L"人生重开模拟器---我要做程序员") / 2, 200 - textheight(L"人生重开模拟器---我要做程序员") / 2, L"人生重开模拟器---我要做程序员");//标题文本
+	outtextxy(WINDOW_WIDTH / 2 - textwidth(L"人生重开模拟器之---我要当程序员") / 2, 200 - textheight(L"人生重开模拟器之---我要当程序员") / 2, L"人生重开模拟器之---我要当程序员");//标题文本
 	//
 	settextcolor(RGB(239, 218, 187));//文本颜色：黑色
 	settextstyle(30, 0, L"字魂无外润黑体(商用需授权)");
