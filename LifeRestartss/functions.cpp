@@ -625,6 +625,9 @@ vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 
 bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合条件的
+    if (root == nullptr) {
+        return true;
+    }
 	if (!root->is_choose) {
 		for (auto child : root->children) {
 			if (child->isTrigger(p)) {

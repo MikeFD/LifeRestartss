@@ -33,8 +33,6 @@ const int LowAttribute = 90;
 */
 extern int flag;
 
-extern vector<YoungAgeChoices> YoungEvents;
-
 #define MINHEALTH 50//
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
@@ -122,6 +120,7 @@ struct YoungAgeChoices
 
 
 };
+extern vector<YoungAgeChoices> YoungEvents;
 
 /*高考选择*/
 extern bool isExam;//表示是否参加高考 若参加根据当前的属性来判断所能考取的分数范围 再利用随机数获取分数
@@ -158,9 +157,9 @@ extern int score;//表示当前的最终分数
 class mainEvent
 {
 public:
-    string description;           // 事件描述
     limit eventlimit;//表示发生该事情的属性限制
-    vector<mainEvent> children;  // 子事件节点
+    string description;           // 事件描述
+    vector<mainEvent*> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
     bool is_choose;
 
@@ -373,7 +372,8 @@ void initRandomEvents();
     返回值：void
 
 */
-void buildEventTree();
+mainEvent* buildEventTree();
+void deleteEventTree(mainEvent* event);
 
 
 //写一条主线，记录固定交互事件的时间点？
@@ -403,7 +403,7 @@ void traverseTree(mainEvent*& root, person& p);
     负责人：飞
     功能：
         根据传入的智力获取一个高考所能获得的分数范围
-    参数：int
+    //参数：int
     返回值：pair<int,int>
 */
 pair<int,int> getScoreRange(int iq);
