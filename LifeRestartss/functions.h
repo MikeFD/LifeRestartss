@@ -14,6 +14,8 @@
 #include <fstream>
 #include <sstream>
 #include <Windows.h>
+#include<set>
+#define maxtalentSize  20
 
 using namespace std;
 
@@ -348,6 +350,11 @@ typedef struct
     返回值：void
 */
 void init(person& p);
+
+
+
+void gettalents();
+
 
 
 /*

@@ -4,13 +4,14 @@
 person Person;
 mainEvent* eventTree;
 
-int main()
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     youngEvent();
     AddFontResourceEx(L"font.ttf", FR_PRIVATE, NULL);
     initgraph(WINDOW_WIDTH, WINDOW_HEIGHT, EX_SHOWCONSOLE);
     setbkcolor(WHITE);
     cleardevice();
+ 
     beginView();
     eventTree = buildEventTree();
     Person = { 0,0,0,0,0 };

@@ -5,6 +5,7 @@
 int flag;
 int score;
 
+
 wstring key_text;//用于将故事内容放入gameView文本框中
 wstring choose_text;//用于选择中的题目
 vector<wstring> btnChoices;//用于存储按钮内容
@@ -14,11 +15,18 @@ vector<randEvent> ranEvents;
 vector<wstring> happenEvent;
 vector<YoungAgeChoices> YoungEvents;
 
+vector<randEvent> ranEvents;
+vector<string> happenEvent;
+vector<talent> randtalents;
+vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
+
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
 vector<talent> talents;//存储可选天赋
 vector<int> talentChoices;//选择的3个天赋id
 
 mainEvent* defeat;
+
+
 
 void YoungAgeChoices::showYoungAgeChoices()
 {
@@ -44,9 +52,14 @@ void init(person& p)
 	p.ProgramingSkill = 0;
 }
 
+
 void initRandomEvents() /*初始化随机事件表*/
 {
     ranEvents.clear(); /*清空容器*/
+
+	  //TalentBonus(p,talentChoices);
+
+
 
     // 添加随机事件及其效果
     ranEvents.emplace_back(randEvent{
@@ -165,6 +178,24 @@ void initRandomEvents() /*初始化随机事件表*/
         false, // 属性不影响概率
         false // 事件未发生
         });
+	
+}
+
+
+
+//void gettalents()
+//{
+//	set<int> selectedIndexes;  // 用于存储已选天赋的索引
+//	while (selectedIndexes.size() < 10)
+//	{
+//		int index = rand() % maxtalentSize;
+//		if (selectedIndexes.find(index) == selectedIndexes.end())
+//		{
+//			selectedIndexes.insert(index);  // 加入索引集，避免重复
+//			randtalents.push_back(talents[index]);
+//		}
+//	}
+//}
 
     ranEvents.emplace_back(randEvent{
         L"你清晨公园散步时，耳边响起鸟儿们的欢快歌声，感觉整个世界都在欢迎新的一天。",
@@ -174,6 +205,7 @@ void initRandomEvents() /*初始化随机事件表*/
         false, // 属性不影响概率
         false // 事件未发生
         });
+
 
     ranEvents.emplace_back(randEvent{
         L"帮助老爷爷老奶奶过马路，他们的笑容比太阳还要灿烂，感觉自己做了件很了不起的事情。",
