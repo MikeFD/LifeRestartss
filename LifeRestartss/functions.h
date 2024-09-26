@@ -14,9 +14,9 @@
 
 using namespace std;
 
-const int HighAttribute ;
-const int MidAttribute ;
-const int LowAttribute ;
+const int HighAttribute = 130;
+const int MidAttribute = 110;
+const int LowAttribute = 90;
 
 
 
@@ -158,9 +158,9 @@ extern int score;//表示当前的最终分数
 class mainEvent
 {
 public:
-    limit eventlimit;//表示发生该事情的属性限制
     string description;           // 事件描述
-    vector<mainEvent*> children;  // 子事件节点
+    limit eventlimit;//表示发生该事情的属性限制
+    vector<mainEvent> children;  // 子事件节点
     Bonus eventBonus; //表示该事件对玩家属性的影响
     bool is_choose;
 
