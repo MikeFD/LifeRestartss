@@ -10,6 +10,17 @@ vector<string> happenEvent;
 
 vector<YoungAgeChoices> YoungEvents;//存储18岁以前的年龄事件
 vector<examSocre> examScores = { {HighAttribute, 500, 700}, {MidAttribute, 300, 500 }, {LowAttribute, 100, 300} };
+vector<talent> talents;//存储可选天赋
+vector<int> talentChoices;//选择的3个天赋id
+
+void YoungAgeChoices::showYoungAgeChoices()
+{
+	char ans[100];
+	for (auto x : choices) {
+		sprintf_s(ans, "%s \n ", x.description.c_str());
+	}
+	printf("%s", ans);
+}
 
 void init()
 {
@@ -18,7 +29,7 @@ void init()
 
 	p.Age = 0;
 	p.EQ = 0;
-	p.Health = 100;
+	p.Health = 100; 
 	p.IQ = 0;
 	p.ProgramingSkill = 0;
 
@@ -94,18 +105,14 @@ void EventBonus(person& p, Bonus b)
     参数：person
     返回值：bool
 */
-bool mainEvent::isTrigger(person p)
+bool mainEvent::isTrigger(person p, mainEvent* event)
 {
-    if (p.IQ < eventlimit.IQ || p.EQ < eventlimit.EQ || p.ProgramingSkill < eventlimit.ProgramingSkill || p.Health < eventlimit.Health)
+    if (p.IQ < event->eventlimit.IQ || p.EQ < event->eventlimit.EQ || p.ProgramingSkill < event->eventlimit.ProgramingSkill || p.Health < event->eventlimit.Health || p.Age < event->eventlimit.Age)
     {
         return false; // 属性不满足条件
     }
 
-    struct YoungAgeChoices y;
-    if (p.Age == y.age)
-    {
-        return true;
-    }
+    return true;
 }
 
 
@@ -125,8 +132,8 @@ void showRandEvent()
     settextstyle(24, 0, _T("宋体"));
 
     // 绘制事件描述
-    outtextxy(50, 50, re.description);
-    outtextxy(50, 70, re.effect);
+    //outtextxy(50, 50, re.description);
+   // outtextxy(50, 70, re.effect);
 
 
 
@@ -135,39 +142,8 @@ void showRandEvent()
 }
 
 
-void endView()
-{
-    initgraph(640, 480); // 创建一个宽640像素，高480像素的窗口
-    setbkcolor(GREEN); // 设置背景颜色
-    cleardevice(); // 清空屏幕
-    settextstyle(24, 0, _T("Arial")); // 设置文本字体为Arial，大小为24
-    settextcolor(BLACK); // 设置文本颜色为黑色
 
-    outtextxy(50, 50, _T("游戏结束！")); // 显示游戏结束
 
-    outtextxy(50, 100, Ending); // 显示结局信息
-    setfillcolor(BLUE); // 设置填充颜色为蓝色
-    setlinecolor(BLUE); // 设置边框颜色为蓝色
-    fillrectangle(220, 200, 420, 230); // 绘制矩形按钮
-    settextstyle(20, 0, _T("Arial")); // 设置文本字体和大小
-    settextcolor(WHITE); // 设置文本颜色为白色
-    outtextxy(250, 210, _T("返回主菜单")); // 显示按钮文本
-    fillrectangle(220, 250, 420, 280); // 绘制矩形按钮
-    outtextxy(250, 260, _T("重新开始游戏")); // 显示按钮文本
-    MOUSEMSG m;
-    while (true) {
-        m = GetMouseMsg();
-        if (m.uMsg == WM_LBUTTONDOWN) { // 检测鼠标左键点击
-            if (m.x >= 220 && m.x <= 420 && m.y >= 200 && m.y <= 230) { // 返回主菜单按钮
-                return menuView(); // 调用返回主菜单的函数
-            }
-            if (m.x >= 220 && m.x <= 420 && m.y >= 250 && m.y <= 280) { // 重新开始游戏按钮
-                return gameBeignView(); // 调用开始游戏的函数
-            }
-        }
-    }
-    closegraph(); // 关闭图形窗口
-}
 
 mainEvent* buildEventTree() {
     /*
@@ -630,7 +606,7 @@ bool is_mainEvent(mainEvent*& root, person p) {//判断子节点是否有符合�
     }
 	if (!root->is_choose) {
 		for (auto child : root->children) {
-			if (child->isTrigger(p)) {
+			if (child->isTrigger(p, root)) {
 				root = child;
 				return true;
 			}
@@ -661,7 +637,7 @@ void gameLoop(person& p, mainEvent*& event) {
 			if (YoungEvents[p.Age].choices.size() > 1) {
 				YoungEvents[p.Age].showYoungAgeChoices();
 				//是不是还要加一些数值传入什么
-				Bonus delta = YoungEvents[p.Age].choices[0].improve;//这行代码的数值传入尚未解决。就那个0
+				Bonus delta = YoungEvents[p.Age].choices[0].improvebonus;//这行代码的数值传入尚未解决。就那个0
 				p.IQ += delta.IQBonus;
 				p.EQ += delta.EQBonus;
 				p.ProgramingSkill += delta.ProgramingSkillBonus;
@@ -683,22 +659,11 @@ void gameLoop(person& p, mainEvent*& event) {
 		p.ProgramingSkill += event->eventBonus.ProgramingSkillBonus;
 		
 
-	}
-	else if (ranEvents[randId].triggerEvent(p, ranEvents[randId])) {
-		//这里判断随机事件的发生情况
-		randEvent cEvent = ranEvents[randId];
-		string arr = cEvent.description;
-		p.IQ += cEvent.effect.IQBonus;
-		p.EQ += cEvent.effect.EQBonus;
-		p.ProgramingSkill += cEvent.effect.ProgramingSkillBonus;
-		p.Health += cEvent.effect.HealthBonus;
-	}
-}
 
 void TalentBonus(person& p, vector<int>& talentId)
 {
     for (vector<int>::iterator it1 = talentId.begin(); it1 != talentId.end(); it1++) {
-        for (vector<talent>::iterator it2 = talents.begin(); it2 != talents.end(); it2++) {
+        for (vector<talent>::iterator it2 =talents.begin(); it2 != talents.end(); it2++) {
             if (it2->talentID == *it1) {
                 p.IQ += it2->talentBonus.IQBonus;
                 p.EQ += it2->talentBonus.EQBonus;
@@ -710,12 +675,10 @@ void TalentBonus(person& p, vector<int>& talentId)
         
   
 }
-mainEvent::mainEvent(string description, limit event, Bonus eventBonus, bool choose) {
-	this->description = description;
-	this->eventlimit = event;
-	this->eventBonus = eventBonus;
-	this->is_choose = choose;
-}
+
+
+mainEvent::mainEvent(string description, limit event):description(description), eventlimit(event) {}
+
 
 float randEvent::adjustPossibility(person& p, randEvent event)
 {
@@ -723,15 +686,14 @@ float randEvent::adjustPossibility(person& p, randEvent event)
 	float adjustposibility = event.possibility;
 	if (p.Health < 50)
 	{
-		adjustposibility += abs(p.Health - 50) * 0.5;
+		adjustposibility += float(abs(p.Health - 50) * 0.5);
 	}
 	if (p.Age > 0)
 	{
-		adjustposibility = p.Age * 0.25;
+		adjustposibility =float( p.Age * 0.25);
 	}
 	return min(100.0f, adjustposibility);
 
-	
 }
 
 bool randEvent::triggerEvent(person &p,randEvent &event)
@@ -763,5 +725,27 @@ void randEvent::checkRandEvents(person &p,randEvent &event)
 		p.IQ = event.effect.IQBonus;
 		p.ProgramingSkill = event.effect.ProgramingSkillBonus;
 	}
+}
+/*
+	负责人：飞
+	功能：
+		根据传入的智力获取一个高考所能获得的分数范围
+*/
+pair<int, int> getScoreRange(int iq)
+{
+	for (int i = 0; i < examScores.size(); i++) {
+		const auto& score = examScores[i];
+		if (iq >= score.IQ)
+			return make_pair(examScores[i].min_score,examScores[i].max_score);
+	}
+	return make_pair(0, 0);
+}
+// 调用 getScoreRange 函数来获取一个分数范围再 从返回的分数范围内利用随机数返回最后的实际的高考分数
+int getScore(int iq) {
+	int score;
+	std::pair<int, int> scoreRange = getScoreRange(iq);
+	/*std::srand(std::time(0));*/
+	score = scoreRange.first + (std::rand() % (scoreRange.second - scoreRange.first + 1));
+	return score;
 }
 

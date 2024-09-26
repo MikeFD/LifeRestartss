@@ -33,6 +33,50 @@ const int LowAttribute = 90;
 */
 extern int flag;
 
+
+/*
+    属性受影响 加/减
+*/
+typedef struct
+{
+    int IQBonus;
+    int EQBonus;
+    int ProgramingSkillBonus;
+    int HealthBonus;
+}Bonus;
+
+/*
+    表示18岁之前的选择性事件
+*/
+//人生选择 18岁之前的一些选择以及选择带来的一些影响
+struct youngChoiceEffects
+{
+    string description;//事件描述
+    Bonus improvebonus;
+    string outcome;//表示事件发生在界面上所返回的一些句子
+};//代表18岁之前的选择以及影响
+
+
+/*
+    表示18岁之前的选择性事件集合
+*/
+struct YoungAgeChoices
+{
+    int age; // 年龄阶段，例如：12表示12岁，15表示15岁
+    vector<youngChoiceEffects> choices; // 选择列表
+
+    /*
+        负责人：崇
+        功能：展示事件描述以及选择供玩家选择
+        返回值：void
+    */
+    void showYoungAgeChoices();
+
+
+};
+
+extern vector<YoungAgeChoices> YoungEvents;
+
 #define MINHEALTH 50//
 #define WINDOW_HEIGHT 768// 窗口高度
 #define WINDOW_WIDTH 1024//窗口宽度
@@ -52,21 +96,6 @@ typedef struct
     int Health;//健康
 }person;
 
-person p;//实例化主角
-
-
-/*
-    属性受影响 加/减
-*/
-typedef struct
-{
-    int IQBonus;
-    int EQBonus;
-    int ProgramingSkillBonus;
-    int HealthBonus;
-}Bonus;
-
-Bonus b;//实例化Bonus结构体
 
 /*
     触发事件的属性限制  如{"IQ": 100, "CodingLevel": 80}
@@ -90,35 +119,14 @@ typedef struct {
     Bonus talentBonus; //天赋对属性的影响
 }talent;
 
-/*
-    表示18岁之前的选择性事件
-*/
-//人生选择 18岁之前的一些选择以及选择带来的一些影响
-typedef struct youngChoiceEffects
-{
-    string description;//事件描述
-    Bonus improve;
-    string outcome;//表示事件发生在界面上所返回的一些句子
-};//代表18岁之前的选择以及影响
+extern vector<talent> talents;//存储可选天赋
+extern vector<talent> randtalents;//存储在天赋页面上展现的天赋
+extern vector<int> talentChoices;//选择的3个天赋id
+
+
+
 
 // 定义18岁之前的选择数据
-
-/*
-    表示18岁之前的选择性事件集合
-*/
-struct YoungAgeChoices
-{
-    int age; // 年龄阶段，例如：12表示12岁，15表示15岁
-    vector<youngChoiceEffects> choices; // 选择列表
-
-    /*
-        负责人：崇
-        功能：展示事件描述以及选择供玩家选择
-        返回值：void
-    */
-    void showYoungAgeChoices();
-
-
 };
 extern vector<YoungAgeChoices> YoungEvents;
 
@@ -138,7 +146,7 @@ struct examSocre//表示高考分数范围
 表示高考分数的三个范围100~300 300~500 500~700
 
 */
-vector<examSocre> examScores;
+extern vector<examSocre> examScores;
 
 extern int score;//表示当前的最终分数
 
@@ -180,7 +188,7 @@ public:
         参数：person
         返回值：bool
     */
-    bool isTrigger(person p);
+    bool isTrigger(person p, mainEvent* event);
 
 
     /*
@@ -430,6 +438,10 @@ int getScore(int iq);
     返回值：bool
 */
 bool mouseClick(int x, int y);
+
+
+
+
 
 
 /*

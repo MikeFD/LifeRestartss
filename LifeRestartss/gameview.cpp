@@ -1,4 +1,4 @@
-//Í¼ĞÎ»¯Çø
+//å›¾å½¢åŒ–åŒº
 #include "functions.h"
 #include "Easytext.h"
 ExMessage msg = { 0 };
@@ -14,70 +14,70 @@ void menuView()
 		putimage(0, 0, &main);
 		setbkcolor(BLACK);
 
-		setlinecolor(BLACK);            // ÉèÖÃ»­ÏßÑÕÉ«
-		setbkcolor(WHITE);                // ÉèÖÃ±³¾°ÑÕÉ«
-		setfillcolor(RGB(248, 193, 90));            // ÉèÖÃÌî³äÑÕÉ«
+		setlinecolor(BLACK);            // è®¾ç½®ç”»çº¿é¢œè‰²
+		setbkcolor(WHITE);                // è®¾ç½®èƒŒæ™¯é¢œè‰²
+		setfillcolor(RGB(248, 193, 90));            // è®¾ç½®å¡«å……é¢œè‰²
 
-		settextstyle(30, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");
+		settextstyle(30, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");
 		settextcolor(BLACK);
 		fillrectangle(340, 200, 700, 240);
-		outtextxy(470, 205, "¿ªÊ¼ÓÎÏ·");
+		outtextxy(470, 205, "å¼€å§‹æ¸¸æˆ");
 		fillrectangle(340, 270, 700, 310);
-		outtextxy(470, 275, "½áËã½çÃæ");
+		outtextxy(470, 275, "ç»“ç®—ç•Œé¢");
 		//fillrectangle(340, 340, 700, 380);
-		//outtextxy(470, 345, " ÅÅĞĞ°ñ ");
+		//outtextxy(470, 345, " æ’è¡Œæ¦œ ");
 		//fillrectangle(340, 410, 700, 450);
-		//outtextxy(470, 415, "¸ü»»Æ¤·ô");
+		//outtextxy(470, 415, "æ›´æ¢çš®è‚¤");
 		fillrectangle(340, 480, 700, 520);
-		outtextxy(470, 485, "Õ¹Ê¾ÉèÖÃ");
+		outtextxy(470, 485, "å±•ç¤ºè®¾ç½®");
 		fillrectangle(340, 550, 700, 590);
-		outtextxy(470, 555, "ÍË³öÓÎÏ·");
+		outtextxy(470, 555, "é€€å‡ºæ¸¸æˆ");
 		EndBatchDraw();
 		//
 		if (peekmessage(&msg, EX_MOUSE) && msg.message == WM_LBUTTONDOWN)
 		{
 			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 200 && msg.y <= 240)
 			{
-				gameBeignView();//¿ªÊ¼ÓÎÏ·
-				cout << "µã»÷Êó±êÓÒ¼ü1" << endl;
+				gameBeignView();//å¼€å§‹æ¸¸æˆ
+				cout << "ç‚¹å‡»é¼ æ ‡å³é”®1" << endl;
 			}
 
 			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 270 && msg.y <= 310)
 			{
 
-				endView();//ÓÎÏ·ÉèÖÃ½çÃæ
-				cout << "µã»÷Êó±êÓÒ¼ü2" << endl;
+				endView();//æ¸¸æˆè®¾ç½®ç•Œé¢
+				cout << "ç‚¹å‡»é¼ æ ‡å³é”®2" << endl;
 			}
 			//
 			//			//if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 340 && msg.y <= 380)
 			//			//{
 			//			//	
 			//			//	mciSendString("setaudio musicMenu volume to 0", NULL, 0, NULL);
-			//			//	rankView();//ÅÅĞĞ°ñ½çÃæ
-			//			//	cout << "µã»÷Êó±êÓÒ¼ü3" << endl;
+			//			//	rankView();//æ’è¡Œæ¦œç•Œé¢
+			//			//	cout << "ç‚¹å‡»é¼ æ ‡å³é”®3" << endl;
 			//			//}
 			//
 			//			//if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 410 && msg.y <= 450)
 			//			//{
 			//			//
 			//			//	mciSendString("setaudio musicMenu volume to 0", NULL, 0, NULL);
-			//			//	skinView();//¸ü»»Æ¤·ô
-			//			//	cout << "µã»÷Êó±êÓÒ¼ü4" << endl;
+			//			//	skinView();//æ›´æ¢çš®è‚¤
+			//			//	cout << "ç‚¹å‡»é¼ æ ‡å³é”®4" << endl;
 			//			//}
 			//
 			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 480 && msg.y <= 520)
 			{
 
 
-				settingView();//ÓÎÏ·ËµÃ÷
-				//cout << "µã»÷Êó±êÓÒ¼ü5" << endl;
+				settingView();//æ¸¸æˆè¯´æ˜
+				//cout << "ç‚¹å‡»é¼ æ ‡å³é”®5" << endl;
 			}
 			//
 			if (msg.x >= 340 && msg.x < 340 + 360 && msg.y >= 550 && msg.y <= 590)
 			{
 
-				exit(0);// ÍË³öÓÎÏ·
-				//				cout << "µã»÷Êó±êÓÒ¼ü6" << endl;
+				exit(0);// é€€å‡ºæ¸¸æˆ
+				//				cout << "ç‚¹å‡»é¼ æ ‡å³é”®6" << endl;
 			}
 		}
 	}
@@ -96,8 +96,8 @@ void achievementView()
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
 		btnthing.Create(220, 130, 760, 570, "", NULL);
-		btnreturn.Create(420, 130, 540, 180, "³É¾Í", NULL);
-		btnnext.Create(420, 590, 540, 630, "·µ»ØÓÎÏ·", gameBeignView);
+		btnreturn.Create(420, 130, 540, 180, "æˆå°±", NULL);
+		btnnext.Create(420, 590, 540, 630, "è¿”å›æ¸¸æˆ", gameBeignView);
 		EndBatchDraw();
 		while (true)
 		{
@@ -130,12 +130,12 @@ void endView()
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
 		btnthing.Create(220, 300, 760, 570, "", NULL);
-		btnreturn.Create(180, 650, 320, 690, "·µ»Ø²Ëµ¥", menuView);
-		btntext.Create(660, 650, 800, 690, "ÔÙÀ´Ò»¾Ö", gameBeignView);
+		btnreturn.Create(180, 650, 320, 690, "è¿”å›èœå•", menuView);
+		btntext.Create(660, 650, 800, 690, "å†æ¥ä¸€å±€", gameBeignView);
 		EndBatchDraw();
 		while (true)
 		{
-			msg = getmessage(EX_MOUSE);
+			ExMessage msg = getmessage(EX_MOUSE);
 			if (msg.message == WM_LBUTTONDOWN)
 			{
 				if (btnreturn.Check(msg.x, msg.y)) {
@@ -162,8 +162,8 @@ void settingView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btnreturn.Create(400, 590, 560, 650, "·µ»Ø²Ëµ¥", menuView);
-		btntext.Create(400, 220, 560, 280, "¾´ÇëÆÚ´ı", NULL);
+		btnreturn.Create(400, 590, 560, 650, "è¿”å›èœå•", menuView);
+		btntext.Create(400, 220, 560, 280, "æ•¬è¯·æœŸå¾…", NULL);
 		EndBatchDraw();
 		while (true)
 		{
@@ -193,10 +193,10 @@ void popView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btntext.Create(400, 220, 560, 280, "Ñ¡ÔñÊÂ¼ş", NULL);
+		btntext.Create(400, 220, 560, 280, "é€‰æ‹©äº‹ä»¶", NULL);
 		btnthing.Create(220, 300, 760, 570, "", NULL);
-		btnreturn.Create(260, 570, 380, 610, "A", thingView);
-		btnreturn1.Create(580, 570, 720, 610, "B", thingView);
+		btnreturn.Create(260, 570, 380, 610, "A", gameView);
+		btnreturn1.Create(580, 570, 720, 610, "B", gameView);
 		EndBatchDraw();
 		while (true)
 		{
@@ -215,57 +215,149 @@ void popView()
 		}
 	}
 }
+
+
+
+
+
+
 void talentChooseView()
 {
-	EasyButton 	btnthing;
+	// æµ‹è¯•æ¡ˆä¾‹
+	vector<talent> randtalents;
+	Bonus improve = { 10, 10, 10, 10 };
+	talent a = { 1, "ä¸€ä¸ªå¾ˆç‰›é€¼çš„å¤©èµ‹", improve };
+	for (int i = 0; i < 10; i++)
+	{
+		randtalents.push_back(a);
+	}
+
+	EasyButton btnthing;
 	EasyButton btntext;
 	EasyButton btnreturn;
 	EasyButton btnreturn1;
-	cout << 3 << endl;
+	EasyButton btnchoices[10];
+
+	int selectedCount = 0; // é€‰ä¸­çš„å¤©èµ‹æ•°é‡
+  vector<bool> selected(randtalents.size(), false); // ç”¨äºè·Ÿè¸ªæ¯ä¸ªå¤©èµ‹çš„é€‰ä¸­çŠ¶æ€
+
+  bool showDialog = false; // æ§åˆ¶å¼¹çª—æ˜¾ç¤º
+  const char* dialogMessage = ""; // å¼¹çª—æ¶ˆæ¯å†…å®¹
+
 	while (1)
 	{
-		char str[20] = "´óĞ¡¶àÉÙÄêÁä";
-		char ans[20];
+
 		BeginBatchDraw();
-		setbkcolor(BLACK);
-		IMAGE game;
-		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
-		putimage(0, 0, &game);
-		settextcolor(BLACK);
+	setbkcolor(BLACK);
+	IMAGE game;
+	loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
+	putimage(0, 0, &game);
+	settextcolor(BLACK);
+	settextstyle(25, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)"); // å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
+	// åˆ›å»ºæŒ‰é’®
+	btnthing.Create(220, 50, 760, 700, "", NULL);
+	btntext.Create(400, 50, 560, 90, "é€‰æ‹©å¤©èµ‹", NULL);
+	btnreturn.Create(260, 700, 380, 740, "å–æ¶ˆ", gameBeginView);
+	btnreturn1.Create(580, 700, 720, 740, "ç¡®è®¤", gameView);
 
-		btnthing.Create(220, 50, 760, 700, "", NULL);
-		btntext.Create(400, 50, 560, 90, "Ñ¡ÔñÌì¸³", NULL);
-		btnreturn.Create(260, 700, 380, 740, "È¡Ïû", NULL);
-		btnreturn1.Create(580, 700, 720, 740, "È·ÈÃ", gameView);
-		settextcolor(RGB(239, 218, 187));
-		settextstyle(25, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)"); // ×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
+	settextcolor(RGB(239, 218, 187));
+	settextstyle(25, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");
 
-		for (int i = 1; i <= 10; i++)
+	// ç»˜åˆ¶å¤©èµ‹é€‰é¡¹
+	for (int i = 0; i < randtalents.size(); i++)
+	{
+		// ç»˜åˆ¶æŒ‰é’®çš„èƒŒæ™¯
+		btnchoices[i].Create(290, 80 + (i + 1) * 50, 690, 130 + (i + 1) * 50, "", NULL);
+
+		// æ ¹æ®é€‰ä¸­çŠ¶æ€æ”¹å˜æŒ‰é’®çš„æ–‡å­—é¢œè‰²
+		settextcolor(selected[i] ? RGB(255, 0, 0) : RGB(239, 218, 187)); // é€‰ä¸­/æœªé€‰ä¸­é¢œè‰²
+
+		// ç»˜åˆ¶æ–‡æœ¬
+		outtextxy(300, 90 + (i + 1) * 50, randtalents[i].description.c_str());
+	}
+	FlushBatchDraw();
+
+	// å¼¹çª—é€»è¾‘
+	while (showDialog)
+	{
+		// è®¾ç½®å¼¹çª—èƒŒæ™¯è‰²
+		setfillcolor(RGB(173, 216, 230)); // å¼¹çª—èƒŒæ™¯è‰²
+		fillrectangle(280, 250, 700, 400); // å¼¹çª—ä½ç½®å’Œå¤§å°
+
+		// ç»˜åˆ¶å¼¹çª—è¾¹æ¡†
+		setlinecolor(RGB(0, 0, 139)); // è¾¹æ¡†é¢œè‰²
+		rectangle(280, 250, 700, 400);
+
+		// ç»˜åˆ¶æ¶ˆæ¯
+		settextcolor(RGB(50, 50, 50)); // æ–‡å­—é¢œè‰²
+		settextstyle(25, 0, "é»‘ä½“");
+		outtextxy(300, 280, dialogMessage); // ç»˜åˆ¶æ¶ˆæ¯æ–‡æœ¬
+
+		// åˆ›å»ºç¡®å®šæŒ‰é’®
+		EasyButton btnOk;
+		btnOk.Create(430, 375, 530 ,425 , "ç¡®å®š", NULL);
+
+		// æ£€æŸ¥é¼ æ ‡äº‹ä»¶
+		msg = getmessage();
+		if (msg.message == WM_LBUTTONDOWN)
 		{
-			sprintf_s(ans, "%d  %s", i, str);
-			cout << ans;
-			outtextxy(300, 100 + i * 20, ans); // ±êÌâÎÄ±¾?
+			if (btnOk.Check(msg.x, msg.y))
+			{
+				showDialog = false; // å…³é—­å¼¹çª—
+				break; // é€€å‡ºå¼¹çª—å¾ªç¯ï¼Œç»§ç»­ä¸»å¾ªç¯
+			}
+		}
+		FlushBatchDraw();
+	}
+
+	// å¤„ç†é¼ æ ‡äº‹ä»¶
+	msg = getmessage(EX_MOUSE);
+	if (msg.message == WM_LBUTTONDOWN)
+	{
+		if (btnreturn.Check(msg.x, msg.y)) {
+			btnreturn.OnMessage(); // è¿”å›ä¸»ç•Œé¢
 		}
 
-		EndBatchDraw();
-		while (true)
-		{
-			msg = getmessage(EX_MOUSE);
-			if (msg.message == WM_LBUTTONDOWN)
+		if (btnreturn1.Check(msg.x, msg.y)) {
+			if (selectedCount < 3)
 			{
-				if (btnreturn.Check(msg.x, msg.y)) {
+				dialogMessage = "è¯·é€‰æ‹©ä¸‰ä¸ªå¤©èµ‹"; // è®¾ç½®å¼¹çª—æ¶ˆæ¯
+				showDialog = true; // æ˜¾ç¤ºå¼¹çª—
+			}
+			else
+			{
+				btnreturn1.OnMessage(); // ç¡®è®¤é€‰æ‹©
+			}
+		}
 
-					btnreturn.OnMessage();
+		// éå†æ‰€æœ‰æŒ‰é’®ï¼Œæ£€æŸ¥æ˜¯å¦è¢«ç‚¹å‡»
+		for (int i = 0; i < randtalents.size(); i++)
+		{
+			if (btnchoices[i].Check(msg.x, msg.y))
+			{
+				// åˆ‡æ¢é€‰ä¸­çŠ¶æ€
+				if (!selected[i])
+				{
+					if (selectedCount < 3)
+					{
+						selected[i] = true; // é€‰ä¸­
+						selectedCount++;
+					}
 				}
-				if (btnreturn1.Check(msg.x, msg.y)) {
-
-					btnreturn1.OnMessage();
+				else
+				{
+					selected[i] = false; // å–æ¶ˆé€‰ä¸­
+					selectedCount--;
 				}
 			}
 		}
 	}
+	
+	}
 }
-void career()
+
+
+void careerView()
 {
 	EasyButton 	btnthing;
 	EasyButton btnnext;
@@ -282,7 +374,7 @@ void career()
 		settextcolor(BLACK);
 
 		btnthing.Create(220, 130, 760, 570, "", NULL);
-		btnnext.Create(420, 590, 540, 630, "·µ»ØÓÎÏ·", gameBeignView);
+		btnnext.Create(420, 590, 540, 630, "è¿”å›æ¸¸æˆ", gameBeignView);
 
 
 
@@ -306,83 +398,96 @@ void career()
 
 	}
 }
-void thingView()
-{
-	EasyButton 	btnthing;
-	EasyButton btnnext;
-	EasyButton btnreturn;
-	cout << 2;
 
-	while (1)
-	{
-		BeginBatchDraw();
-		setbkcolor(BLACK);
-		IMAGE game;
-		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
-		putimage(0, 0, &game);
-		settextcolor(BLACK);
-
-		btnthing.Create(220, 130, 760, 570, "", NULL);
-		btnreturn.Create(180, 650, 800, 690, "½áÊø´Ë½×¶Î", gameView);
-		btnnext.Create(420, 590, 540, 630, "ÏÂÒ»Äê", popView);
-
-
-
-		EndBatchDraw();
-
-		while (true)
-		{
-			msg = getmessage(EX_MOUSE);
-			if (msg.message == WM_LBUTTONDOWN)
-			{
-				if (btnreturn.Check(msg.x, msg.y)) {
-
-					btnreturn.OnMessage();
-				}
-				if (btnnext.Check(msg.x, msg.y)) {
-
-					btnnext.OnMessage();
-				}
-			}
-
-
-		}
-
-
-	}
-}
 void gameView()
 {
-	EasyButton 	btnthing;
-	EasyButton btnnext;
-	EasyButton btnnature;
-	cout << 1 << endl;
-	while (1)
+
+	const int HighAttribute = 100;
+	const int MidAttribute = 50;
+	const int LowAttribute = 0;
+
+	EasyButton btnreturn;
+	std::vector<std::string> messages;
+	int scroll_offset = 0;
+	const int BOX_WIDTH = WINDOW_WIDTH / 4 * 3;
+	const int BOX_HEIGHT = WINDOW_HEIGHT / 4 * 3;
+	const int BOX_X = 100;
+	const int BOX_Y = 50;
+	const int LINE_HEIGHT = 20;
+	const int MAX_LINES = BOX_HEIGHT / LINE_HEIGHT;
+	messages.push_back("Message 1");
+	messages.push_back("Message 2");
+	messages.push_back("Message 3");
+	messages.push_back("Message 4");
+	messages.push_back("Message 5");
+	messages.push_back("Message 6");
+	messages.push_back("Message 7");
+	messages.push_back("Message 8");
+	messages.push_back("Message 9");
+	messages.push_back("Message 10");
+	messages.push_back("Message 11");
+	messages.push_back("Message 12");
+	messages.push_back("Message 13");
+	messages.push_back("Message 14");
+	messages.push_back("Message 15");
+	messages.push_back("Message 1");
+	messages.push_back("Message 2");
+	messages.push_back("Message 3");
+	messages.push_back("Message 4");
+	messages.push_back("Message 5");
+	messages.push_back("Message 6");
+	messages.push_back("Message 7");
+	messages.push_back("Message 8");
+	messages.push_back("Message 9");
+	messages.push_back("Message 10");
+	messages.push_back("Message 11");
+	messages.push_back("Message 12");
+	messages.push_back("Message 13");
+	messages.push_back("Message 14");
+	messages.push_back("Message 15");
+
+	while (true)
 	{
 		BeginBatchDraw();
-		setbkcolor(BLACK);
+		cleardevice();
 		IMAGE game;
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
-		settextcolor(BLACK);
-		btnthing.Create(220, 130, 760, 570, "", NULL);
-		btnnext.Create(420, 590, 540, 630, "¿ªÊ¼ÊÂ¼ş", thingView);
-		btnnature.Create(180, 650, 800, 690, "ÊôĞÔ : ÖÇÉÌ:    ÇéÉÌ£º ±à³ÌÄÜÁ¦£º ÌåÖÊ£º  ", NULL);
-		settextcolor(BLACK);
-		setbkmode(TRANSPARENT);
-		EndBatchDraw();
-		while (true)
-		{
-			msg = getmessage(EX_MOUSE);
-			if (msg.message == WM_LBUTTONDOWN)
-			{
-				if (btnnext.Check(msg.x, msg.y)) {
+		setfillcolor(WHITE);
+		bar(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
 
-					btnnext.OnMessage();
-				}
+		// ç»˜åˆ¶æ¶ˆæ¯æ¡†çš„è¾¹æ¡†
+		setlinecolor(BLACK);
+		rectangle(BOX_X, BOX_Y, BOX_X + BOX_WIDTH, BOX_Y + BOX_HEIGHT);
+
+		// ç»˜åˆ¶æ¶ˆæ¯
+		int start_line = scroll_offset;
+		int end_line = start_line + MAX_LINES;
+
+		
+
+		for (int i = start_line; i < end_line && i < messages.size(); ++i) {
+			outtextxy(BOX_X + 10, BOX_Y + 10 + (i - start_line) * LINE_HEIGHT, messages[i].c_str());//messages[i].c_str()è½¬æ¢æˆcè¯­è¨€é£æ ¼çš„å­—ç¬¦ä¸²
+		}
+		EasyButton btnnext;
+		settextcolor(BLACK);
+		btnreturn.Create(200, 660, 360, 710, "ä¸Šä¸€å¹´(è¯·æŒ‰w)", NULL);
+		btnnext.Create(600, 660, 760, 710, "ä¸‹ä¸€å¹´(è¯·æŒ‰s)", NULL);
+		if (_kbhit()) //æ£€æµ‹æ˜¯å¦æœ‰è¾“å…¥
+		{
+			char key = _getch();//è·å–æŒ‰é”®
+			if (key == 'w' && scroll_offset > 0) {
+				scroll_offset--;
+			}
+			else if (key == 's' && scroll_offset < messages.size() - MAX_LINES) {
+				scroll_offset++;
 			}
 		}
+		Sleep(10);
+		FlushBatchDraw();
 	}
+	EndBatchDraw();
+
 }
 void gameBeignView()
 {
@@ -397,29 +502,29 @@ void gameBeignView()
 		loadimage(&game, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 		putimage(0, 0, &game);
 		settextcolor(BLACK);
-		btningame.Create(320, 200, 700, 240, "µã»÷¿ªÊ¼ÄãµÄ³ÌĞòÔ±µÄÒ»Éú", talentChooseView);
-		btnLife.Create(200, 500, 350, 540, "ÈËÉú", career);
-		btnach.Create(650, 500, 780, 540, "³É¾Í", achievementView);
+		btningame.Create(320, 200, 700, 240, "ç‚¹å‡»å¼€å§‹ä½ çš„ç¨‹åºå‘˜çš„ä¸€ç”Ÿ", talentChooseView);
+		btnLife.Create(200, 500, 350, 540, "äººç”Ÿ", careerView);
+		btnach.Create(650, 500, 780, 540, "æˆå°±", achievementView);
 		EndBatchDraw();
 		while (true)
 		{
-			msg = getmessage(EX_MOUSE);            // »ñÈ¡ÏûÏ¢ÊäÈë
+			msg = getmessage(EX_MOUSE);            // è·å–æ¶ˆæ¯è¾“å…¥
 
 			if (msg.message == WM_LBUTTONDOWN)
 			{
-				// ÅĞ¶Ï¿Ø¼ş
+				// åˆ¤æ–­æ§ä»¶
 				if (btningame.Check(msg.x, msg.y)) {
 
 					btningame.OnMessage();
 				}
 
-				// ÅĞ¶Ï¿Ø¼ş
+				// åˆ¤æ–­æ§ä»¶
 				if (btnLife.Check(msg.x, msg.y)) {
 
 					btnLife.OnMessage();
 				}
 
-				// ÅĞ¶Ï¿Ø¼ş
+				// åˆ¤æ–­æ§ä»¶
 				if (btnach.Check(msg.x, msg.y)) {
 					;
 					btnach.OnMessage();
@@ -438,25 +543,25 @@ void loginView()
 	EasyButton LoginView_btnBack;
 	BeginBatchDraw();
 	cleardevice();
-	//ÉèÖÃ´°¿ÚÑÕÉ«
+	//è®¾ç½®çª—å£é¢œè‰²
 	setbkcolor(RGB(255, 255, 255));
 	cleardevice();
 	IMAGE login;
 	loadimage(&login, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 	putimage(0, 0, &login);
 	settextcolor(RGB(239, 218, 187));
-	setbkmode(TRANSPARENT); // ÎÄ±¾Ìî³äÉ«£ºÍ¸Ã÷
-	settextstyle(100, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)"); // ×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
-	outtextxy(WINDOW_WIDTH / 2 - textwidth("µÇÂ¼ÕËºÅ") / 2, 200 - textheight("µÇÂ¼ÕËºÅ") / 2, "µÇÂ¼ÕËºÅ"); // ±êÌâÎÄ±¾
-	settextcolor(RGB(239, 218, 187)); // ÎÄ±¾ÑÕÉ«£ººÚÉ«
-	settextstyle(30, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");
+	setbkmode(TRANSPARENT); // æ–‡æœ¬å¡«å……è‰²ï¼šé€æ˜
+	settextstyle(100, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)"); // å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
+	outtextxy(WINDOW_WIDTH / 2 - textwidth("ç™»å½•è´¦å·") / 2, 200 - textheight("ç™»å½•è´¦å·") / 2, "ç™»å½•è´¦å·"); // æ ‡é¢˜æ–‡æœ¬
+	settextcolor(RGB(239, 218, 187)); // æ–‡æœ¬é¢œè‰²ï¼šé»‘è‰²
+	settextstyle(30, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");
 	setbkmode(TRANSPARENT);
-	outtextxy(300, 378, "ÕËºÅ");
-	outtextxy(300, 438, "ÃÜÂë");
+	outtextxy(300, 378, "è´¦å·");
+	outtextxy(300, 438, "å¯†ç ");
 	settextcolor(BLACK);
-	LoginView_btnConfirm.Create(470, 610, 575, 650, "È·ÈÏ", menuView);
-	LoginView_btnBack.Create(470, 670, 575, 710, "·µ»Ø", beginView);
-	settextstyle(20, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");//×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
+	LoginView_btnConfirm.Create(470, 610, 575, 650, "ç¡®è®¤", menuView);
+	LoginView_btnBack.Create(470, 670, 575, 710, "è¿”å›", beginView);
+	settextstyle(20, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");//å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
 	settextcolor(BLACK);
 
 	LoginView_txtUsername.Create(370, 375, 700, 405, 20);
@@ -482,7 +587,7 @@ void loginView()
 			}
 			if (LoginView_btnBack.Check(msg.x, msg.y))
 			{
-				LoginView_btnBack.OnMessage();// ·µ»ØÖ÷½çÃæ
+				LoginView_btnBack.OnMessage();// è¿”å›ä¸»ç•Œé¢
 			}
 		}
 
@@ -499,25 +604,25 @@ void registerView()
 	EasyButton registerView_btnBack;
 	BeginBatchDraw();
 	cleardevice();
-	//ÉèÖÃ´°¿ÚÑÕÉ«
+	//è®¾ç½®çª—å£é¢œè‰²
 	setbkcolor(RGB(255, 255, 255));
 	cleardevice();
 	IMAGE login;
 	loadimage(&login, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 	putimage(0, 0, &login);
 	settextcolor(RGB(239, 218, 187));
-	setbkmode(TRANSPARENT); // ÎÄ±¾Ìî³äÉ«£ºÍ¸Ã÷
-	settextstyle(100, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)"); // ×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
-	outtextxy(WINDOW_WIDTH / 2 - textwidth("×¢²áÕËºÅ") / 2, 200 - textheight("×¢²áÕËºÅ") / 2, "µÇÂ¼ÕËºÅ"); // ±êÌâÎÄ±¾
-	settextcolor(RGB(239, 218, 187)); // ÎÄ±¾ÑÕÉ«£ººÚÉ«
-	settextstyle(30, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");
+	setbkmode(TRANSPARENT); // æ–‡æœ¬å¡«å……è‰²ï¼šé€æ˜
+	settextstyle(100, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)"); // å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
+	outtextxy(WINDOW_WIDTH / 2 - textwidth("æ³¨å†Œè´¦å·") / 2, 200 - textheight("æ³¨å†Œè´¦å·") / 2, "ç™»å½•è´¦å·"); // æ ‡é¢˜æ–‡æœ¬
+	settextcolor(RGB(239, 218, 187)); // æ–‡æœ¬é¢œè‰²ï¼šé»‘è‰²
+	settextstyle(30, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");
 	setbkmode(TRANSPARENT);
-	outtextxy(200, 378, "ÉèÖÃÕËºÅ");
-	outtextxy(200, 438, "ÉèÖÃÃÜÂë");
+	outtextxy(200, 378, "è®¾ç½®è´¦å·");
+	outtextxy(200, 438, "è®¾ç½®å¯†ç ");
 	settextcolor(BLACK);
-	registerView_btnConfirm.Create(470, 610, 575, 650, "È·ÈÏ", beginView);
-	registerView_btnBack.Create(470, 670, 575, 710, "·µ»Ø", beginView);
-	settextstyle(20, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");//×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
+	registerView_btnConfirm.Create(470, 610, 575, 650, "ç¡®è®¤", beginView);
+	registerView_btnBack.Create(470, 670, 575, 710, "è¿”å›", beginView);
+	settextstyle(20, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");//å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
 	settextcolor(BLACK);
 
 	registerView_txtUsername.Create(370, 375, 700, 405, 20);
@@ -543,7 +648,7 @@ void registerView()
 			}
 			if (registerView_btnBack.Check(msg.x, msg.y))
 			{
-				registerView_btnBack.OnMessage();// ·µ»ØÖ÷½çÃæ
+				registerView_btnBack.OnMessage();// è¿”å›ä¸»ç•Œé¢
 			}
 		}
 
@@ -561,27 +666,27 @@ void beginView()
 	loadimage(&login, "./background.jpg", WINDOW_WIDTH, WINDOW_HEIGHT);
 	putimage(0, 0, &login);
 	settextcolor(RGB(239, 218, 187));
-	setbkmode(TRANSPARENT);//ÎÄ±¾Ìî³äÉ«£ºÍ¸Ã÷
-	settextstyle(50, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");//×ÖÌå´óĞ¡&ÀàĞÍ×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)
-	outtextxy(WINDOW_WIDTH / 2 - textwidth("ÈËÉúÖØ¿ªÄ£ÄâÆ÷---ÎÒÒª×ö³ÌĞòÔ±") / 2, 200 - textheight("ÈËÉúÖØ¿ªÄ£ÄâÆ÷---ÎÒÒª×ö³ÌĞòÔ±") / 2, "ÈËÉúÖØ¿ªÄ£ÄâÆ÷---ÎÒÒª×ö³ÌĞòÔ±");//±êÌâÎÄ±¾
+	setbkmode(TRANSPARENT);//æ–‡æœ¬å¡«å……è‰²ï¼šé€æ˜
+	settextstyle(50, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");//å­—ä½“å¤§å°&ç±»å‹å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)
+	outtextxy(WINDOW_WIDTH / 2 - textwidth("äººç”Ÿé‡å¼€æ¨¡æ‹Ÿå™¨---æˆ‘è¦åšç¨‹åºå‘˜") / 2, 200 - textheight("äººç”Ÿé‡å¼€æ¨¡æ‹Ÿå™¨---æˆ‘è¦åšç¨‹åºå‘˜") / 2, "äººç”Ÿé‡å¼€æ¨¡æ‹Ÿå™¨---æˆ‘è¦åšç¨‹åºå‘˜");//æ ‡é¢˜æ–‡æœ¬
 	//
-	settextcolor(RGB(239, 218, 187));//ÎÄ±¾ÑÕÉ«£ººÚÉ«
-	settextstyle(30, 0, "×Ö»êÎŞÍâÈóºÚÌå(ÉÌÓÃĞèÊÚÈ¨)");
+	settextcolor(RGB(239, 218, 187));//æ–‡æœ¬é¢œè‰²ï¼šé»‘è‰²
+	settextstyle(30, 0, "å­—é­‚æ— å¤–æ¶¦é»‘ä½“(å•†ç”¨éœ€æˆæƒ)");
 	setbkmode(TRANSPARENT);
 
 	settextcolor(BLACK);
-	btnLogIn.Create(350, 300, 650, 340, "µÇÂ¼ÕËºÅ", loginView);
-	btnRegister.Create(350, 410, 650, 450, "×¢²áÕËºÅ", registerView);
-	btnEnd.Create(350, 520, 650, 560, "ÍË³öÓÎÏ·", NULL);
+	btnLogIn.Create(350, 300, 650, 340, "ç™»å½•è´¦å·", loginView);
+	btnRegister.Create(350, 410, 650, 450, "æ³¨å†Œè´¦å·", registerView);
+	btnEnd.Create(350, 520, 650, 560, "é€€å‡ºæ¸¸æˆ", NULL);
 
 	EndBatchDraw();
 	while (true)
 	{
-		msg = getmessage(EX_MOUSE);            // »ñÈ¡ÏûÏ¢ÊäÈë
+		msg = getmessage(EX_MOUSE);            // è·å–æ¶ˆæ¯è¾“å…¥
 
 		if (msg.message == WM_LBUTTONDOWN)
 		{
-			// ÅĞ¶Ï¿Ø¼ş
+			// åˆ¤æ–­æ§ä»¶
 			if (btnLogIn.Check(msg.x, msg.y)) {
 				btnLogIn.OnMessage();
 			}
@@ -596,6 +701,3 @@ void beginView()
 	}
 }
 
-void careerView() {
-
-}
